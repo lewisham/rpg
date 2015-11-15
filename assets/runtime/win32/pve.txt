@@ -1,0 +1,235 @@
+operate string:
+1: 22304768
+2: 38555648
+3: 60459008
+4: 76711936
+5: 94537728
+6: 106203136
+7: 122460160
+8: 144345088
+9: 161646592
+10: 173346816
+11: 195725312
+12: 206374912
+13: 228231168
+14: 240437248
+15: 256690176
+
+Pseudo Random 4989
+
+dump monster info, group: 1
+
+
+monster info:
+Accuracy : 0
+Atk : 881
+AttackSpeed : 108
+CriDmg : 63
+CriRate : 21
+Defence : 605
+HitPoint : 10277
+HitRate : 100
+Resistance : 18
+SpeedProgress : 0
+Tenacity : 95
+style2skill: 1 id: 32011 level: 8
+skill: 2 id: 32022 level: 7
+skill: 3 id: 32032 level: 7
+
+
+
+monster info:
+Accuracy : 1
+Atk : 148
+AttackSpeed : 120
+CriDmg : 50
+CriRate : 16
+Defence : 123
+HitPoint : 2874
+HitRate : 100
+Resistance : 18
+SpeedProgress : 0
+Tenacity : 95
+style1skill: 1 id: 45011 level: 1
+skill: 2 id: 45021 level: 1
+skill: 3 id: 45131 level: 1
+
+dump monster info, group: 2
+
+
+monster info:
+Accuracy : 0
+Atk : 38
+AttackSpeed : 89
+CriDmg : 50
+CriRate : 15
+Defence : 35
+HitPoint : 668
+HitRate : 100
+Resistance : 15
+SpeedProgress : 0
+Tenacity : 95
+style5skill: 1 id: 39011 level: 1
+
+
+
+monster info:
+Accuracy : 0
+Atk : 41
+AttackSpeed : 97
+CriDmg : 50
+CriRate : 15
+Defence : 38
+HitPoint : 734
+HitRate : 100
+Resistance : 15
+SpeedProgress : 0
+Tenacity : 95
+style5skill: 1 id: 39011 level: 1
+
+
+
+monster info:
+Accuracy : 0
+Atk : 100
+AttackSpeed : 100
+CriDmg : 50
+CriRate : 15
+Defence : 100
+HitPoint : 1000
+HitRate : 100
+Resistance : 15
+SpeedProgress : 0
+Tenacity : 95
+style2skill: 1 id: 5011 level: 1
+
+
+
+monster info:
+Accuracy : 0
+Atk : 52
+AttackSpeed : 96
+CriDmg : 50
+CriRate : 15
+Defence : 59
+HitPoint : 743
+HitRate : 100
+Resistance : 15
+SpeedProgress : 0
+Tenacity : 95
+style2skill: 1 id: 5011 level: 1
+
+
+
+on monster trun: group: 1, index: 2, name: unnamed
+PseudoRandom: 4989
+on round--------------------------->1
+
+g1 index2 attack g2 index1, damage: -541
+
+
+on monster trun: group: 1, index: 1, name: unnamed
+PseudoRandom: 594
+on round--------------------------->2
+
+g1 index1 attack g2 index1, damage: -8186
+monster unnamed knockout group: 2, index: 1
+
+
+on monster trun: group: 2, index: 3, name: unnamed
+PseudoRandom: 535
+on round--------------------------->3
+
+g2 index3 attack g1 index2, damage: -365
+
+
+on monster trun: group: 2, index: 2, name: unnamed
+PseudoRandom: 9572
+on round--------------------------->4
+
+g2 index2 attack g1 index2, damage: -100
+g2 index2 attack g1 index2, damage: -103
+
+
+on monster trun: group: 2, index: 4, name: unnamed
+PseudoRandom: 2972
+on round--------------------------->5
+
+g2 index4 attack g1 index2, damage: -218
+
+
+on monster trun: group: 1, index: 2, name: unnamed
+PseudoRandom: 6745
+on round--------------------------->6
+
+g1 index2 attack g2 index2, damage: -447
+
+
+on monster trun: group: 1, index: 1, name: unnamed
+PseudoRandom: 8640
+on round--------------------------->7
+
+g1 index1 attack g2 index2, damage: -3909
+g1 index1 attack g2 index2, damage: -4110
+monster unnamed knockout group: 2, index: 2
+
+
+on monster trun: group: 2, index: 3, name: unnamed
+PseudoRandom: 4759
+on round--------------------------->8
+
+g2 index3 attack g1 index2, damage: -267
+
+
+on monster trun: group: 2, index: 4, name: unnamed
+PseudoRandom: 1951
+on round--------------------------->9
+
+g2 index4 attack g1 index2, damage: -154
+
+
+on monster trun: group: 1, index: 2, name: unnamed
+PseudoRandom: 9819
+on round--------------------------->10
+
+g1 index2 attack g2 index4, damage: -241
+
+
+on monster trun: group: 2, index: 5, name: unnamed
+PseudoRandom: 7537
+on round--------------------------->11
+
+g0 index0 attack g1 index1, damage: -300
+g0 index0 attack g1 index2, damage: -300
+
+
+on monster trun: group: 1, index: 1, name: unnamed
+PseudoRandom: 7537
+on round--------------------------->12
+
+g1 index1 attack g2 index4, damage: -5977
+monster unnamed knockout group: 2, index: 4
+
+
+on monster trun: group: 2, index: 3, name: unnamed
+PseudoRandom: 8852
+on round--------------------------->13
+
+g2 index3 attack g1 index2, damage: -421
+
+
+on monster trun: group: 1, index: 2, name: unnamed
+PseudoRandom: 3666
+on round--------------------------->14
+
+g1 index2 attack g2 index3, damage: -365
+
+
+on monster trun: group: 1, index: 1, name: unnamed
+PseudoRandom: 6102
+on round--------------------------->15
+
+g1 index1 attack g2 index3, damage: -3287
+monster unnamed knockout group: 2, index: 3
+
+
