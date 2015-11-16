@@ -33,15 +33,13 @@ end
 -- 计算技能选取目标
 function Camp:search(caster, iType)
 	local group = EnemyGroup(caster:getChild("GroupID"))
-	local target = nil
+	local list = {}
 	for _, val in pairs(self.mActors) do
 		if val:getChild("GroupID") == group then
-			target = val
-			break
+			table.insert(list, val)
 		end
 	end
-
-    return target
+    return list
 end
 
 
