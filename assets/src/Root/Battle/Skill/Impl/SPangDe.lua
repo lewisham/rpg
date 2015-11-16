@@ -19,7 +19,7 @@ function SPangDe:playDisplay1(co, logic)
     local monster = self.mMonster
     local model = monster:getChild("ActionSprite").mModel
     -- 移动
-    self:playMonsterMove(monster, "front", self:getPos(1), 0.15)
+    self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
   
     -- 判断攻击次数
@@ -58,11 +58,12 @@ function SPangDe:playDisplay1(co, logic)
 end
 
 function SPangDe:excuteLogic1(co)
+    self:calcTargets()
     self.mAttackTimes = math.random(1, 3)
     --self.mAttackTimes = 2
     for i = 1, self.mAttackTimes do
         co:pause("step"..i)
-        self.mTarget:getChild("HitPoint"):bearDamage(self:calcDamage(1))
+        self:makeDamage(1)
     end
 end
 
@@ -73,11 +74,11 @@ function SPangDe:playDisplay2(co, logic)
     local monster = self.mMonster
     local model = monster:getChild("ActionSprite").mModel
     -- 移动
-    self:playMonsterMove(monster, "front", self:getPos(1), 0.15)
+    self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
 
     self:playMask()
-    self:playEffectOnce("shoujitexiao", "duang", self:getPos(3), false)
+    --self:playEffectOnce("shoujitexiao", "duang", self:getPos(3), false)
     self:playModelAnimate(model, "skill")
     self:playEffectOnce("pangde", "effect_2", self:getPos(3), false)
     co:waitForEvent(SK_EVENT.Frame_Event, model)
@@ -91,8 +92,9 @@ end
 
 -- 执行技能1逻辑
 function SPangDe:excuteLogic2(co)
+    self:calcTargets()
     co:pause("step1")
-    self.mTarget:getChild("HitPoint"):bearDamage(self:calcDamage(1))
+    self:makeDamage(1)
 end
 
 -----------------------------
@@ -108,7 +110,7 @@ function SPangDe:playDisplay3(co, logic)
     local monster = self.mMonster
     local model = monster:getChild("ActionSprite").mModel
     -- 移动
-    self:playMonsterMove(monster, "front", self:getPos(1), 0.15)
+    self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "skillchase_1")
@@ -123,8 +125,9 @@ end
 
 -- 执行技能1逻辑
 function SPangDe:excuteLogic3(co)
+    self:calcTargets()
     co:pause("step1")
-    self.mTarget:getChild("HitPoint"):bearDamage(self:calcDamage(1))
+    self:makeDamage(1)
 end
 
 return SPangDe

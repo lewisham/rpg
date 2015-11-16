@@ -29,7 +29,7 @@ function SKDisplay:playBackOff()
     local pos1 = self:getPos(2)
     local pos2 = self:getPos(3)
     if math.abs(pos1.x - pos2.x) > 2 or math.abs(pos1.y - pos2.y) > 2 then
-        self:playMonsterMove(monster, "moveback", self:getPos(2), 0.1)
+        self:playMonsterMove(monster, "moveback", self:getPos(2), 0.075)
         self.mDisplayCO:waitForEvent(SK_EVENT.Move_Complete, monster)
     end
     self:changeZOrder(0)
@@ -42,6 +42,7 @@ end
 
 -- 播放怪物移动
 function SKDisplay:playMonsterMove(monster, name, pos, duration)
+    duration = duration or 0.1
     local function callback()
         self:changeZOrder(10)
         SKEvent.post(SK_EVENT.Move_Complete, monster)
@@ -67,7 +68,7 @@ function SKDisplay:playModelAnimate(model, name)
     -- 帧事件回调
     local function frameEventHandler(evt)
         SKEvent.post(SK_EVENT.Frame_Event, model, evt)
-        --print(evt)
+        print(evt)
     end
     model:playAnimate(name, 0, animateEndHandler, frameEventHandler)
 end
@@ -83,6 +84,12 @@ function SKDisplay:playEffectOnce(file, name, pos, bReverse, zOrder)
         group = EnemyGroup(group)
     end
     effect:initDirection(group)
+
+    -- 帧事件回调
+    local function frameEventHandler(evt)
+        SKEvent.post(SK_EVENT.Frame_Event, effect, evt)
+        print(evt)
+    end
 
     local function animateEndHandler()
         SKEvent.post(SK_EVENT.Movement_Complete, effect)

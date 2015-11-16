@@ -56,7 +56,7 @@ function UIBase:onCreate()
 	self:setAnchorPoint(0, 0)
 	local node = cc.CSLoader:createNode(self._uiFileName)
  	self:setContentSize(node:getContentSize())
- 	self:setTouchEnabled(true) -- 防止穿透
+ 	self:setTouchEnabled(false) -- 防止穿透
 	for k, v in pairs(node:getChildren()) do
 		v:changeParentNode(self)
 	end

@@ -8,7 +8,7 @@ local SLinJingYu = class("SLinJingYu", SKDisplay)
 
 function SLinJingYu:initDisplayRes()
 	self:addSkillInfo(1, 0)
-    --self:addSkillInfo(2, 3)
+    self:addSkillInfo(2, 3)
 end
 
 -----------------------------
@@ -18,7 +18,7 @@ function SLinJingYu:playDisplay1(co, logic)
     local monster = self.mMonster
     local model = monster:getChild("ActionSprite").mModel
     -- 移动
-    self:playMonsterMove(monster, "front", self:getPos(1, 150), 0.15)
+    self:playMonsterMove(monster, "front", self:getPos(1, 150))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
 
     -- 判断攻击次数
@@ -56,12 +56,14 @@ function SLinJingYu:playDisplay1(co, logic)
 end
 
 function SLinJingYu:excuteLogic1(co)
+    self:calcTargets()
     self.mAttackTimes = math.random(1, 3)
     --self.mAttackTimes = 2
     for i = 1, self.mAttackTimes do
         co:pause("step"..i)
-        self.mTarget:getChild("HitPoint"):bearDamage(self:calcDamage(1))
+        self:makeDamage(1)
     end
+    self:playState(Monster_State.JiTui)
 end
 
 -----------------------------
@@ -71,7 +73,7 @@ function SLinJingYu:playDisplay2(co, logic)
     local monster = self.mMonster
     local model = monster:getChild("ActionSprite").mModel
     -- 移动
-    self:playMonsterMove(monster, "front", self:getPos(1), 0.15)
+    self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "skill1")
@@ -81,6 +83,7 @@ function SLinJingYu:playDisplay2(co, logic)
 end
 
 function SLinJingYu:excuteLogic2(co)
+    self:calcTargets()
 end
 
 -----------------------------
@@ -90,7 +93,7 @@ function SLinJingYu:playDisplay3(co, logic)
     local monster = self.mMonster
     local model = monster:getChild("ActionSprite").mModel
     -- 移动
-    self:playMonsterMove(monster, "front", self:getPos(1), 0.15)
+    self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "attack1_1")
@@ -111,7 +114,7 @@ function SLinJingYu:playDisplay4(co, logic)
     local monster = self.mMonster
     local model = monster:getChild("ActionSprite").mModel
     -- 移动
-    self:playMonsterMove(monster, "front", self:getPos(1), 0.15)
+    self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "skill1")

@@ -29,6 +29,8 @@ function Monster:init(args)
     self:createComponent("StatusBar.MStatusBar", args)
     self:createComponent("Tips.HPTips")
 
+    self:createComponent("State.MState")
+
     -- 创建技能
     self:createSkill("Root.Battle.Skill.Impl."..args.config.skill)
 end

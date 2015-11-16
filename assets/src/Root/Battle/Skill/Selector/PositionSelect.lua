@@ -65,6 +65,11 @@ function PositionSelect:solution6()
     return self:getPositionByGroup(group)
 end
 
+-- 战场正中心
+function PositionSelect:solution7()
+    return cc.p(512, 256)
+end
+
 function PositionSelect:getPositionByGroup(group)
     if group == 1 then
         return cc.p(200, 256)

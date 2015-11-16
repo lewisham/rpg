@@ -37,6 +37,7 @@
     <Folder Include="src\Root\Battle\Monster\Buff\Impl\Immunity\" />
     <Folder Include="src\Root\Battle\Monster\Base\" />
     <Folder Include="src\Root\Battle\Monster\ActionSprite\" />
+    <Folder Include="src\Root\Battle\Monster\State\" />
     <Folder Include="src\Root\Battle\Monster\Tips\" />
     <Folder Include="src\Root\Battle\Monster\StatusBar\" />
     <Folder Include="src\Root\Battle\Monster\ActionSprite\Model\" />
@@ -92,6 +93,7 @@
     <Compile Include="src\Root\Battle\Monster\ActionSprite\ActionSprite.lua" />
     <Compile Include="src\Root\Battle\Monster\ActionSprite\Model\Model.lua" />
     <Compile Include="src\Root\Battle\Monster\ActionSprite\Model\ModelShaderController.lua" />
+    <Compile Include="src\Root\Battle\Monster\State\MState.lua" />
     <Compile Include="src\Root\Battle\Monster\StatusBar\MStatusBar.lua" />
     <Compile Include="src\Root\Battle\Monster\StatusBar\LifeBar.lua" />
     <Compile Include="src\Root\Battle\Monster\Tips\HPTips.lua" />
@@ -108,11 +110,11 @@
     <Compile Include="src\Root\Battle\Skill\Effect\EffectRootMgr.lua" />
     <Compile Include="src\Root\Battle\Skill\Effect\EMask.lua" />
     <Compile Include="src\Root\Battle\Skill\Effect\Missile.lua" />
-    <Compile Include="src\Root\Battle\Skill\Impl\SFengXing.lua" />
     <Compile Include="src\Root\Battle\Skill\Impl\SJiangWei.lua" />
     <Compile Include="src\Root\Battle\Skill\Impl\SLinJingYu.lua" />
     <Compile Include="src\Root\Battle\Skill\Impl\SPangDe.lua" />
     <Compile Include="src\Root\Battle\Skill\Impl\SSiMayi.lua" />
+    <Compile Include="src\Root\Battle\Skill\Impl\SXiaHouDun.lua" />
     <Compile Include="src\Root\Battle\Skill\Selector\Damage.lua" />
     <Compile Include="src\Root\Battle\Skill\Selector\PositionSelect.lua" />
     <Compile Include="src\Root\Battle\Skill\Selector\TargetSelect.lua" />
