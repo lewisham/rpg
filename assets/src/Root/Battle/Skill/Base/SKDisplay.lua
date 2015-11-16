@@ -17,6 +17,12 @@ function SKDisplay:getPos(id, args)
     return self.PositionSelect:play(id, args)
 end
 
+-- 提高施法者的层级
+function SKDisplay:changeZOrder(val)
+    val = val or 0
+    self.mMonster:getChild("ActionSprite"):setExtraZOrder(val)
+end
+
 -- 回退
 function SKDisplay:playBackOff()
     local monster = self.mMonster
@@ -26,6 +32,7 @@ function SKDisplay:playBackOff()
         self:playMonsterMove(monster, "moveback", self:getPos(2), 0.1)
         self.mDisplayCO:waitForEvent(SK_EVENT.Move_Complete, monster)
     end
+    self:changeZOrder(0)
     monster:getChild("ActionSprite"):changeState("idle")
 end
 
@@ -36,10 +43,16 @@ end
 -- 播放怪物移动
 function SKDisplay:playMonsterMove(monster, name, pos, duration)
     local function callback()
+        self:changeZOrder(10)
         SKEvent.post(SK_EVENT.Move_Complete, monster)
     end
+     local tb = 
+    {
+        cc.MoveTo:create(duration, pos),
+        cc.CallFunc:create(callback, {}),
+    }
     local node = monster:getChild("ActionSprite")
-    node:actionMoveTo(pos, duration, callback)
+    node:runAction(cc.Sequence:create(tb))
     local model = monster:getChild("ActionSprite").mModel
     model:playAnimate(name, 1)
 end
@@ -60,11 +73,16 @@ function SKDisplay:playModelAnimate(model, name)
 end
 
 -- 播放特效
-function SKDisplay:playEffectOnce(file, name, pos, zOrder)
+function SKDisplay:playEffectOnce(file, name, pos, bReverse, zOrder)
     local root = zOrder == nil and g_FrontEffectRoot or g_BackEffectRoot
     local effect = require("Root.Battle.Skill.Effect.Effect").create(file, args)
     root:addChild(effect)
     effect:setPosition(pos)
+    local group = self.mMonster:getChild("GroupID")
+    if bReverse then
+        group = EnemyGroup(group)
+    end
+    effect:initDirection(group)
 
     local function animateEndHandler()
         SKEvent.post(SK_EVENT.Movement_Complete, effect)

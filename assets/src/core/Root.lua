@@ -39,15 +39,6 @@ function Root:createChild(path, args, name)
     return ret
 end
 
-function Root:createUIChild(path, args, name)
-	local cls = require(path)
-	local ret = cls:create(args)
-	ret._root = self
-    name = name or ret.__cname
-    self.mChildren[name] = ret
-    return ret
-end
-
 function Root:addChild(name, child)
     self.mChildren[name] = child
 end
@@ -59,9 +50,6 @@ end
 
 function Root:getChild(name)
 	return self.mChildren[name]
-end
-
-function findRoot(name)
 end
 
 

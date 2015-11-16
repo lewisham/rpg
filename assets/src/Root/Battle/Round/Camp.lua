@@ -6,6 +6,15 @@
 
 local Camp = class("Camp", Root)
 
+function EnemyGroup(group)
+    if group == 1 then
+		group = 2
+	else
+		group = 1
+	end
+    return group
+end
+
 function Camp:init()
     self.mActors = {}
 end
@@ -14,13 +23,16 @@ function Camp:addActor(actor)
     table.insert(self.mActors, actor)
 end
 
+-- 重新排序
+function Camp:sortZOrder()
+    for _, val in ipairs(self.mActors) do
+        val:getChild("ActionSprite"):onOrder()
+    end
+end
+
+-- 计算技能选取目标
 function Camp:search(caster, iType)
-	local group = caster:getChild("GroupID")
-	if group == 1 then
-		group = 2
-	else
-		group = 1
-	end
+	local group = EnemyGroup(caster:getChild("GroupID"))
 	local target = nil
 	for _, val in pairs(self.mActors) do
 		if val:getChild("GroupID") == group then

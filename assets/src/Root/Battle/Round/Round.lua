@@ -18,7 +18,6 @@ function Round:update(co)
     local list = skill:getSkillInfo()
     local r = math.random(1, #list)
     local idx = list[r].id
-	idx = 2
     skill:play(idx, target)
 end
 

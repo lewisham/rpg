@@ -1,5 +1,14 @@
 Common = {}
 
+-- 对obj添加对应类的方法
+function Common.setClass(obj, cls)
+    for name, val in pairs(cls) do
+        if obj[name] == nil then
+            obj[name] = val
+        end
+    end
+end
+
 function Common.loadSpriteFrames(name)
 	local df = cc.Texture2D:getDefaultAlphaPixelFormat()
 	--local cf = cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A4444

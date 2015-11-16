@@ -4,18 +4,22 @@
 -- 描述：场景
 ----------------------------------------------------------------------
 
-local BScene = class("BScene", Root)
+local BScene = NodeDef("BScene", "Scene/scene06/scene06_1.csb")
 
-BScene.ROOT_PATH = "Root.Battle.Scene"
+function BScene:init()
+    g_BattleRoot:addChild(self)
+    g_MonsterRoot = self.ground
 
--- 构造函数
-function BScene:ctor()
-    BScene.super.ctor(self)
+    local node = cc.Node:create()
+    self:addChild(node)
+    node:scheduleUpdateWithPriorityLua(function() self:onReorder() end, 0)
+
 end
 
--- 初始化
-function BScene:init(config)
-	self:createComponent("View.BSceneViewHelper", config)
+-- 对子结点重新排序
+function BScene:onReorder()
+    Root:findRoot("Camp"):sortZOrder()
+    g_MonsterRoot:sortAllChildren()
 end
 
 return BScene

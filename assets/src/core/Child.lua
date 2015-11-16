@@ -31,7 +31,5 @@ end
 
 function Child:createBrother(name, args)
     local path = self._root.ROOT_PATH.."."..name
-    self:getRoot():createChild(path, args)
+    self._root:createChild(path, args)
 end
-
-return Child

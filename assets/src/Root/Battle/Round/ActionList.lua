@@ -9,7 +9,7 @@ local ActionList = class("ActionList", Root)
 function ActionList:init()
     self.mActors = {}
     self.mActionCnt = 0
-    self:createUIChild("Root.Battle.Round.View.UIActorsProgress")
+    self:createChild("Root.Battle.Round.View.UIActorsProgress")
     startCoroutine(self, "update")
 end
 
