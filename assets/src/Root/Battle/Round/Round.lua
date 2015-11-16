@@ -12,13 +12,14 @@ function Round:init(actor)
 end
 
 function Round:update(co)
-    local target = Root:findRoot("Camp"):search(self.mActors, 1)
+    local targets = Root:findRoot("Camp"):search(self.mActors, 1)
+    local target = targets[math.random(1, #targets)]
     local skill = self.mActors:getChild("Skill1")
 	require(skill.__path)
     local list = skill:getSkillInfo()
     local r = math.random(1, #list)
     local idx = list[r].id
-	idx = 2
+    idx = 1
     skill:play(idx, target)
 end
 

@@ -13,7 +13,7 @@ function SSiMayi:playDisplay1(co, logic)
     local monster = self.mMonster
     local model = monster:getChild("ActionSprite").mModel
     -- 移动
-    self:playMonsterMove(monster, "front", self:getPos(1), 0.15)
+    self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "attack_1")

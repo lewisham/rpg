@@ -35,7 +35,8 @@ end
 
 -- 伤害基于攻击力
 function Damage:calc1(args)
-    self.mDamageValue = math.random(100, 1000)
+    local atk = self.mCaster:getChild("Atk"):getCurrent()
+    self.mDamageValue = -math.floor(math.random(90, 110) / 100 * atk)
 end
 
 

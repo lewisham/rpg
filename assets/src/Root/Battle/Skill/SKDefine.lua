@@ -12,5 +12,11 @@ PositionType =
     PT3 = 3,        -- 已方当前位置
     PT4 = 4,        -- 目标当前位置
     PT5 = 5,        -- 已方阵型中心
-    PT5 = 6,        -- 敌方阵型中心
+    PT6 = 6,        -- 敌方阵型中心
+    PT7 = 7,        -- 战场正中心
+}
+
+Monster_State =
+{
+    JiTui = "JiTui",
 }

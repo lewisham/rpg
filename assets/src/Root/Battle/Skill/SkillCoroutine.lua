@@ -24,6 +24,7 @@ function SkillCoroutine.startCoroutine(target, name, args)
     end
     local co = nil
     local function excuteFunc()
+        --func(target, co, args)
         xpcall(function() func(target, co, args) end, __G__TRACKBACK__)
     end
     co = SkillCoroutine.createCoroutine(excuteFunc)
@@ -39,6 +40,7 @@ function SkillCoroutine:waitForEvent(id, obj)
     SKEvent.create(id, obj, callback)
     self:pause("waitForEvent")
 end
+
 
 
 return SkillCoroutine

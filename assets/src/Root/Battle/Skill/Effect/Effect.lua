@@ -6,13 +6,12 @@
 
 local Effect = class("Effect", function (name) return ccs.Armature:create(name) end)
 
-function Effect.create(name, dir)
+function Effect.create(name)
     dir = dir or 1
     local path = "effect/"..name.."/"..name..".ExportJson"
 	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(path)
     local ret = Effect.new(name)
     ret:init()
-    ret:initDirection(dir)
     return ret
 end
 
@@ -25,9 +24,12 @@ function Effect:init()
 	self:listenMovementEvent()
 end
 
--- 初始化朝向并初始脚上位置
-function Effect:initDirection(dir)
-	local sx = dir < 0 and 1 or -1
+-- 初始化朝
+function Effect:initDirection(group)
+    local sx = -1
+    if group == 2 then
+        sx = 1
+    end
 	self:setScaleX(sx)
 end
 

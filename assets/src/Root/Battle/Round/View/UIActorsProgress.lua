@@ -5,9 +5,9 @@
 ----------------------------------------------------------------------
 
 
-local UIActorsProgress = UIDef("UIActorsProgress", "Layout/Actors/ActorsProgress.csb")
+local UIActorsProgress = NodeDef("UIActorsProgress", "Layout/Actors/ActorsProgress.csb")
 
-function UIActorsProgress:onCreate()
+function UIActorsProgress:init()
     g_RootScene:addChild(self, 1)
     self.mActors = {}
     self.mMaxLength = self.bg:getContentSize().width * self.bg:getScaleX()
@@ -23,7 +23,8 @@ function UIActorsProgress:addActor(actor)
     else
         root = self.down_root
     end
-    local node = cls:create("hero_icon/"..actor._args.config.actor_icon)
+    local node = cls.new()
+    node:init("hero_icon/"..actor._args.config.actor_icon)
     root:addChild(node)
 
     local unit = {}

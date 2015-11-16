@@ -26,7 +26,8 @@ function startCoroutine(target, name, args)
     end
     local co = nil
     local function excuteFunc()
-        func(target, co, args)
+        --func(target, co, args)
+        xpcall(function() func(target, co, args) end, __G__TRACKBACK__)
     end
     co = Coroutine.createCoroutine(excuteFunc)
     co:run()
@@ -135,6 +136,16 @@ end
 function Coroutine:waitForFuncResult(func)
     self.mWaitForFuncResult = func
     self:pause("waitForFuncResult")
+end
+
+-- 等待动作
+function Coroutine:waitForModelAnimate(model, name)
+    -- 动作完毕回调
+    local function animateEndHandler()
+        self:resume("waitForModelAnimate")
+    end
+    model:playAnimate(name, 0, animateEndHandler)
+    self:pause("waitForModelAnimate")
 end
 
 -- 恢复

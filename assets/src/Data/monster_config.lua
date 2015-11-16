@@ -4,8 +4,8 @@ monster_config =
     {
         id = 101,
         name = "流风云",
-        hit_point = 100,
-        atk = 20,
+        hit_point = 1000,
+        atk = 100,
 		speed = 120,
         skill = "SPangDe",
         model = "pangde_action",
@@ -26,11 +26,22 @@ monster_config =
     {
         id = 103,
         name = "林惊宇",
-        hit_point = 100,
-        atk = 20,
-		speed = 80,
+        hit_point = 700,
+        atk = 220,
+		speed = 140,
         skill = "SLinJingYu",
         model = "Zhujiao_feng_action",
+        actor_icon = "hero_icon_026.png"
+    },
+    [104] = 
+    {
+        id = 104,
+        name = "夏候敦",
+        hit_point = 1500,
+        atk = 80,
+		speed = 80,
+        skill = "SXiaHouDun",
+        model = "xiahoudun_action",
         actor_icon = "hero_icon_026.png"
     },
 }

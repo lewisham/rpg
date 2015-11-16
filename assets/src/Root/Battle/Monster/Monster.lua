@@ -8,6 +8,8 @@ local Monster = class("Monster", Root)
 
 Monster.ROOT_PATH = "Root.Battle.Monster"
 
+require(Monster.ROOT_PATH..".Base.AttributeBase")
+
 -- 构造函数
 function Monster:ctor()
     Monster.super.ctor(self)
@@ -17,8 +19,19 @@ end
 function Monster:init(args)
     self._args = args
     self:addChild("GroupID", args.group)
-	self:createComponent("View.MonsterViewHelper", args)
-    self:createComponent("Attribute.MonsterAttributeHelper", args)
+    -- 创建属性
+    self:createComponent("Attribute.HitPoint", args.config)
+    self:createComponent("Attribute.Atk", args.config)
+    self:createComponent("Attribute.ActionBar", args.config)
+
+    -- 创建视图
+	self:createComponent("ActionSprite.ActionSprite", args)
+    self:createComponent("StatusBar.MStatusBar", args)
+    self:createComponent("Tips.HPTips")
+
+    self:createComponent("State.MState")
+
+    -- 创建技能
     self:createSkill("Root.Battle.Skill.Impl."..args.config.skill)
 end
 

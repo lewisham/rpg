@@ -27,8 +27,14 @@ function SKLogic:makeDamage(calcType)
 end
 
 -- 生成buff
-function SKBase:logicBuff(id, duration, args)
+function SKLogic:logicBuff(id, duration, args)
 
+end
+
+function SKLogic:playState(name)
+    for _, target in pairs(self.mTargetList) do
+        target:getChild("MState"):play(name)
+    end
 end
 
 

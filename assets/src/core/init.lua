@@ -4,6 +4,7 @@ require("core.Child")
 require("core.Coroutine")
 require("core.UIBase")
 require("core.RequireReload")
+require("core.Common")
 
 -- 有序显示对象key
 -- 参数 sFind: 要查找的单词

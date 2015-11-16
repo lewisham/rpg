@@ -9,13 +9,13 @@ local NodeActor = NodeDef("NodeActor", "Layout/Actors/ActorIconUp.csb")
 
 function NodeActor.changeFile(group)
     if group == 1 then
-        NodeActor.__uiFile = "Layout/Actors/ActorIconUp.csb"
+        NodeActor._uiFileName = "Layout/Actors/ActorIconUp.csb"
     else
-        NodeActor.__uiFile = "Layout/Actors/ActorIconDown.csb"
+        NodeActor._uiFileName = "Layout/Actors/ActorIconDown.csb"
     end
 end
 
-function NodeActor:onCreate(filename)
+function NodeActor:init(filename)
     self.icon:loadTexture(filename)
 end
 
