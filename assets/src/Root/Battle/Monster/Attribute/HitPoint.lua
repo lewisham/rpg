@@ -30,6 +30,9 @@ end
 function HitPoint:bearDamage(damage)
     local value = damage:getDamage()
     self.mCurrent = self.mCurrent + value
+    if self:isKnockout() then
+        self.mCurrent = self.mMax
+    end
     self:getBrother("HPTips"):play(value)
     self:getBrother("ActionSprite").mModel:onHit()
     self:getBrother("LifeBar"):update(self:getPercent())

@@ -21,14 +21,14 @@ function ModeEdit:init(args)
 
     self:createChild("Root.Battle.Scene.BScene", {root = root})
     self:createChild("Root.Battle.Skill.Effect.EffectRootMgr")
-    local m1 = self:createMonster(101, cc.p(180, 256), 1)
-    Root:findRoot("ActionList"):addActor(m1)
+    --local m1 = self:createMonster(101, cc.p(180, 256), 1)
+    --Root:findRoot("ActionList"):addActor(m1)
 	local m3 = self:createMonster(103, cc.p(140, 356), 1)
     Root:findRoot("ActionList"):addActor(m3)
     local m2 = self:createMonster(103, cc.p(1024 - 180, 256), 2)
 	Root:findRoot("ActionList"):addActor(m2)
-	local m4 = self:createMonster(101, cc.p(1024 - 140, 356), 2)
-	Root:findRoot("ActionList"):addActor(m4)
+	--local m4 = self:createMonster(101, cc.p(1024 - 140, 356), 2)
+	--Root:findRoot("ActionList"):addActor(m4)
     --m2:getChild("ActionSprite").mModel:loopPlay()
     
 

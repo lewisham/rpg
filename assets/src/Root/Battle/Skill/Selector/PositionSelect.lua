@@ -12,19 +12,20 @@ function PositionSelect.create(skill)
     return ret
 end
 
-function PositionSelect:play(id)
+function PositionSelect:play(id, args)
     local pos = nil
     local func = self["solution"..id]
-    local pos = func(self)
+    local pos = func(self, args)
     return pos
 end
 
 --　1敌方正前方
-function PositionSelect:solution1()
+function PositionSelect:solution1(args)
     local monster = self.mSkill.mTarget
     local pos = cc.p(monster:getChild("ActionSprite"):getPosition())
     local groupId = monster:getChild("GroupID")
-    local offx = 160
+    local args = args or 0
+    local offx = 160 + args
     if groupId == 2 then
         offx = -offx
     end
