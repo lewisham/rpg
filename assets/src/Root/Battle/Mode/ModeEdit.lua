@@ -11,22 +11,18 @@ ModeEdit.ROOT_PATH = "Root.Mode.ModeEdit"
 
 -- 初始化
 function ModeEdit:init(args)
-    self:createChild("Root.Battle.Round.Camp")
     self:createChild("Root.Battle.Round.ActionList")
 
-    local root = cc.Layer:create()
-	g_RootScene:addChild(root)
-	root:setPosition(0, 0)
-    g_BattleRoot = root
-
-    self:createChild("Root.Battle.Scene.BScene", {root = root})
-    self:createChild("Root.Battle.Skill.Effect.EffectRootMgr")
+    self:createChild("Root.Battle.Scene.BScene")
+    
     local m1 = self:createMonster(103, cc.p(180, 256), 1)
     Root:findRoot("ActionList"):addActor(m1)
 	local m3 = self:createMonster(101, cc.p(140, 356), 1)
     Root:findRoot("ActionList"):addActor(m3)
-    local m2 = self:createMonster(104, cc.p(1024 - 180, 256), 2)
+    local m2 = self:createMonster(202, cc.p(1024 - 180, 256), 2)
 	Root:findRoot("ActionList"):addActor(m2)
+    local m2 = self:createMonster(201, cc.p(1024 - 280, 156), 2)
+    Root:findRoot("ActionList"):addActor(m2)
 	--local m4 = self:createMonster(101, cc.p(1024 - 140, 356), 2)
 	--Root:findRoot("ActionList"):addActor(m4)
     --m2:getChild("ActionSprite").mModel:loopPlay()
@@ -47,8 +43,8 @@ function ModeEdit:init(args)
             if eventType ~= ccui.TouchEventType.ended then
                 return
             end
-            monster:getChild("MState"):play(Monster_State.JiTui)
-            --monster:getChild("ActionSprite").mModel:loopPlay(tb)
+            --monster:getChild("MState"):play(Monster_State.JiTui)
+            monster:getChild("ActionSprite").mModel:loopPlay(tb)
         end    
         local function createButton(idx)
             local button = ccui.Button:create()
@@ -61,7 +57,7 @@ function ModeEdit:init(args)
         end
         createButton(5)
     end
-    playLoopModel(104)
+    --playLoopModel(202)
     --playEffect("xiahoudun", cc.p(512, 100))
     --playEffect("pangde", cc.p(512, 100))
     --playEffect("simayi", cc.p(512, 100))
@@ -74,11 +70,8 @@ function ModeEdit:init(args)
 end
 
 function ModeEdit:createMonster(id, pos, group)
-    local config = monster_config[id]
-    local path = "Root.Battle.Monster.Monster"
-    local m1 = self:createChild(path, {config = config, position = pos, group = group})
-    Root:findRoot("Camp"):addActor(m1)
-    return m1
+    local ret = createMonster(id, pos, group)
+    return ret
 end
 
 

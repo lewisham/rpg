@@ -144,8 +144,8 @@ function Coroutine:waitForModelAnimate(model, name)
     local function animateEndHandler()
         self:resume("waitForModelAnimate")
     end
-    model:playAnimate(name, 0, animateEndHandler)
-    self:pause("waitForModelAnimate")
+    local bRet = model:playAnimate(name, 0, animateEndHandler)
+    if bRet then self:pause("waitForModelAnimate") end
 end
 
 -- 恢复

@@ -18,14 +18,15 @@ end
 function ActionSprite:init(args)
     g_MonsterRoot:addChild(self)
     self:setOrginPosition(args.position)
-    local dir = 1
-	if args.group == 2 then dir = -1 end
+    local dir = args.config.dir
+	if args.group == 2 then dir = -dir end
     local name = args.config.model
 
+    local scale = args.config.scale or 1.0
     local node = cc.Node:create()
     self:addChild(node)
     node:setAnchorPoint(0, 0)
-    --node:setScale(0.95)
+    node:setScale(scale)
 
 	local path = "monster/"..name.."/"..name..".ExportJson"
 	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(path)
@@ -35,6 +36,7 @@ function ActionSprite:init(args)
 	model:initDirection(dir)
 	node:addChild(model)
     self.mModel = model
+    self.mDir = dir
 end
 
 -- 设置站立原始位置

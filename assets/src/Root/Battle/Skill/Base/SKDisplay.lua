@@ -24,12 +24,14 @@ function SKDisplay:changeZOrder(val)
 end
 
 -- 回退
-function SKDisplay:playBackOff()
+function SKDisplay:playBackOff(name, duration)
     local monster = self.mMonster
     local pos1 = self:getPos(2)
     local pos2 = self:getPos(3)
+    name = name or "moveback"
+    duration = duration or 0.075
     if math.abs(pos1.x - pos2.x) > 2 or math.abs(pos1.y - pos2.y) > 2 then
-        self:playMonsterMove(monster, "moveback", self:getPos(2), 0.075)
+        self:playMonsterMove(monster, name, self:getPos(2), duration)
         self.mDisplayCO:waitForEvent(SK_EVENT.Move_Complete, monster)
     end
     self:changeZOrder(0)
@@ -68,7 +70,7 @@ function SKDisplay:playModelAnimate(model, name)
     -- 帧事件回调
     local function frameEventHandler(evt)
         SKEvent.post(SK_EVENT.Frame_Event, model, evt)
-        print(evt)
+        --print(evt)
     end
     model:playAnimate(name, 0, animateEndHandler, frameEventHandler)
 end

@@ -6,10 +6,13 @@
 
 local ActionList = class("ActionList", Root)
 
+ActionList.ROOT_PATH = "Root.Battle.Round"
+
 function ActionList:init()
     self.mActors = {}
     self.mActionCnt = 0
-    self:createChild("Root.Battle.Round.View.UIActorsProgress")
+    self:createComponent("View.Actors.UIActorsProgress")
+    self:createComponent("View.Operator.UIOperatorMain")
     startCoroutine(self, "update")
 end
 

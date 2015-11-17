@@ -52,5 +52,11 @@ function Root:getChild(name)
 	return self.mChildren[name]
 end
 
+function createObject(path)
+    local ret = require(path).new()
+    ret:init()
+    return ret
+end
+
 
 return Root

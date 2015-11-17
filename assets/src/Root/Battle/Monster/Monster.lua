@@ -33,10 +33,20 @@ function Monster:init(args)
 
     -- 创建技能
     self:createSkill("Root.Battle.Skill.Impl."..args.config.skill)
+
 end
 
 function Monster:createSkill(path)
     self:createChild(path, {monster = self}, "Skill1")
+end
+
+-- 说话
+function Monster:speak(str)
+    if self:getChild("UIChatPanel") == nil then
+       self:createComponent("Speaker.UIChatPanel")
+    end
+    local dir = self:getChild("ActionSprite").mDir
+    self:getChild("UIChatPanel"):speak(dir, str)
 end
 
 return Monster

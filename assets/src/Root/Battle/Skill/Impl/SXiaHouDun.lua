@@ -25,13 +25,11 @@ function SXiaHouDun:playDisplay1(co, logic)
     -- 判断攻击次数
     if self.mAttackTimes == 1 then
         self:playModelAnimate(model, "attack_1")
-        --self:playEffectOnce("xiahoudun", "attack_1", self:getPos(3), false)
         co:waitForEvent(SK_EVENT.Frame_Event, model)
         logic:resume("step1")
         co:waitForEvent(SK_EVENT.Movement_Complete, model)
     elseif self.mAttackTimes == 2 then
         self:playModelAnimate(model, "attack_2")
-        --self:playEffectOnce("xiahoudun", "attack_2", self:getPos(3), false)
         co:waitForEvent(SK_EVENT.Frame_Event, model)
         logic:resume("step1")
         co:waitForEvent(SK_EVENT.Frame_Event, model)
@@ -39,7 +37,6 @@ function SXiaHouDun:playDisplay1(co, logic)
         co:waitForEvent(SK_EVENT.Movement_Complete, model)
     else
         self:playModelAnimate(model, "attack_3")
-        --self:playEffectOnce("xiahoudun", "attack_3", self:getPos(3), false)
         co:waitForEvent(SK_EVENT.Frame_Event, model)
         logic:resume("step1")
         co:waitForEvent(SK_EVENT.Frame_Event, model)
@@ -61,7 +58,9 @@ function SXiaHouDun:excuteLogic1(co)
         co:pause("step"..i)
         self:makeDamage(1)
     end
-    self:playState(Monster_State.JiTui)
+    if self.mAttackTimes == 3 then
+        self:playState(Monster_State.JiTui)
+    end
 end
 
 -----------------------------
