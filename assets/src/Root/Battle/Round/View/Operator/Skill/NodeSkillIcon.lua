@@ -9,6 +9,7 @@ local NodeSkillIcon = NodeDef("NodeSkillIcon", "Layout/Skill/SkillIcon.csb")
 
 
 function NodeSkillIcon:init(idx, handler)
+    self:onCreate()
     self.mIdx = idx
     self.mHandler = handler
 end

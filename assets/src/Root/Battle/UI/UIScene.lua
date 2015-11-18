@@ -4,9 +4,10 @@
 -- 描述：场景
 ----------------------------------------------------------------------
 
-local BScene = NodeDef("BScene", "Scene/scene06/scene06_1.csb")
+local UIScene = NodeDef("UIScene", "Scene/scene06/scene06_1.csb")
 
-function BScene:init()
+function UIScene:init()
+    self:onCreate()
     g_BattleRoot:addChild(self)
     g_MonsterRoot = self.ground
     self:initParallaxNode()
@@ -18,7 +19,7 @@ function BScene:init()
 end
 
 -- 初始化不同层级移动速度不同结点
-function BScene:initParallaxNode()
+function UIScene:initParallaxNode()
     local parallaxNode = cc.ParallaxNode:create()
 	self:addChild(parallaxNode)
     self.mParallaxNode = parallaxNode
@@ -49,20 +50,20 @@ function BScene:initParallaxNode()
     local width = size.width - cc.Director:getInstance():getWinSize().width
 end
 
-function BScene:cameraMoveTo(pos, duration)
+function UIScene:cameraMoveTo(pos, duration)
     self.mParallaxNode:stopAllActions()
 	local act1 = cc.EaseIn:create(cc.MoveTo:create(duration, pos), 1.0)
 	self.mParallaxNode:runAction(act1)
 end
 
-function BScene:setPosition(x, y)
+function UIScene:setPosition(x, y)
     self.mParallaxNode:setPosition(x, y)
 end
 
 -- 对子结点重新排序
-function BScene:onReorder()
+function UIScene:onReorder()
     Root:findRoot("Camp"):sortZOrder()
     g_MonsterRoot:sortAllChildren()
 end
 
-return BScene
+return UIScene

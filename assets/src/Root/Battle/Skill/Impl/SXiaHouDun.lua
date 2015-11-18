@@ -10,6 +10,7 @@ function SXiaHouDun:initDisplayRes()
 	self:addSkillInfo(1, 0)
     self:addSkillInfo(2, 3)
     self:addSkillInfo(3, 3)
+    self:addSkillInfo(4, 3)
 end
 
 -----------------------------
@@ -125,7 +126,7 @@ function SXiaHouDun:excuteLogic3(co)
 end
 
 -----------------------------
--- 技能4
+-- 技能4分身
 -----------------------------
 
 function SXiaHouDun:playDisplay4(co, logic)
@@ -133,13 +134,9 @@ function SXiaHouDun:playDisplay4(co, logic)
     local model = monster:getChild("ActionSprite").mModel
     self:playEffectOnce("shoujitexiao", "duang", self:getPos(3), false)
     co:waitForSeconds(0.15)
-    self:playMask()
+    --self:playMask()
     -- 移动
-    self:playMonsterMove(monster, "front", self:getPos(1))
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
-    self:playModelAnimate(model, "skillchase_1")
-    self:playEffectOnce("xiahoudun", "skillchase_1", self:getPos(3), false)
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    self:playModelAnimate(model, "skillchase_2")
     co:waitForEvent(SK_EVENT.Frame_Event, model)
     logic:resume("step1")
     co:waitForEvent(SK_EVENT.Movement_Complete, model)
@@ -149,7 +146,7 @@ end
 
 function SXiaHouDun:excuteLogic4(co)
     co:pause("step1")
-    self.mTarget:getChild("HitPoint"):bearDamage(self:calcDamage(1))
+    local list = createPhantasm(self.mMonster)
 end
 
 return SXiaHouDun

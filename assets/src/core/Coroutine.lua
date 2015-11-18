@@ -138,6 +138,11 @@ function Coroutine:waitForFuncResult(func)
     self:pause("waitForFuncResult")
 end
 
+-- 等待函数回调
+function Coroutine:waitForCallback(func)
+    self:pause("waitForCallback")
+end
+
 -- 等待动作
 function Coroutine:waitForModelAnimate(model, name)
     -- 动作完毕回调
@@ -146,6 +151,26 @@ function Coroutine:waitForModelAnimate(model, name)
     end
     local bRet = model:playAnimate(name, 0, animateEndHandler)
     if bRet then self:pause("waitForModelAnimate") end
+end
+
+-- 等待怪物移动到
+function Coroutine:waitForMonsterMoveTo(monster, pos, duration, name)
+    local function callback()
+        monster:getChild("ActionSprite"):changeState("idle")
+        monster:getChild("ActionSprite"):setOrginPosition(pos)
+        self:resume("waitForMonsterMoveTo")
+    end
+     local tb = 
+    {
+        cc.MoveTo:create(duration, pos),
+        cc.CallFunc:create(callback, {}),
+    }
+    local node = monster:getChild("ActionSprite")
+    node:runAction(cc.Sequence:create(tb))
+    local model = monster:getChild("ActionSprite").mModel
+    name = name or "front"
+    model:playAnimate(name, 1)
+    self:pause("waitForMonsterMoveTo")
 end
 
 -- 恢复

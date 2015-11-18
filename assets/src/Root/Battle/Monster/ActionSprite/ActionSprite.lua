@@ -18,11 +18,12 @@ end
 function ActionSprite:init(args)
     g_MonsterRoot:addChild(self)
     self:setOrginPosition(args.position)
-    local dir = args.config.dir
+    local config = args.config.model
+    local dir = config.dir
 	if args.group == 2 then dir = -dir end
-    local name = args.config.model
-
-    local scale = args.config.scale or 1.0
+    local name = config.model
+    
+    local scale = config.scale or 1.0
     local node = cc.Node:create()
     self:addChild(node)
     node:setAnchorPoint(0, 0)

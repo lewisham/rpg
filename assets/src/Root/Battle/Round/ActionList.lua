@@ -11,6 +11,7 @@ ActionList.ROOT_PATH = "Root.Battle.Round"
 function ActionList:init()
     self.mActors = {}
     self.mActionCnt = 0
+    self.mbBattleEnd = false
     self:createComponent("View.Actors.UIActorsProgress")
     self:createComponent("View.Operator.UIOperatorMain")
     startCoroutine(self, "update")
@@ -21,10 +22,25 @@ function ActionList:addActor(actor)
     self:getChild("UIActorsProgress"):addActor(actor)
 end
 
+function ActionList:getEmptyPlace(group)
+    local list = {1, 2, 3, 4, 5}
+    for _, val in pairs(self.mActors) do
+        if val:getChild("GroupID") == group then
+            local idx = val:getChild("FIdx")
+            list[idx] = nil
+        end
+    end
+    return list
+end
+
 function ActionList:update(co)
-    co:waitForSeconds(1.0)
+    co:waitForSeconds(0.5)
+    for _, val in pairs(self.mActors) do
+        val:getChild("MStatusBar"):setVisible(true)
+        val:getChild("ActionSprite"):changeState("idle")
+    end
     while true do
-        if self:isBattleEnd() ~= 0 then
+        if self:isBattleEnd() then
             break
         end
         self.mActionCnt = 0
@@ -50,7 +66,7 @@ end
 
 -- 是否是战斗结束了
 function ActionList:isBattleEnd()
-    return 0
+    return self.mbBattleEnd
 end
 
 -- 更新行动者

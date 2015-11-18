@@ -33,3 +33,6 @@ function Child:createBrother(name, args)
     local path = self._root.ROOT_PATH.."."..name
     self._root:createChild(path, args)
 end
+
+function Child:removeFromRoot()
+end

@@ -90,7 +90,7 @@ function SKDisplay:playEffectOnce(file, name, pos, bReverse, zOrder)
     -- 帧事件回调
     local function frameEventHandler(evt)
         SKEvent.post(SK_EVENT.Frame_Event, effect, evt)
-        print(evt)
+        --print(evt)
     end
 
     local function animateEndHandler()

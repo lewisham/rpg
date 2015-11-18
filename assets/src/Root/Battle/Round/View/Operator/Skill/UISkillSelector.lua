@@ -8,6 +8,7 @@
 local UISkillSelector = NodeDef("UISkillSelector", "Layout/Skill/SkillSelector.csb")
 
 function UISkillSelector:init()
+    self:onCreate()
     g_RootScene:addChild(self, 1)
 
     local function callback(idx) self:clickHandler(idx) end

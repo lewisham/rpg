@@ -79,6 +79,9 @@ function SLinJingYu:playDisplay2(co, logic)
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "skill1")
+    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    logic:resume("step1")
     co:waitForEvent(SK_EVENT.Movement_Complete, model)
     self:playBackOff()
 	self:over()
@@ -86,6 +89,8 @@ end
 
 function SLinJingYu:excuteLogic2(co)
     self:calcTargets()
+    co:pause("step1")
+    self:makeDamage(1)
 end
 
 -----------------------------

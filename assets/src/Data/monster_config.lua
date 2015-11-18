@@ -1,79 +1,32 @@
 monster_config = 
 {
-    [101] = 
+    [10001] = 
     {
-        id = 101,
+        id = 10001,
         name = "流风云",
-        hit_point = 1000,
-        atk = 100,
+        hit_point = 10000,
+        atk = 1200,
 		speed = 120,
-        skill = "SPangDe",
-        model = "pangde_action",
-        dir = 1,
-        actor_icon = "hero_icon_010.png"
+        model_id = 103,
     },
 
-    [102] = 
+    [10002] = 
     {
-        id = 102,
-        name = "司马",
-        hit_point = 100,
-        atk = 20,
-        skill = "SSiMayi",
-        dir = 1,
-        model = "simayi_action",
+        id = 10002,
+        name = "流风林",
+        hit_point = 15000,
+        atk = 999,
+        speed = 115,
+        model_id = 104,
     },
 
-    [103] = 
+    [10003] = 
     {
-        id = 103,
-        name = "林惊宇",
-        hit_point = 700,
-        atk = 220,
-		speed = 140,
-        skill = "SLinJingYu",
-        model = "Zhujiao_feng_action",
-        dir = 1,
-        actor_icon = "hero_icon_026.png"
-    },
-    [104] = 
-    {
-        id = 104,
-        name = "夏候敦",
-        hit_point = 1500,
-        atk = 80,
-		speed = 80,
-        skill = "SXiaHouDun",
-        model = "xiahoudun_action",
-        dir = 1,
-        actor_icon = "hero_icon_028.png"
-    },
-
-    [201] = 
-    {
-        id = 201,
-        name = "野狼",
-        hit_point = 1500,
-        atk = 80,
-		speed = 100,
-        skill = "SWildWolf",
-        model = "hero_0067_add_fire",
-        dir = -1,
-        scale = 0.6,
-        actor_icon = "hero_0034_fire.png"
-    },
-
-    [202] = 
-    {
-        id = 202,
-        name = "毛球怪",
-        hit_point = 1500,
-        atk = 80,
-		speed = 120,
-        skill = "SMaoQiuGuai",
-        model = "hero_0017_fire",
-        dir = -1,
-        scale = 0.8,
-        actor_icon = "hero_0017_fire.png"
+        id = 10002,
+        name = "宠物狼",
+        hit_point = 15000,
+        atk = 999,
+        speed = 115,
+        model_id = 202,
     },
 }

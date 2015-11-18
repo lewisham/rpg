@@ -8,6 +8,7 @@
 local UIOperatorMain = NodeDef("UIOperatorMain", "Layout/Operator/OperatorMain.csb")
 
 function UIOperatorMain:init()
+    self:onCreate()
     g_RootScene:addChild(self, 1)
     self:setVisible(false)
 end
