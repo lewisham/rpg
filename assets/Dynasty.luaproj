@@ -66,6 +66,7 @@
     <Compile Include="src\main.lua" />
     <Compile Include="src\Root\Battle\BattleRoot.lua" />
     <Compile Include="src\Root\Battle\BGobalFunc.lua" />
+    <Compile Include="src\Root\Battle\Monster\ActionSprite\FlySword.lua" />
     <Compile Include="src\Root\Battle\UI\UILoading.lua" />
     <Compile Include="src\Root\Battle\UI\UIPlaceName.lua" />
     <Compile Include="src\Root\Battle\UI\UISideMask.lua" />

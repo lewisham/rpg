@@ -25,7 +25,12 @@ end
 
 -- 重新排序
 function Camp:sortZOrder()
-    for _, val in ipairs(self.mActors) do
+    for key, val in pairs(self.mActors) do
+        val = val:getSelf()
+        if val == nil then
+            self.mActors[key] = nil
+            break
+        end
         val:getChild("ActionSprite"):onOrder()
     end
 end

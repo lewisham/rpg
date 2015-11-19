@@ -28,6 +28,7 @@ function Round:input(co)
     local list = skill:getSkillInfo()
     local r = math.random(1, #list)
     local idx = list[r].id
+    --co:waitForRoundInput()
 
     self.mTarget = target
     self.mIdx = idx

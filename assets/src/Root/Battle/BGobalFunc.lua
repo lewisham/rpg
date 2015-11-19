@@ -6,12 +6,14 @@
 
 g_MonsterRoot = nil
 g_BattleRoot = nil
+g_UIScene = nil
 
 function safeRemoveNode(node)
     if not node then return end
     node:removeFromParent(true)
 end
 
+-- 创建怪物
 function createMonster(id, pos, group, fidx)
     local config = monster_config[id]
     local tb = clone(config)
@@ -29,7 +31,10 @@ function createPhantasm(monster)
     local list = {}
     for _, idx in pairs(places) do
         local pos = calcFormantionPos(idx, group)
-        local ret = createMonster(monster._args.config.id, pos, group, idx)
+        local monster_id = monster._args.config.id
+        --monster_id = 10003
+        local ret = createMonster(monster_id, pos, group, idx)
+        ret:addChild("Phantasm", true)
         Root:findRoot("ActionList"):addActor(ret)
         ret:getChild("MStatusBar"):setVisible(true)
         ret:getChild("ActionSprite"):changeState("idle")
@@ -38,6 +43,7 @@ function createPhantasm(monster)
     return list
 end
 
+-- 预加载怪物资源
 function preloadMonsterRes(id)
     local config = monster_model[monster_config[id].model_id]
     local name = config.model
@@ -45,9 +51,19 @@ function preloadMonsterRes(id)
 	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(path)
 end
 
+-- 阵形位置
+SCENE_MAP_WIDTH = 1024
 function calcFormantionPos(id, group)
     local offset = 120
     local list2 = {cc.p(0, 0), cc.p(offset, 0), cc.p(-offset, 0), cc.p(0, -offset), cc.p(0, offset)}
-    local list1 = {cc.p(200, 256), cc.p(1024 - 200, 256)}
-    return cc.pAdd(list1[group], list2[id])
+    local x = (SCENE_MAP_WIDTH - 1024) / 2 + 200
+    local list1 = {cc.p(x, 256), cc.p(SCENE_MAP_WIDTH - x, 256)}
+    local pos = cc.pAdd(list1[group], list2[id])
+    return pos
+end
+
+-- 镜对移动到
+function cameraMoveTo(pos, duration)
+    if g_UIScene == nil then return end
+    g_UIScene:cameraMoveTo(pos, duration)
 end

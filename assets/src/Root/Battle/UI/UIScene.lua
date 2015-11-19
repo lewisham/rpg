@@ -7,6 +7,7 @@
 local UIScene = NodeDef("UIScene", "Scene/scene06/scene06_1.csb")
 
 function UIScene:init()
+    g_UIScene = self
     self:onCreate()
     g_BattleRoot:addChild(self)
     g_MonsterRoot = self.ground
@@ -25,6 +26,7 @@ function UIScene:initParallaxNode()
     self.mParallaxNode = parallaxNode
 
     local size = self.ground:getContentSize()
+    SCENE_MAP_WIDTH = size.width
     local winSize = cc.Director:getInstance():getWinSize()
     local tb = {"front", "ground", "back", "sky"}
     local list = {}
@@ -48,11 +50,20 @@ function UIScene:initParallaxNode()
 
     -- max
     local width = size.width - cc.Director:getInstance():getWinSize().width
+    self.mMaxMoveWidth = width
 end
 
-function UIScene:cameraMoveTo(pos, duration)
+function UIScene:cameraMoveTo(posType, duration)
+    local pos
+    if posType == 0 then
+        pos = cc.p(-self.mMaxMoveWidth / 2, 0)
+    elseif posType < 0 then
+        pos = cc.p(0, 0)
+    else
+        pos = cc.p(-self.mMaxMoveWidth, 0)
+    end
     self.mParallaxNode:stopAllActions()
-	local act1 = cc.EaseIn:create(cc.MoveTo:create(duration, pos), 1.0)
+	local act1 = cc.MoveTo:create(duration, pos)
 	self.mParallaxNode:runAction(act1)
 end
 

@@ -8,7 +8,7 @@ local EMask = class("EMask", function () return cc.Layer:create() end)
 
 function EMask.create(args)
     local ret = EMask.new()
-    g_BattleRoot:addChild(ret, 100)
+    g_UIScene:addChild(ret, 100)
     ret:init(args)
     ret:setPosition(0, 0)
     return ret
@@ -27,15 +27,25 @@ function EMask:init(args)
     self:addChild(mask)
     self.mMask = mask
 
+    self.mRoot = cc.Node:create()
+    self:addChild(self.mRoot)
+
     Root:findRoot("EffectRootMgr"):modify(self)
 
     startCoroutine(self, "implPlay", args)
+    self:scheduleUpdateWithPriorityLua(function() self:updatePosition() end, 0)
+end
+
+function EMask:updatePosition()
+    local x = g_UIScene.mParallaxNode:getPositionX()
+    self:setPositionX(x)
+    self.mMask:setPositionX(-x)
 end
 
 function EMask:implPlay(co, args)
     for _, monster in pairs(args.monsters) do
         local node = monster:getChild("ActionSprite")
-        changeParent(self.mMask, node)
+        changeParent(self.mRoot, node)
     end
     local duration = 1.5
     co:waitForSeconds(duration)

@@ -20,6 +20,7 @@ function Monster:init(args)
     self._args = args
     self:addChild("GroupID", args.group)
     self:addChild("FIdx", args.fidx)
+    self:addChild("Phantasm", false)
     -- ¥¥Ω® Ù–‘
     self:createComponent("Attribute.HitPoint", args.config)
     self:createComponent("Attribute.Atk", args.config)
@@ -48,6 +49,11 @@ function Monster:speak(str)
     end
     local dir = self:getChild("ActionSprite").mDir
     self:getChild("UIChatPanel"):speak(dir, str)
+end
+
+function Monster:destroy()
+    self:getChild("ActionSprite"):removeFromParent(true)
+    self:release()
 end
 
 return Monster

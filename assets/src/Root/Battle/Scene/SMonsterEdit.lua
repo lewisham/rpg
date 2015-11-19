@@ -14,14 +14,11 @@ function SMonsterEdit:init(args)
     self:createChild("Root.Battle.Round.Camp")
     self:createChild("Root.Battle.UI.UIScene")
     self:createChild("Root.Battle.Round.ActionList")
+    self:getChild("UIScene"):cameraMoveTo(0, 0.1)
     self:playLoopModel(10002)
     --self:playEffect("xiahoudun", cc.p(512, 100))
 
     self:addPlayMonster(10002, 1, 1)
-    --self:addPlayMonster(10002, 2, 1)
-    --self:addPlayMonster(10002, 3, 1)
-    --self:addPlayMonster(10002, 4, 1)
-    --self:addPlayMonster(10002, 5, 1)
     self:addPlayMonster(10001, 4, 2)
    
     

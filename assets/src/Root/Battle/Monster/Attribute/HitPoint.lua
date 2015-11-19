@@ -9,6 +9,7 @@ local HitPoint = class("HitPoint", AttributeBase)
 -- 构造
 function HitPoint:ctor()
 	HitPoint.super.ctor(self)
+    self.mbAlive = true
 end
 
 -- 初始化
@@ -18,7 +19,7 @@ end
 
 -- 是否存活
 function HitPoint:isAlive()
-    return self.mCurrent > 0
+    return self.mbAlive
 end
 
 -- 是否阵亡
@@ -30,12 +31,13 @@ end
 function HitPoint:bearDamage(damage)
     local value = damage:getDamage()
     self.mCurrent = self.mCurrent + value
-    if self:isKnockout() then
-        self.mCurrent = self.mMax
-    end
     self:getBrother("HPTips"):play(value)
     self:getBrother("ActionSprite").mModel:onHit()
     self:getBrother("LifeBar"):update(self:getPercent())
+end
+
+function HitPoint:onKnockout()
+    self.mbAlive = false
 end
 
 return HitPoint

@@ -4,7 +4,7 @@ monster_config =
     {
         id = 10001,
         name = "流风云",
-        hit_point = 10000,
+        hit_point = 1000,
         atk = 1200,
 		speed = 120,
         model_id = 103,
@@ -14,7 +14,7 @@ monster_config =
     {
         id = 10002,
         name = "流风林",
-        hit_point = 15000,
+        hit_point = 18000,
         atk = 999,
         speed = 115,
         model_id = 104,
@@ -27,6 +27,6 @@ monster_config =
         hit_point = 15000,
         atk = 999,
         speed = 115,
-        model_id = 202,
+        model_id = 201,
     },
 }

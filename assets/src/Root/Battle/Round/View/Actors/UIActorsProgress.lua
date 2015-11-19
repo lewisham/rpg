@@ -37,9 +37,11 @@ end
 
 function UIActorsProgress:updateAll()
     for _, val in pairs(self.mActors) do
+        local bVisible = val.actor:getChild("HitPoint"):isAlive()
         local percent = val.actor:getChild("ActionBar"):getPercent()
         local x = math.floor(self.mMaxLength * percent / 100)
         val.node:setPositionX(x)
+        val.node:setVisible(bVisible)
     end
 end
 
