@@ -26,7 +26,7 @@ function ActionBar:isFull()
     return self.mDistance >= 100
 end
 
-function ActionBar:getPrecent()
+function ActionBar:getPercent()
     return self.mDistance
 end
 

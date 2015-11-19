@@ -52,5 +52,18 @@ function Root:getChild(name)
 	return self.mChildren[name]
 end
 
+function Root:removeChild(name, args)
+    local child = self.mChildren[name]
+    if child == nil then return end
+    self.mChildren[name] = nil
+    child:removeFromRoot(args)
+end
+
+function createObject(path, args)
+    local ret = require(path).new()
+    ret:init(args)
+    return ret
+end
+
 
 return Root

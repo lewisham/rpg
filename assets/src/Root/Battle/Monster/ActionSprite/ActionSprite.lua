@@ -9,6 +9,7 @@ local ActionSprite = class("ActionSprite", function() return cc.Layer:create() e
 -- 构造
 function ActionSprite:ctor()
     Common.setClass(self, Child)
+    self.mNode = nil
     self.mModel = nil
     self.mOrginPosition = nil
     self.mExtraZOrder = 0
@@ -18,14 +19,19 @@ end
 function ActionSprite:init(args)
     g_MonsterRoot:addChild(self)
     self:setOrginPosition(args.position)
-    local dir = 1
-	if args.group == 2 then dir = -1 end
-    local name = args.config.model
+    local config = args.config.model
+    local dir = config.dir
+    self.mOrginDir = dir
+	if args.group == 2 then dir = -dir end
+    local name = config.model
 
+    
+    local scale = config.scale or 1.0
     local node = cc.Node:create()
     self:addChild(node)
     node:setAnchorPoint(0, 0)
-    --node:setScale(0.95)
+    node:setScale(scale)
+    self.mNode = node
 
 	local path = "monster/"..name.."/"..name..".ExportJson"
 	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(path)
@@ -33,8 +39,17 @@ function ActionSprite:init(args)
 	local model = cls.create(name)
 	model:init()
 	model:initDirection(dir)
-	node:addChild(model)
+	node:addChild(model, 1)
     self.mModel = model
+    self.mDir = dir
+end
+
+function ActionSprite:onDir(dir)
+    self.mModel:initDirection(self.mOrginDir * dir)
+    if self.mSword then
+        self.mSword:setScale(dir)
+    end
+    --self.mDir = dir
 end
 
 -- 设置站立原始位置
@@ -58,8 +73,38 @@ function ActionSprite:onOrder()
     self:setLocalZOrder(z)
 end
 
-function ActionSprite:changeState(name)
-    self.mModel:playAnimate(name, 1)
+function ActionSprite:changeState(name, args)
+    local func = self["state_"..name]
+    func(self, args)
 end
+
+function ActionSprite:state_idle()
+    self.mModel:playAnimate("idle", 1)
+end
+
+function ActionSprite:state_cast()
+    self.mModel:playAnimate("cast", 1)
+end
+
+function ActionSprite:state_dead()
+    self.mModel:playAnimate("dead", 0)
+end
+
+-- 御剑飞行
+function ActionSprite:onSword(bOn)
+    if bOn then
+        local sword = require("Root.Battle.Monster.ActionSprite.FlySword").new()
+        sword:init()
+        self.mNode:addChild(sword)
+        self.mNode:setPosition(0, 100)
+        self.mSword = sword
+    elseif self.mSword then
+        --self.mNode:setPosition(0, 0)
+        self.mSword:removeFromParent(true)
+        self.mSword = nil
+        self.mNode:runAction(cc.EaseIn:create(cc.MoveTo:create(0.3, cc.p(0, 0)), 1.5))
+    end
+end
+
 
 return ActionSprite

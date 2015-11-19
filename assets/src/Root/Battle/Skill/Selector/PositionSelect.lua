@@ -67,7 +67,7 @@ end
 
 -- 战场正中心
 function PositionSelect:solution7()
-    return cc.p(512, 256)
+    return cc.p(SCENE_MAP_WIDTH / 2, 256)
 end
 
 function PositionSelect:getPositionByGroup(group)

@@ -21,7 +21,7 @@ function GameApp.applicationDidFinishLaunching()
 	g_RootScene = cc.Scene:create()
 	cc.Director:getInstance():runWithScene(g_RootScene)
     cc.FileUtils:getInstance():setPopupNotify(false)
-    cc.Director:getInstance():setDisplayStats(true)
+    --cc.Director:getInstance():setDisplayStats(true)
     
 	require "cocos.init"
 	require "core.init"

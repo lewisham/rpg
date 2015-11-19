@@ -6,7 +6,10 @@
 
 local MStatusBar = NodeDef("MStatusBar", "Layout/Monster/StatusBar/MonsterStatusBar.csb")
 
-function MStatusBar:init(args)
+function MStatusBar:init()
+    -- 默认隐藏
+    self:setVisible(false)
+    self:onCreate()
     Common.setClass(self, Child)
     local root = self:getBrother("ActionSprite")
     root:addChild(self)

@@ -29,10 +29,6 @@ function Model:init()
 	self:listenMovementEvent()
 	self:listenFrameEvent()
 
-	-- 初始化站立位置
-	self.mFootPos = self:getBonePosition("shadow") or cc.p(0, 0)
-	self.mHitPos = self:getBonePosition("point") or cc.p(0, 0)
-	
 	self:playAnimate("idle", 1)
     --self:loopPlay()
 end
@@ -74,6 +70,11 @@ end
 function Model:initDirection(dir)
 	local sx = dir < 0 and 1 or -1
 	self:setScaleX(sx)
+    local pos = self:getBonePosition("shadow")
+    if pos == nil then
+        return
+    end
+    self:setPosition(-pos.x * sx, -pos.y)
 end
 
 -- 获得骨骼位置

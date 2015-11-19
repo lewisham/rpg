@@ -49,12 +49,14 @@ UIBase = class("UIBase", function() return ccui.Widget:create() end)
 UIBase._uiFileName = ""
 
 function UIBase:ctor()
-    self:onCreate()
 end
 
-function UIBase:onCreate()
+
+function UIBase:onCreate(filename)
+    filename = filename or self._uiFileName
 	self:setAnchorPoint(0, 0)
-	local node = cc.CSLoader:createNode(self._uiFileName)
+    if filename == nil then return end
+	local node = cc.CSLoader:createNode(filename)
  	self:setContentSize(node:getContentSize())
  	self:setTouchEnabled(false) -- 防止穿透
 	for k, v in pairs(node:getChildren()) do
@@ -64,6 +66,10 @@ function UIBase:onCreate()
 end
 
 function UIBase:init()
+end
+
+function UIBase:removeFromRoot()
+    self:removeFromParent(true)
 end
 
 -- 自动注册按钮点击事件和控件名称
