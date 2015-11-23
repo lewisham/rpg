@@ -19,6 +19,7 @@ end
 function Monster:init(args)
     self._args = args
     self:addChild("GroupID", args.group)
+    self:addChild("KnockOutType", 0)
     self:addChild("FIdx", args.fidx)
     self:addChild("Phantasm", false)
     -- ¥¥Ω® Ù–‘
@@ -51,7 +52,21 @@ function Monster:speak(str)
     self:getChild("UIChatPanel"):speak(dir, str)
 end
 
-function Monster:destroy()
+function Monster:onKnockout()
+    self:getChild("HitPoint"):onKnockout()
+    self:getChild("ActionBar"):empty()
+    if self:getChild("KnockOutType") == 0 then
+        self:getChild("ActionSprite"):changeState("dead")
+        return
+    end
+    local function callback()
+        self:removeFromScene()
+    end
+    local dir = self:getChild("GroupID") == 1 and -1 or 1
+    self:getChild("ActionSprite"):escape(dir, callback)
+end
+
+function Monster:removeFromScene()
     self:getChild("ActionSprite"):removeFromParent(true)
     self:release()
 end

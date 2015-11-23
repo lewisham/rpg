@@ -20,14 +20,14 @@ function createMonster(id, pos, group, fidx)
     tb.model = clone(monster_model[tb.model_id])
     local ret = require("Root.Battle.Monster.Monster").new()
     ret:init({config = tb, position = pos, group = group, fidx = fidx})
-    Root:findRoot("Camp"):addActor(ret)
+    findObject("Camp"):addActor(ret)
     return ret
 end
 
 -- 创建幻象
 function createPhantasm(monster)
     local group = monster:getChild("GroupID")
-    local places = Root:findRoot("ActionList"):getEmptyPlace(group)
+    local places = findObject("ActionList"):getEmptyPlace(group)
     local list = {}
     for _, idx in pairs(places) do
         local pos = calcFormantionPos(idx, group)
@@ -35,7 +35,7 @@ function createPhantasm(monster)
         --monster_id = 10003
         local ret = createMonster(monster_id, pos, group, idx)
         ret:addChild("Phantasm", true)
-        Root:findRoot("ActionList"):addActor(ret)
+        findObject("ActionList"):addActor(ret)
         ret:getChild("MStatusBar"):setVisible(true)
         ret:getChild("ActionSprite"):changeState("idle")
         table.insert(list, ret)

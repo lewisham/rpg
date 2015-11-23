@@ -16,17 +16,27 @@ monster_config =
         name = "流风林",
         hit_point = 18000,
         atk = 999,
-        speed = 115,
+        speed = 105,
         model_id = 104,
     },
 
     [10003] = 
     {
+        id = 10003,
+        name = "林雨",
+        hit_point = 180,
+        atk = 39,
+        speed = 135,
+        model_id = 105,
+    },
+
+    [10004] = 
+    {
         id = 10002,
         name = "宠物狼",
-        hit_point = 15000,
-        atk = 999,
-        speed = 115,
+        hit_point = 60,
+        atk = 15,
+        speed = 85,
         model_id = 201,
     },
 }

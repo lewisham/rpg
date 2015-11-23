@@ -36,7 +36,8 @@ end
 function SKBase:addSkillInfo(id, cd)
     local unit = {}
     unit.id = id
-    unit.cd = cd or 0
+    unit.cur_cd = 0
+    unit.max_cd = cd or 0
     table.insert(self.mSkillInfos, unit)
 end
 
@@ -64,12 +65,19 @@ end
 
 function SKBase:play(idx, target)
     self.mTarget = target
+    self:startCoolDown(idx)
     local logicCO = self:startCoroutine("excuteLogic"..idx)
     self.mDisplayCO = self:startCoroutine("playDisplay"..idx, logicCO)
 end
 
 function SKBase:over()
-    Root:findRoot("ActionList"):iActorDone()
+    findObject("ActionList"):iActorDone()
+end
+
+-- 开启cd
+function SKBase:startCoolDown(idx)
+    local unit = self.mSkillInfos[idx]
+    unit.cur_cd = unit.max_cd
 end
 
 return SKBase

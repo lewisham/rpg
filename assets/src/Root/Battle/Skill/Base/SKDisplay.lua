@@ -114,4 +114,14 @@ function SKDisplay:changeMonsterState(monster, name, args)
     model:onHit()
 end
 
+function SKDisplay:cameraFollowCaster(duration)
+    duration = duration or 0.1
+    local dir = self.mMonster:getChild("GroupID") == 1 and 1 or -1
+    findObject("UIScene"):cameraMoveTo(dir, duration)
+end
+
+function SKDisplay:cameraRecover()
+    findObject("UIScene"):cameraMoveTo(0, 0.1)
+end
+
 return SKDisplay

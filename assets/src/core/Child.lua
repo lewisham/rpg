@@ -34,5 +34,5 @@ function Child:createBrother(name, args)
     self._root:createChild(path, args)
 end
 
-function Child:removeFromRoot()
+function Child:removeFromScene()
 end

@@ -7,6 +7,14 @@
 local SKLogic = class("SKLogic", SKBase)
 _G["SKLogic"] = SKLogic
 
+function SKLogic:initLogic()
+    self.InputTargetSelector = require("Root.Battle.Skill.Selector.InputTargetSelector").create(self)
+end
+
+function SKLogic:getInputTargets(idx)
+    return self.InputTargetSelector:play(1)
+end
+
 -- 计算伤害
 function SKLogic:calcDamage(calcType)
     local damage = require("Root.Battle.Skill.Selector.Damage").create(self.mMonster, self.mTarget)

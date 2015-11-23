@@ -24,8 +24,8 @@ function BattleRoot:init()
 	root:setPosition(0, 0)
     g_BattleRoot = root
     math.randomseed(os.clock())
-    self:createChild("Root.Battle.Scene.SOpeningCG")
-	--self:createChild("Root.Battle.Scene.SMonsterEdit")
+    self:createScene("Root.Battle.Scene.SOpeningCG")
+	--self:createScene("Root.Battle.Scene.SMonsterEdit")
 end
 
 return BattleRoot

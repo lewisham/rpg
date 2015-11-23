@@ -17,6 +17,16 @@ function ActionList:init()
     startCoroutine(self, "update")
 end
 
+function ActionList:getActors()
+    return self.mActors
+end
+
+function ActionList:removeFromScene()
+    self:getChild("UIActorsProgress"):removeFromParent(true)
+    self:getChild("UIOperatorMain"):removeFromParent(true)
+    self:release()
+end
+
 function ActionList:addActor(actor)
     table.insert(self.mActors, actor)
     self:getChild("UIActorsProgress"):addActor(actor)
@@ -41,9 +51,6 @@ function ActionList:update(co)
         val:getChild("ActionSprite"):changeState("idle")
     end
     while true do
-        if self:isBattleEnd() then
-            break
-        end
         local actor = self:calcNextActor(co)
         self:move(actor)
         co:waitForFuncResult(function() return self:isActionEnd() end)
@@ -51,6 +58,9 @@ function ActionList:update(co)
         self:knockOutJudge(co)
         self:getChild("UIActorsProgress"):updateAll()
         self:implBattleEndJudge(co)
+        if self:isBattleEnd() then
+            break
+        end
         co:waitForSeconds(1.0)
     end
     self:battleEnd()
@@ -85,7 +95,7 @@ end
 function ActionList:calcActor()
    local actor = nil
    for _, val in pairs(self.mActors) do
-        if val:getChild("ActionBar"):isFull() then
+        if val:getChild("HitPoint"):isAlive() and val:getChild("ActionBar"):isFull() then
             actor = val
             break
         end
@@ -95,7 +105,9 @@ end
 
 function ActionList:updateActorActionBar()
      for _, val in pairs(self.mActors) do
-        val:getChild("ActionBar"):updatePerFrame()
+        if val:getChild("HitPoint"):isAlive() then
+            val:getChild("ActionBar"):updatePerFrame()
+        end
    end
 end
 
@@ -130,8 +142,7 @@ function ActionList:knockOutJudge(co)
     local cnt = 0
     for _, val in pairs(self.mActors) do
         if val:getChild("HitPoint"):isAlive() and val:getChild("HitPoint"):isKnockout() then
-            val:getChild("ActionSprite"):changeState("dead")
-            val:getChild("HitPoint"):onKnockout()
+            val:onKnockout()
             cnt = cnt + 1
         end
     end
@@ -159,15 +170,33 @@ function ActionList:implBattleEndJudge(co)
     end
 end
 
+-- 更新列表，移除空指针
+function ActionList:updateList()
+    local bBreak = true
+    while true do
+        bBreak = true
+        for key, val in pairs(self.mActors) do
+            if val:getSelf() == nil then
+                table.remove(self.mActors, key)
+                bBreak = false
+                break
+            end
+        end
+        if bBreak then
+            break
+        end
+    end
+end
+
 function ActionList:battleEnd()
+    self:updateList()
     for _, val in pairs(self.mActors) do
         val:getChild("MStatusBar"):setVisible(false)
         if val:getChild("Phantasm") then
-            val:destroy()
+            val:removeFromScene()
         end
     end
     self.mActors = {}
-    self:removeChild("UIActorsProgress")
 end
 
 return ActionList

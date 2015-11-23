@@ -38,6 +38,16 @@ monster_model =
         actor_icon = "hero_icon_028.png"
     },
 
+    [105] = 
+    {
+        id = 105,
+        name = "林雨",
+        skill = "SLinYu",
+        model = "Zhujiao_shui_action",
+        dir = 1,
+        actor_icon = "hero_icon_shuizhu.png"
+    },
+
     [201] = 
     {
         id = 201,

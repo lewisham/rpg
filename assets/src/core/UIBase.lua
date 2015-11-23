@@ -68,7 +68,7 @@ end
 function UIBase:init()
 end
 
-function UIBase:removeFromRoot()
+function UIBase:removeFromScene()
     self:removeFromParent(true)
 end
 
