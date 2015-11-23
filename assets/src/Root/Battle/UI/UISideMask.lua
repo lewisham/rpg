@@ -25,7 +25,7 @@ function UISideMask:init(duration)
     self.down = down
 end
 
-function UISideMask:removeFromRoot(duration)
+function UISideMask:removeFromScene(duration)
     self.up:runAction(cc.EaseIn:create(cc.MoveBy:create(duration, cc.p(0, height)), 2.5))
     self.down:runAction(cc.EaseIn:create(cc.MoveBy:create(duration, cc.p(0, -height)), 2.5))
     local tb =

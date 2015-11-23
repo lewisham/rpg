@@ -12,7 +12,7 @@ function UIChatPanel:init()
     local root = self:getBrother("ActionSprite")
     root:addChild(self)
     self:setPosition(0, 160)
-    self.text:enableOutline(cc.c4b(255, 255, 255, 255), 0.5)
+    --self.text:enableOutline(cc.c4b(0, 0, 0, 255), 1.0)
 end
 
 function UIChatPanel:changeDir(dir)

@@ -13,13 +13,14 @@ SMonsterEdit.ROOT_PATH = "Root.Mode.SMonsterEdit"
 function SMonsterEdit:init(args)
     self:createChild("Root.Battle.Round.Camp")
     self:createChild("Root.Battle.UI.UIScene")
+    self:createChild("Root.Battle.Skill.Effect.EffectRootMgr")
     self:createChild("Root.Battle.Round.ActionList")
-    self:getChild("UIScene"):cameraMoveTo(0, 0.1)
-    self:playLoopModel(10002)
+    self:getChild("UIScene"):cameraMoveTo(0, 0)
+    self:playLoopModel(10003)
     --self:playEffect("xiahoudun", cc.p(512, 100))
 
-    self:addPlayMonster(10002, 1, 1)
-    self:addPlayMonster(10001, 4, 2)
+    self:addPlayMonster(10003, 1, 1)
+    self:addPlayMonster(10003, 1, 2)
    
     
 end
@@ -27,7 +28,7 @@ end
 function SMonsterEdit:addPlayMonster(id, idx, group)
     local pos = calcFormantionPos(idx, group)
     local ret = createMonster(id, pos, group, idx)
-    Root:findRoot("ActionList"):addActor(ret)
+    findObject("ActionList"):addActor(ret)
 end
 
 function SMonsterEdit:playLoopModel(id)

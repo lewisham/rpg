@@ -41,7 +41,7 @@ function ActionSprite:init(args)
 	model:initDirection(dir)
 	node:addChild(model, 1)
     self.mModel = model
-    self.mDir = dir
+    self.mDir = dir * self.mOrginDir
 end
 
 function ActionSprite:onDir(dir)
@@ -49,7 +49,7 @@ function ActionSprite:onDir(dir)
     if self.mSword then
         self.mSword:setScale(dir)
     end
-    --self.mDir = dir
+    self.mDir = dir * self.mOrginDir
 end
 
 -- 设置站立原始位置
@@ -104,6 +104,20 @@ function ActionSprite:onSword(bOn)
         self.mSword = nil
         self.mNode:runAction(cc.EaseIn:create(cc.MoveTo:create(0.3, cc.p(0, 0)), 1.5))
     end
+end
+
+-- 逃跑
+function ActionSprite:escape(dir, callback)
+    self:onDir(dir)
+    self.mModel:playAnimate("move", 1)
+    local pos = cc.p(self.mOrginPosition.x, self.mOrginPosition.y)
+    pos.x = pos.x + dir * 680
+    local tb = 
+    {
+        cc.MoveTo:create(1.0, pos),
+        cc.CallFunc:create(callback, {})
+    }
+    self:runAction(cc.Sequence:create(tb))
 end
 
 

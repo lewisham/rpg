@@ -13,19 +13,37 @@ local mRootList = {}
 
 -- 构造函数
 function Root:ctor()
-    mRootList[self.__cname] = self
 	Root.super.ctor(self)
 	self.mChildren = {}
 end
 
-function Root:findRoot(name)
-    return mRootList[name]
+function findObject(name)
+    return mRootList["Scene"]:getChild(name)
 end
 
 function Root:init()
 end
 
 function Root:cleanup()
+end
+
+-- 从场景中移除
+function Root:removeFromScene()
+    for _, child in pairs(self.mChildren) do
+    end
+    self:release()
+end
+
+function Root:createScene(path, args, name)
+    local cls = require(path)
+	local ret = cls.new()
+    mRootList["Scene"] = ret
+	ret._root = self
+    name = name or ret.__cname
+    self.mChildren[name] = ret
+	ret:init(args)
+	ret.__path = path
+    return ret
 end
 
 function Root:createChild(path, args, name)
@@ -56,7 +74,7 @@ function Root:removeChild(name, args)
     local child = self.mChildren[name]
     if child == nil then return end
     self.mChildren[name] = nil
-    child:removeFromRoot(args)
+    child:removeFromScene(args)
 end
 
 function createObject(path, args)

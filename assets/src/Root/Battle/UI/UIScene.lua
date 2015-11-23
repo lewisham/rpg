@@ -16,7 +16,6 @@ function UIScene:init()
     local node = cc.Node:create()
     self:addChild(node)
     node:scheduleUpdateWithPriorityLua(function() self:onReorder() end, 0)
-    createObject("Root.Battle.Skill.Effect.EffectRootMgr")
 end
 
 -- 初始化不同层级移动速度不同结点
@@ -73,7 +72,7 @@ end
 
 -- 对子结点重新排序
 function UIScene:onReorder()
-    Root:findRoot("Camp"):sortZOrder()
+    findObject("Camp"):sortZOrder()
     g_MonsterRoot:sortAllChildren()
 end
 

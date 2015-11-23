@@ -20,7 +20,7 @@ function GameApp.applicationDidFinishLaunching()
 	cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(1024, 576, 2)
 	g_RootScene = cc.Scene:create()
 	cc.Director:getInstance():runWithScene(g_RootScene)
-    cc.FileUtils:getInstance():setPopupNotify(false)
+    --cc.FileUtils:getInstance():setPopupNotify(false)
     --cc.Director:getInstance():setDisplayStats(true)
     
 	require "cocos.init"

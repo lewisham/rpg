@@ -21,9 +21,9 @@ end
 
 -- 输入
 function Round:input(co)
-    local targets = Root:findRoot("Camp"):search(self.mActors, 1)
-    local target = targets[math.random(1, #targets)]
     local skill = self.mActors:getChild("Skill1")
+    local targets = skill:getInputTargets()
+    local target = targets[math.random(1, #targets)]
 	require(skill.__path)
     local list = skill:getSkillInfo()
     local r = math.random(1, #list)
