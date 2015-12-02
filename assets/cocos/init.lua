@@ -26,6 +26,8 @@ require "cocos.cocos2d.Cocos2d"
 require "cocos.cocos2d.Cocos2dConstants"
 require "cocos.cocos2d.functions"
 
+require "cocos.framework.init"
+
 if CC_USE_FRAMEWORK then
     require "cocos.framework.init"
 else

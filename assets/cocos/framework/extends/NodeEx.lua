@@ -226,3 +226,29 @@ function Node:onCleanup_()
     end
     self:onCleanupCallback_()
 end
+
+function Node:changeParentNode(newParent)
+	local nd = self
+	nd:retain() -- ∑¿÷π±ª Õ∑≈
+	nd:removeFromParent()
+	newParent:addChild(nd)
+	nd:release()
+end
+
+function Node:visitAll(fn)
+	local function fnVisitAll(nd, fn)
+		for k, child in pairs(nd:getChildren()) do
+			local bStop = fn(child)
+			if bStop then
+				return bStop
+			end
+
+			bStop = fnVisitAll(child, fn)
+			if bStop then
+				return bStop
+			end
+		end
+	end
+
+	return fnVisitAll(self, fn)
+end

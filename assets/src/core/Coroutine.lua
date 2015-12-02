@@ -156,8 +156,8 @@ end
 -- 等待怪物移动到
 function Coroutine:waitForMonsterMoveTo(monster, pos, duration, name)
     local function callback()
-        monster:getChild("ActionSprite"):changeState("idle")
-        monster:getChild("ActionSprite"):setOrginPosition(pos)
+        monster:getComponent("ActionSprite"):changeState("idle")
+        monster:getComponent("ActionSprite"):setOrginPosition(pos)
         self:resume("waitForMonsterMoveTo")
     end
      local tb = 
@@ -165,9 +165,9 @@ function Coroutine:waitForMonsterMoveTo(monster, pos, duration, name)
         cc.MoveTo:create(duration, pos),
         cc.CallFunc:create(callback, {}),
     }
-    local node = monster:getChild("ActionSprite")
+    local node = monster:getComponent("ActionSprite")
     node:runAction(cc.Sequence:create(tb))
-    local model = monster:getChild("ActionSprite").mModel
+    local model = monster:getComponent("ActionSprite").mModel
     name = name or "front"
     model:playAnimate(name, 1)
     self:pause("waitForMonsterMoveTo")

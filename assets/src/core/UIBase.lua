@@ -4,51 +4,12 @@
 -- 描述：节点基类
 ----------------------------------------------------------------------
 
-function cc.Node:changeParentNode(newParent)
-	local nd = self
-	nd:retain() -- 防止被释放
-	nd:removeFromParent()
-	newParent:addChild(nd)
-	nd:release()
-end
-
-function cc.Node:visitAll(fn)
-	local function fnVisitAll(nd, fn)
-		for k, child in pairs(nd:getChildren()) do
-			local bStop = fn(child)
-			if bStop then
-				return bStop
-			end
-
-			bStop = fnVisitAll(child, fn)
-			if bStop then
-				return bStop
-			end
-		end
-	end
-
-	return fnVisitAll(self, fn)
-end
-
-function ccui.Widget:onClicked(callback)
-	assert(type(callback) == 'function')
-    local function touchEvent(_sender, eventType)
-		if eventType == ccui.TouchEventType.ended then
-			callback(self)
-		end
-	end
-    -- 设置回调引用,新手引导用
-    self._onClickedHandler = callback
-	self:addTouchEventListener(touchEvent)
-    return self
-end
-
-
 UIBase = class("UIBase", function() return ccui.Widget:create() end)
 
 UIBase._uiFileName = ""
 
 function UIBase:ctor()
+    self.mDelegate = nil
 end
 
 
@@ -80,7 +41,7 @@ function UIBase:_autoRegisterButtonsAndVars()
 						return
 					end
 					self[objName] = child -- 保存直接引用关系
-
+                    if self.mDelegate then self.mDelegate[objName] = child end
 					-- 修复scale9控件bug
 					if child.isScale9Enabled and not child:isScale9Enabled() then
 						if tolua.type(child) ~= "ccui.Slider" then
@@ -92,10 +53,11 @@ function UIBase:_autoRegisterButtonsAndVars()
 					 	child:onClicked(function()
 					 						-- 事件名加click_前缀
 					 						local eventName = 'click_' .. objName
-					 						local fn = self[eventName]
+                                            local target = self.mDelegate or self
+					 						local fn = target[eventName]
 					 						if fn then
 					 							print('点击按钮'.. objName)
-					 							fn(self, child)
+					 							fn(target, child)
 					 						else
 					 							print('缺少按钮事件代码 ' .. eventName)
 					 						end

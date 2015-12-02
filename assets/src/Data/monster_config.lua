@@ -32,11 +32,21 @@ monster_config =
 
     [10004] = 
     {
-        id = 10002,
+        id = 10004,
         name = "宠物狼",
         hit_point = 60,
         atk = 15,
         speed = 85,
         model_id = 201,
+    },
+
+    [10005] = 
+    {
+        id = 10005,
+        name = "流风云",
+        hit_point = 240,
+        atk = 25,
+		speed = 120,
+        model_id = 103,
     },
 }
