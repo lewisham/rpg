@@ -24,12 +24,10 @@ function GameApp.applicationDidFinishLaunching()
     --cc.Director:getInstance():setDisplayStats(true)
     
 	require "cocos.init"
-	require "core.init"
+	require "Core.init"
+    require "Global.Common"
 	
-	local cls = require("Root.Battle.BattleRoot")
-	local ret = cls.new()
-	ret:init()
-
+    createGameScene("Scene.SYuMengLing")
 end
 
 function GameApp.applicationWillEnterForeground()

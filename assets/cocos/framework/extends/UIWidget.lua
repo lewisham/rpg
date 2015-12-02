@@ -41,3 +41,16 @@ function Widget:onTouch(callback)
     end)
     return self
 end
+
+function Widget:onClicked(callback)
+	assert(type(callback) == 'function')
+    local function touchEvent(_sender, eventType)
+		if eventType == ccui.TouchEventType.ended then
+			callback(self)
+		end
+	end
+    -- 设置回调引用,新手引导用
+    self._onClickedHandler = callback
+	self:addTouchEventListener(touchEvent)
+    return self
+end
