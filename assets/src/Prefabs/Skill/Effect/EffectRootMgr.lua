@@ -4,12 +4,10 @@
 -- 描述：特效根结点管理
 ----------------------------------------------------------------------
 
-g_FrontEffectRoot = nil
-g_BackEffectRoot = nil
-
 local EffectRootMgr = class("EffectRootMgr", GameObject)
 
 function EffectRootMgr:init()
+    g_EffectRootMgr = self
     self.front = cc.Layer:create()
     g_MonsterRoot:addChild(self.front , 1000)
 

@@ -6,6 +6,7 @@
 
 local FlySword = NodeDef("FlySword", "Layout/Monster/FlySword/FlySword.csb")
 
+
 function FlySword:init()
     self:onCreate()
     self.particle:setPositionType(cc.POSITION_TYPE_FREE)

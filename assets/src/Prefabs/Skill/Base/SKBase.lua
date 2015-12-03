@@ -4,10 +4,8 @@
 -- 描述：技能基类
 ----------------------------------------------------------------------
 
-local SKBase = class("SKBase", Child)
+SKBase = class("SKBase", Component)
 _G["SKBase"] = SKBase
-
-SKBase.ROOT_PATH = "Root.Battle.SKBase"
 
 -- 构造函数
 function SKBase:ctor()
@@ -55,7 +53,7 @@ end
 
 -- 开启协程
 function SKBase:startCoroutine(name, args)
-    local cls = require("Root.Battle.Skill.SkillCoroutine")
+    local cls = require("Prefabs.Skill.SkillCoroutine")
     return cls.startCoroutine(self, name, args)
 end
 
@@ -71,7 +69,7 @@ function SKBase:play(idx, target)
 end
 
 function SKBase:over()
-    findObject("ActionList"):iActorDone()
+    g_ActionList:iActorDone()
 end
 
 -- 开启cd
@@ -80,4 +78,3 @@ function SKBase:startCoolDown(idx)
     unit.cur_cd = unit.max_cd
 end
 
-return SKBase

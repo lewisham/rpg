@@ -4,12 +4,11 @@
 -- 描述：技能表现接口
 ----------------------------------------------------------------------
 
-local SKDisplay = class("SKDisplay", SKLogic)
-_G["SKDisplay"] = SKDisplay
+SKDisplay = class("SKDisplay", SKLogic)
 
 -- 初始化表现
 function SKDisplay:initDisplay()
-    self.PositionSelect = require("Root.Battle.Skill.Selector.PositionSelect").create(self)
+    self.PositionSelect = require("Prefabs.Skill.Selector.PositionSelect").create(self)
 end
 
 -- 获得位置
@@ -20,7 +19,7 @@ end
 -- 提高施法者的层级
 function SKDisplay:changeZOrder(val)
     val = val or 0
-    self.mMonster:getComponent("ActionSprite"):setExtraZOrder(val)
+    self.mMonster:findComponent("ActionSprite"):setExtraZOrder(val)
 end
 
 -- 回退
@@ -35,7 +34,7 @@ function SKDisplay:playBackOff(name, duration)
         self.mDisplayCO:waitForEvent(SK_EVENT.Move_Complete, monster)
     end
     self:changeZOrder(0)
-    monster:getComponent("ActionSprite"):changeState("idle")
+    monster:findComponent("ActionSprite"):changeState("idle")
 end
 
 -----------------------------------------
@@ -54,9 +53,9 @@ function SKDisplay:playMonsterMove(monster, name, pos, duration)
         cc.MoveTo:create(duration, pos),
         cc.CallFunc:create(callback, {}),
     }
-    local node = monster:getComponent("ActionSprite")
+    local node = monster:findComponent("ActionSprite")
     node:runAction(cc.Sequence:create(tb))
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     model:playAnimate(name, 1)
 end
 
@@ -78,10 +77,10 @@ end
 -- 播放特效
 function SKDisplay:playEffectOnce(file, name, pos, bReverse, zOrder)
     local root = zOrder == nil and g_FrontEffectRoot or g_BackEffectRoot
-    local effect = require("Root.Battle.Skill.Effect.Effect").create(file, args)
+    local effect = require("Prefabs.Skill.Effect.Effect").create(file, args)
     root:addChild(effect)
     effect:setPosition(pos)
-    local group = self.mMonster:getComponent("GroupID")
+    local group = self.mMonster:findComponent("GroupID")
     if bReverse then
         group = EnemyGroup(group)
     end
@@ -103,25 +102,23 @@ end
 
 -- 播放遮罩
 function SKDisplay:playMask()
-    local cls = require("Root.Battle.Skill.Effect.EMask")
+    local cls = require("Prefabs.Skill.Effect.EMask")
     local ret = cls.create({monsters = {self.mMonster, self.mTarget}})
     return ret
 end
 
 -- 改变角色状态
 function SKDisplay:changeMonsterState(monster, name, args)
-    local model = self.mTarget:getComponent("ActionSprite").mModel
+    local model = self.mTarget:findComponent("ActionSprite").mModel
     model:onHit()
 end
 
 function SKDisplay:cameraFollowCaster(duration)
     duration = duration or 0.1
-    local dir = self.mMonster:getComponent("GroupID") == 1 and 1 or -1
-    findObject("UIScene"):cameraMoveTo(dir, duration)
+    local dir = self.mMonster:findComponent("GroupID") == 1 and 1 or -1
+    g_UIScene:cameraMoveTo(dir, duration)
 end
 
 function SKDisplay:cameraRecover()
-    findObject("UIScene"):cameraMoveTo(0, 0.1)
+    g_UIScene:cameraMoveTo(0, 0.1)
 end
-
-return SKDisplay

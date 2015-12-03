@@ -9,14 +9,13 @@ local UIActorsProgress = NodeDef("UIActorsProgress", "Layout/Actors/ActorsProgre
 
 function UIActorsProgress:init()
     self:onCreate()
-    g_RootScene:addChild(self, 1)
     self.mActors = {}
     self.mMaxLength = self.bar:getContentSize().width * self.bar:getScaleX() - 5
 end
 
 function UIActorsProgress:addActor(actor)
-    local cls = require("Root.Battle.Round.View.Actors.NodeActor")
-    local group = actor:getComponent("GroupID")
+    local cls = require("Prefabs.Round.View.Actors.NodeActor")
+    local group = actor:findComponent("GroupID")
     cls.changeFile(group)
     local root
     if group == 1 then
@@ -37,8 +36,8 @@ end
 
 function UIActorsProgress:updateAll()
     for _, val in pairs(self.mActors) do
-        local bVisible = val.actor:getComponent("HitPoint"):isAlive()
-        local percent = val.actor:getComponent("ActionBar"):getPercent()
+        local bVisible = val.actor:findComponent("HitPoint"):isAlive()
+        local percent = val.actor:findComponent("ActionBar"):getPercent()
         local x = math.floor(self.mMaxLength * percent / 100)
         val.node:setPositionX(x)
         val.node:setVisible(bVisible)

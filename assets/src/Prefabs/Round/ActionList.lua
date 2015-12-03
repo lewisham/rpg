@@ -4,16 +4,17 @@
 -- 描述：行动列表
 ----------------------------------------------------------------------
 
-local ActionList = class("ActionList", Root)
+local ActionList = class("ActionList", GameObject)
 
-ActionList.ROOT_PATH = "Root.Battle.Round"
+ActionList.ROOT_PATH = "Prefabs.Round"
 
 function ActionList:init()
+    g_ActionList = self
     self.mActors = {}
     self.mActionCnt = 0
     self.mBattleEndType = 0
     self:createComponent("View.Actors.UIActorsProgress")
-    self:createComponent("View.Operator.UIOperatorMain")
+    --self:createComponent("View.Operator.UIOperatorMain")
     startCoroutine(self, "update")
 end
 
@@ -22,22 +23,22 @@ function ActionList:getActors()
 end
 
 function ActionList:removeFromScene()
-    self:getComponent("UIActorsProgress"):removeFromParent(true)
-    self:getComponent("UIOperatorMain"):removeFromParent(true)
+    self:findComponent("UIActorsProgress"):removeFromParent(true)
+    --self:findComponent("UIOperatorMain"):removeFromParent(true)
     self:release()
 end
 
 function ActionList:addActor(actor)
     table.insert(self.mActors, actor)
-    self:getComponent("UIActorsProgress"):addActor(actor)
+    self:findComponent("UIActorsProgress"):addActor(actor)
 end
 
 -- 获得空的位置
 function ActionList:getEmptyPlace(group)
     local list = {1, 2, 3, 4, 5}
     for _, val in pairs(self.mActors) do
-        if val:getComponent("GroupID") == group then
-            local idx = val:getComponent("FIdx")
+        if val:findComponent("GroupID") == group then
+            local idx = val:findComponent("FIdx")
             list[idx] = nil
         end
     end
@@ -47,16 +48,16 @@ end
 function ActionList:update(co)
     co:waitForSeconds(0.5)
     for _, val in pairs(self.mActors) do
-        --val:getComponent("MStatusBar"):setVisible(true)
-        val:getComponent("ActionSprite"):changeState("idle")
+        --val:findComponent("MStatusBar"):setVisible(true)
+        val:findComponent("ActionSprite"):changeState("idle")
     end
     while true do
         local actor = self:calcNextActor(co)
         self:move(actor)
         co:waitForFuncResult(function() return self:isActionEnd() end)
-        actor:getComponent("ActionBar"):empty()
+        actor:findComponent("ActionBar"):empty()
         self:knockOutJudge(co)
-        self:getComponent("UIActorsProgress"):updateAll()
+        self:findComponent("UIActorsProgress"):updateAll()
         self:implBattleEndJudge(co)
         if self:isBattleEnd() then
             break
@@ -86,7 +87,7 @@ function ActionList:calcNextActor(co)
         end
         co:waitForFrames(1)
         self:updateActorActionBar()
-        self:getComponent("UIActorsProgress"):updateAll()
+        self:findComponent("UIActorsProgress"):updateAll()
     end
     return actor
 end
@@ -95,7 +96,7 @@ end
 function ActionList:calcActor()
    local actor = nil
    for _, val in pairs(self.mActors) do
-        if val:getComponent("HitPoint"):isAlive() and val:getComponent("ActionBar"):isFull() then
+        if val:findComponent("HitPoint"):isAlive() and val:findComponent("ActionBar"):isFull() then
             actor = val
             break
         end
@@ -105,8 +106,8 @@ end
 
 function ActionList:updateActorActionBar()
      for _, val in pairs(self.mActors) do
-        if val:getComponent("HitPoint"):isAlive() then
-            val:getComponent("ActionBar"):updatePerFrame()
+        if val:findComponent("HitPoint"):isAlive() then
+            val:findComponent("ActionBar"):updatePerFrame()
         end
    end
 end
@@ -117,7 +118,7 @@ end
 
 function ActionList:move(actor)
     self:iActorStart(actor)
-    self:createComponent("Root.Battle.Round.Round", actor)
+    self:getScene():createGameObject("Prefabs.Round.Round", actor)
     --actor
 end
 
@@ -141,7 +142,7 @@ end
 function ActionList:knockOutJudge(co)
     local cnt = 0
     for _, val in pairs(self.mActors) do
-        if val:getComponent("HitPoint"):isAlive() and val:getComponent("HitPoint"):isKnockout() then
+        if val:findComponent("HitPoint"):isAlive() and val:findComponent("HitPoint"):isKnockout() then
             val:onKnockout()
             cnt = cnt + 1
         end
@@ -157,9 +158,9 @@ end
 function ActionList:implBattleEndJudge(co)
     local list = {0, 0}
     for _, val in pairs(self.mActors) do
-        local idx = val:getComponent("GroupID")
+        local idx = val:findComponent("GroupID")
         list[idx] = list[idx] + 1
-        if not val:getComponent("HitPoint"):isAlive() then
+        if not val:findComponent("HitPoint"):isAlive() then
             list[idx] = list[idx] - 1
         end
     end
@@ -191,8 +192,8 @@ end
 function ActionList:battleEnd()
     self:updateList()
     for _, val in pairs(self.mActors) do
-        val:getComponent("MStatusBar"):setVisible(false)
-        if val:getComponent("Phantasm") then
+        val:findComponent("MStatusBar"):setVisible(false)
+        if val:findComponent("Phantasm") then
             val:removeFromScene()
         end
     end

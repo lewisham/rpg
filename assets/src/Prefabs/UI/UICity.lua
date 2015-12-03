@@ -4,13 +4,13 @@
 -- 描述：全屏剧情
 ----------------------------------------------------------------------
 
-local UICity = class("UICity", GameObject)
+local UICity = ObjDef("UICity", "")
 
 function UICity:init(args)
     local root = self:getScene():getRoot()
     local sky = cc.LayerGradient:create(cc.c4b(0,55,120,255), cc.c4b(40,150,200,255), cc.p(0.9, 0.9))
     root:addChild(sky)
-    self:loadCsb(args.filename)
+    self:onCreate(args.filename)
     self:createBuildings()
 end
 

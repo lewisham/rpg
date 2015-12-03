@@ -18,7 +18,7 @@ end
 -----------------------------
 function SXiaHouDun:playDisplay1(co, logic)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
@@ -69,7 +69,7 @@ end
 -----------------------------
 function SXiaHouDun:playDisplay2(co, logic)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(7))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
@@ -103,7 +103,7 @@ end
 
 function SXiaHouDun:playDisplay3(co, logic)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     self:playEffectOnce("shoujitexiao", "duang", self:getPos(3), false)
     co:waitForSeconds(0.15)
     self:playMask()
@@ -122,7 +122,7 @@ end
 
 function SXiaHouDun:excuteLogic3(co)
     co:pause("step1")
-    self.mTarget:getComponent("HitPoint"):bearDamage(self:calcDamage(1))
+    self.mTarget:findComponent("HitPoint"):bearDamage(self:calcDamage(1))
 end
 
 -----------------------------
@@ -131,7 +131,7 @@ end
 
 function SXiaHouDun:playDisplay4(co, logic)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     self:playEffectOnce("shoujitexiao", "duang", self:getPos(3), false)
     co:waitForSeconds(0.15)
     --self:playMask()

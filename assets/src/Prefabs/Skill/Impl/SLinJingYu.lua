@@ -16,7 +16,7 @@ end
 -----------------------------
 function SLinJingYu:playDisplay1(co, logic)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1, 150))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
@@ -73,7 +73,7 @@ end
 -----------------------------
 function SLinJingYu:playDisplay2(co, logic)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
@@ -98,7 +98,7 @@ end
 -----------------------------
 function SLinJingYu:playDisplay3(co, logic)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
@@ -119,7 +119,7 @@ end
 -----------------------------
 function SLinJingYu:playDisplay4(co, logic)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)

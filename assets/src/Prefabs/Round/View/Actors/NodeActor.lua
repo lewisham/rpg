@@ -16,6 +16,7 @@ function NodeActor.changeFile(group)
 end
 
 function NodeActor:init(filename)
+    self.mbAutoAddTo = false
     self:onCreate()
     self.icon:loadTexture(filename)
     local width = self.icon:getContentSize().width

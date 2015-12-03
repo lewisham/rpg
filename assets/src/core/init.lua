@@ -1,9 +1,9 @@
 require("Core.Coroutine")
 require("Core.UIBase")
 require("Core.RequireReload")
-require("Core.U3D.GameScene")
-require("Core.U3D.GameObject")
-require("Core.U3D.Component")
+require("Core.u3d.GameScene")
+require("Core.u3d.GameObject")
+require("Core.u3d.Component")
 require("Core.Log")
 
 local mInstanceId = 0

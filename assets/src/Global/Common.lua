@@ -1,5 +1,3 @@
-Common = {}
-
 -- 对obj添加对应类的方法
 function setClass(obj, cls)
     for name, val in pairs(cls) do
@@ -8,53 +6,6 @@ function setClass(obj, cls)
         end
     end
 end
-
-function Common.loadSpriteFrames(name)
-	local df = cc.Texture2D:getDefaultAlphaPixelFormat()
-	--local cf = cc.TEXTURE2_D_PIXEL_FORMAT_RGB_A4444
-	local cf = df
-	cc.Texture2D:setDefaultAlphaPixelFormat(cf)
-	cc.SpriteFrameCache:getInstance():addSpriteFrames(name)
-	cc.Texture2D:setDefaultAlphaPixelFormat(df)
-end
-
--- tag = DONOT_LOAD_TEXTURE
-function Common.loadMonsterArmature(name, style)
-	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo("DONOT_LOAD_TEXTURE", "DONOT_LOAD_TEXTURE", name)
-	local plists = lus_get_armature_need_plist_file(name)
-	--Log(plists)
-	-- 加载图片资源
-	if plists then
-		for _, plistName in pairs(plists) do
-			if style == nil then
-				Common.loadSpriteFrames(plistName)
-			else
-				local styleName = mStyleNameList[style]
-				local newPlistName= string.gsub(plistName, "fire", styleName)
-				Common.loadSpriteFrames(newPlistName)
-			end
-		end
-	end
-end
-
--- 创建怪物骨骼动画
-function Common.createMonsterArmature(tb)
-	Common.loadMonsterArmature(tb.fileName, tb.armatureStyle)
-	if tb.armatureStyle then
-		return ccs.Armature:create(tb.armatureName, tb.armatureStyle)
-	else
-		return ccs.Armature:create(tb.armatureName) 
-	end
-end
-
-----------------------------------------------------------------------
--- 作者：lewis
--- 日期：2013-3-31
--- 描述：战斗全局函数
-----------------------------------------------------------------------
-g_MonsterRoot = nil
-g_BattleRoot = nil
-g_UIScene = nil
 
 -- 创建游戏场
 function createGameScene(path, name)
@@ -82,7 +33,7 @@ end
 
 -- 创建幻象
 function createPhantasm(monster)
-    local group = monster:getComponent("GroupID")
+    local group = monster:findComponent("GroupID")
     local places = findObject("ActionList"):getEmptyPlace(group)
     local list = {}
     for _, idx in pairs(places) do
@@ -92,8 +43,8 @@ function createPhantasm(monster)
         local ret = createMonster(monster_id, pos, group, idx)
         ret:addChild("Phantasm", true)
         findObject("ActionList"):addActor(ret)
-        --ret:getComponent("MStatusBar"):setVisible(true)
-        ret:getComponent("ActionSprite"):changeState("idle")
+        --ret:findComponent("MStatusBar"):setVisible(true)
+        ret:findComponent("ActionSprite"):changeState("idle")
         table.insert(list, ret)
     end
     return list

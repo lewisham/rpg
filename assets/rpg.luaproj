@@ -24,13 +24,15 @@
   <ItemGroup>
     <Folder Include="src\" />
     <Folder Include="src\Core\" />
-    <Folder Include="src\Core\U3D\" />
+    <Folder Include="src\Core\u3d\" />
     <Folder Include="src\Data\" />
     <Folder Include="src\Global\" />
+    <Folder Include="src\Player\" />
+    <Folder Include="src\Player\Bag\" />
+    <Folder Include="src\Player\Monster\" />
     <Folder Include="src\Prefabs\" />
     <Folder Include="src\Prefabs\Monster\" />
     <Folder Include="src\Prefabs\Monster\ActionSprite\" />
-    <Folder Include="src\Prefabs\Monster\ActionSprite\Model\" />
     <Folder Include="src\Prefabs\Monster\Attribute\" />
     <Folder Include="src\Prefabs\Monster\Base\" />
     <Folder Include="src\Prefabs\Monster\Speaker\" />
@@ -49,15 +51,19 @@
     <Folder Include="src\Prefabs\Skill\Selector\" />
     <Folder Include="src\Prefabs\UI\" />
     <Folder Include="src\Scene\" />
+    <Folder Include="src\Scene\CG\" />
+    <Folder Include="src\Scene\Battle\" />
+    <Folder Include="src\Scene\City\" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="src\Core\U3D\Component.lua" />
-    <Compile Include="src\Core\U3D\GameScene.lua" />
+    <Compile Include="src\Global\SceneHelper.lua" />
+    <Compile Include="src\Core\u3d\Component.lua" />
+    <Compile Include="src\Core\u3d\GameScene.lua" />
     <Compile Include="src\Core\Log.lua" />
     <Compile Include="src\Global\Common.lua" />
     <Compile Include="src\Core\Coroutine.lua" />
     <Compile Include="src\Core\init.lua" />
-    <Compile Include="src\Core\U3D\GameObject.lua" />
+    <Compile Include="src\Core\u3d\GameObject.lua" />
     <Compile Include="src\Core\RequireReload.lua" />
     <Compile Include="src\Core\UIBase.lua" />
     <Compile Include="src\Data\escort_monster_config.lua" />
@@ -67,10 +73,11 @@
     <Compile Include="src\Data\story_config.lua" />
     <Compile Include="src\GameApp.lua" />
     <Compile Include="src\main.lua" />
+    <Compile Include="src\Player\Player.lua" />
     <Compile Include="src\Prefabs\Monster\ActionSprite\ActionSprite.lua" />
     <Compile Include="src\Prefabs\Monster\ActionSprite\FlySword.lua" />
-    <Compile Include="src\Prefabs\Monster\ActionSprite\Model\Model.lua" />
-    <Compile Include="src\Prefabs\Monster\ActionSprite\Model\ModelShaderController.lua" />
+    <Compile Include="src\Prefabs\Monster\ActionSprite\Model.lua" />
+    <Compile Include="src\Prefabs\Monster\ActionSprite\ModelShaderController.lua" />
     <Compile Include="src\Prefabs\Monster\Attribute\ActionBar.lua" />
     <Compile Include="src\Prefabs\Monster\Attribute\Atk.lua" />
     <Compile Include="src\Prefabs\Monster\Attribute\HitPoint.lua" />
@@ -119,10 +126,10 @@
     <Compile Include="src\Prefabs\UI\UIPlaceName.lua" />
     <Compile Include="src\Prefabs\UI\UIScene.lua" />
     <Compile Include="src\Prefabs\UI\UISideMask.lua" />
-    <Compile Include="src\Scene\SYuMengLing.lua" />
-    <Compile Include="src\Scene\SEscort.lua" />
+    <Compile Include="src\Scene\City\SYuMengLing.lua" />
+    <Compile Include="src\Scene\Battle\SEscortAgency.lua" />
     <Compile Include="src\Scene\SMonsterEdit.lua" />
-    <Compile Include="src\Scene\SOpeningCG.lua" />
+    <Compile Include="src\Scene\CG\SOpeningCG.lua" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

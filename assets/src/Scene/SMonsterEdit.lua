@@ -15,7 +15,7 @@ function SMonsterEdit:init(args)
     self:createComponent("Root.Battle.UI.UIScene")
     self:createComponent("Root.Battle.Skill.Effect.EffectRootMgr")
     self:createComponent("Root.Battle.Round.ActionList")
-    self:getComponent("UIScene"):cameraMoveTo(0, 0)
+    self:findComponent("UIScene"):cameraMoveTo(0, 0)
     self:playLoopModel(10003)
     --self:playEffect("xiahoudun", cc.p(512, 100))
 
@@ -39,8 +39,8 @@ function SMonsterEdit:playLoopModel(id)
         if eventType ~= ccui.TouchEventType.ended then
             return
         end
-        --monster:getComponent("MState"):play(Monster_State.JiTui)
-        monster:getComponent("ActionSprite").mModel:loopPlay(tb)
+        --monster:findComponent("MState"):play(Monster_State.JiTui)
+        monster:findComponent("ActionSprite").mModel:loopPlay(tb)
     end    
     local button = ccui.Button:create()
     button:setTouchEnabled(true)

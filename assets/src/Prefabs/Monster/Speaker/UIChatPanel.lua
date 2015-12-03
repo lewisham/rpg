@@ -7,9 +7,9 @@
 local UIChatPanel = NodeDef("UIChatPanel", "Layout/Monster/Speaker.csb")
 
 function UIChatPanel:init()
+    self.mbAutoAddTo = false
     self:onCreate()
-    setClass(self, Component)
-    local root = self:getBrother("ActionSprite")
+    local root = self:findComponent("ActionSprite")
     root:addChild(self)
     self:setPosition(0, 160)
     --self.text:enableOutline(cc.c4b(0, 0, 0, 255), 1.0)

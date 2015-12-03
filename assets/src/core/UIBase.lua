@@ -7,16 +7,21 @@
 UIBase = class("UIBase", function() return ccui.Widget:create() end)
 
 UIBase._uiFileName = ""
+UIBase._ui_flag = true
 
 function UIBase:ctor()
-    self.mDelegate = nil
+    self.mRoot = nil
+    self.mbAutoAddTo = true
 end
 
 
 function UIBase:onCreate(filename)
+    if self.mRoot and self.mbAutoAddTo then 
+        self.mRoot:addChild(self)
+    end
     filename = filename or self._uiFileName
 	self:setAnchorPoint(0, 0)
-    if filename == nil then return end
+    if filename == nil or filename == "" then return end
 	local node = cc.CSLoader:createNode(filename)
  	self:setContentSize(node:getContentSize())
  	self:setTouchEnabled(false) -- 防止穿透
@@ -41,7 +46,6 @@ function UIBase:_autoRegisterButtonsAndVars()
 						return
 					end
 					self[objName] = child -- 保存直接引用关系
-                    if self.mDelegate then self.mDelegate[objName] = child end
 					-- 修复scale9控件bug
 					if child.isScale9Enabled and not child:isScale9Enabled() then
 						if tolua.type(child) ~= "ccui.Slider" then
@@ -53,7 +57,7 @@ function UIBase:_autoRegisterButtonsAndVars()
 					 	child:onClicked(function()
 					 						-- 事件名加click_前缀
 					 						local eventName = 'click_' .. objName
-                                            local target = self.mDelegate or self
+                                            local target = self
 					 						local fn = target[eventName]
 					 						if fn then
 					 							print('点击按钮'.. objName)
@@ -66,8 +70,18 @@ function UIBase:_autoRegisterButtonsAndVars()
 				end)
 end
 
+-- 组件结点定义
 function NodeDef(clsname, filename)
-    local ret = class(clsname, GameObject)
+    local ret = class(clsname, UIBase)
+    setClass(ret, Component)
+    ret._uiFileName = filename
+    return ret
+end
+
+-- 游戏对象定义
+function ObjDef(clsname, filename)
+    local ret = class(clsname, UIBase)
+    setClass(ret, GameObject)
     ret._uiFileName = filename
     return ret
 end

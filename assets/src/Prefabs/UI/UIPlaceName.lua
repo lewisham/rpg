@@ -4,17 +4,16 @@
 -- 描述：地方名
 ----------------------------------------------------------------------
 
-local UIPlaceName = class("UIPlaceName", GameObject)
+local UIPlaceName = ObjDef("UIPlaceName", "Layout/CG/PlaceName.csb")
 
 function UIPlaceName:init(name)
-    self:loadCsb("Layout/CG/PlaceName.csb")
+    self:onCreate()
     self.name:setString(name)
-    local root = self:getRoot()
-    root:setCascadeOpacityEnabled(true)
-    root:setOpacity(0)
+    self:setCascadeOpacityEnabled(true)
+    self:setOpacity(0)
 
     local winSize = cc.Director:getInstance():getWinSize()
-    root:setPosition(winSize.width / 2, winSize.height / 2 + 150)
+    self:setPosition(winSize.width / 2, winSize.height / 2 + 150)
 
     local tb = 
     {
@@ -23,7 +22,7 @@ function UIPlaceName:init(name)
         cc.FadeOut:create(0.2),
         cc.RemoveSelf:create(),
     }
-    root:runAction(cc.Sequence:create(tb))
+    self:runAction(cc.Sequence:create(tb))
 end
 
 return UIPlaceName

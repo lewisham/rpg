@@ -26,8 +26,9 @@ function GameApp.applicationDidFinishLaunching()
 	require "cocos.init"
 	require "Core.init"
     require "Global.Common"
-	
-    createGameScene("Scene.SOpeningCG")
+    require "Global.SceneHelper"
+    require "Player.Player"
+    Player:getInstance():play()
 end
 
 function GameApp.applicationWillEnterForeground()

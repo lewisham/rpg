@@ -4,7 +4,7 @@
 -- 描述：技能表现事件中心
 ----------------------------------------------------------------------
 
-SKEvent = class("SKEvent", Child)
+SKEvent = class("SKEvent")
 
 SKEvent.map = {}
 
@@ -39,7 +39,6 @@ end
 
 -- 构造函数
 function SKEvent:ctor()
-    SKEvent.super.ctor(self)
     self.mEventId = 0
     self.mObj = nil
     self.mHandler = nil

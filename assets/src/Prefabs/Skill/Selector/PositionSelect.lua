@@ -22,8 +22,8 @@ end
 --　1敌方正前方
 function PositionSelect:solution1(args)
     local monster = self.mSkill.mTarget
-    local pos = cc.p(monster:getComponent("ActionSprite"):getPosition())
-    local groupId = monster:getComponent("GroupID")
+    local pos = cc.p(monster:findComponent("ActionSprite"):getPosition())
+    local groupId = monster:findComponent("GroupID")
     local args = args or 0
     local offx = 160 + args
     if groupId == 2 then
@@ -35,28 +35,28 @@ end
 
 -- 2自己原始位置
 function PositionSelect:solution2()
-    return self.mSkill.mMonster:getComponent("ActionSprite"):getOrginPosition()
+    return self.mSkill.mMonster:findComponent("ActionSprite"):getOrginPosition()
 end
 
 -- 3已方当前位置
 function PositionSelect:solution3()
-    return cc.p(self.mSkill.mMonster:getComponent("ActionSprite"):getPosition())
+    return cc.p(self.mSkill.mMonster:findComponent("ActionSprite"):getPosition())
 end
 
 -- 4目标当前位置
 function PositionSelect:solution4()
-    return cc.p(self.mSkill.mTarget:getComponent("ActionSprite"):getPosition())
+    return cc.p(self.mSkill.mTarget:findComponent("ActionSprite"):getPosition())
 end
 
 -- 已方阵型中心
 function PositionSelect:solution5()
-    local group = self.mSkill.mMonster:getComponent("GroupID")
+    local group = self.mSkill.mMonster:findComponent("GroupID")
     return self:getPositionByGroup(group)
 end
 
 -- 敌方阵型中心
 function PositionSelect:solution6()
-    local group = self.mSkill.mMonster:getComponent("GroupID")
+    local group = self.mSkill.mMonster:findComponent("GroupID")
     if group == 1 then
         group = 2
     else

@@ -21,6 +21,12 @@ end
 function GameScene:init()
 end
 
+function GameScene:destroy()
+    self.mRoot:removeFromParent(true)
+    self.mRoot = nil
+    self:release()
+end
+
 function GameScene:createRoot()
     local layer = cc.Layer:create()
     g_RootScene:addChild(layer)
@@ -67,6 +73,7 @@ function GameScene:createGameObject(path, args, name)
 	local ret = cls.new()
     name = name or ret.__cname
 	ret.mGameScene = self
+    if ret._ui_flag then ret.mRoot = self:getRoot() end
     self.mGameObjects[name] = ret
 	ret:init(args)
     return ret

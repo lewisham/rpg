@@ -4,10 +4,10 @@
 -- 描述：加载资源中
 ----------------------------------------------------------------------
 
-local UILoading = class("UILoading", GameObject)
+local UILoading = ObjDef("UILoading", "Layout/Loading/Loading.csb")
 
 function UILoading:init(args)
-    self:loadCsb("Layout/Loading/Loading.csb")
+    self:onCreate()
     local bar = self.bar
     local count = 1
     local idx = 1
@@ -36,7 +36,7 @@ function UILoading:init(args)
             to = math.floor(idx / total * 100)
         end
 	end
-	self:getRoot():scheduleUpdateWithPriorityLua(update, 0)
+	self:scheduleUpdateWithPriorityLua(update, 0)
 end
 
 function UILoading:play(co)

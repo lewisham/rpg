@@ -12,11 +12,11 @@ end
 
 -- 击退
 function MState:playJiTui(co)
-    local node = self:getBrother("ActionSprite")
+    local node = self:findComponent("ActionSprite")
     local model = node.mModel
 
     local offx = 250
-    if self:getBrother("GroupID") == 1 then
+    if self:findComponent("GroupID") == 1 then
         offx = -offx
     end
     model:playAnimate("hitback", 1)

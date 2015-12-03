@@ -30,7 +30,7 @@ function EMask:init(args)
     self.mRoot = cc.Node:create()
     self:addChild(self.mRoot)
 
-    findObject("EffectRootMgr"):modify(self)
+    g_EffectRootMgr:modify(self)
 
     startCoroutine(self, "implPlay", args)
     self:scheduleUpdateWithPriorityLua(function() self:updatePosition() end, 0)
@@ -44,14 +44,14 @@ end
 
 function EMask:implPlay(co, args)
     for _, monster in pairs(args.monsters) do
-        local node = monster:getComponent("ActionSprite")
+        local node = monster:findComponent("ActionSprite")
         changeParent(self.mRoot, node)
     end
     local duration = 1.5
     co:waitForSeconds(duration)
 
     for _, monster in pairs(args.monsters) do
-        local node = monster:getComponent("ActionSprite")
+        local node = monster:findComponent("ActionSprite")
         changeParent(g_MonsterRoot, node)
     end
 
@@ -59,7 +59,7 @@ function EMask:implPlay(co, args)
     for _, child in pairs(children) do
         changeParent(g_MonsterRoot, child)
     end
-    findObject("EffectRootMgr"):recove()
+    g_EffectRootMgr:recove()
     self:removeFromParent(true)
 end
 

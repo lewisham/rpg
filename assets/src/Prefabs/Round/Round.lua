@@ -4,7 +4,7 @@
 -- 描述：回合
 ----------------------------------------------------------------------
 
-local Round = class("Round", Root)
+local Round = class("Round", GameObject)
 
 
 function Round:init(actor)
@@ -21,7 +21,7 @@ end
 
 -- 输入
 function Round:input(co)
-    local skill = self.mActors:getComponent("Skill1")
+    local skill = self.mActors:findComponent("Skill1")
     local targets = skill:getInputTargets()
     local target = targets[math.random(1, #targets)]
 	require(skill.__path)
@@ -40,7 +40,7 @@ end
 
 -- 施法中
 function Round:casting(co)
-    self.mActors:getComponent("Skill1"):play(self.mIdx, self.mTarget)
+    self.mActors:findComponent("Skill1"):play(self.mIdx, self.mTarget)
 end
 
 -- 追打监听

@@ -4,10 +4,10 @@
 -- 描述：全屏剧情
 ----------------------------------------------------------------------
 
-local UICityMainPanel = class("UICityMainPanel", GameObject)
+local UICityMainPanel = ObjDef("UICityMainPanel", "City/CityMainPanel.csb")
 
 function UICityMainPanel:init()
-    self:loadCsb("City/CityMainPanel.csb")
+    self:onCreate()
 end
 
 return UICityMainPanel

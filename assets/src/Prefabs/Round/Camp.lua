@@ -4,7 +4,7 @@
 -- 描述：营地
 ----------------------------------------------------------------------
 
-local Camp = class("Camp", Root)
+local Camp = class("Camp", GameObject)
 
 function EnemyGroup(group)
     if group == 1 then
@@ -31,16 +31,17 @@ function Camp:sortZOrder()
             self.mActors[key] = nil
             break
         end
-        val:getComponent("ActionSprite"):onOrder()
+        local node = val:findComponent("ActionSprite")
+        node:onOrder()
     end
 end
 
 -- 计算技能选取目标
 function Camp:search(caster, iType)
-	local group = EnemyGroup(caster:getComponent("GroupID"))
+	local group = EnemyGroup(caster:findComponent("GroupID"))
 	local list = {}
 	for _, val in pairs(self.mActors) do
-		if val:getComponent("GroupID") == group then
+		if val:findComponent("GroupID") == group then
 			table.insert(list, val)
 		end
 	end

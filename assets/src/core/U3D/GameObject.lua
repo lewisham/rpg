@@ -52,21 +52,6 @@ function GameObject:getScene()
     return self.mGameScene
 end
 
--- 加载csb
-function GameObject:loadCsb(filename)
-    filename = filename or self._uiFileName
-    local node = UIBase.new()
-    node.mDelegate = self
-    self:getScene():getRoot():addChild(node)
-    self.mRoot = node
-    if filename == nil then return end
-    node:onCreate(filename)
-end
-
-function GameObject:getRoot()
-    return self.mRoot
-end
-
 --------------------------------------
 -- 组件操作
 --------------------------------------
@@ -76,12 +61,18 @@ function GameObject:removeFromScene(args)
 end
 
 -- 创建组件
-function GameObject:createComponent(filename, args, name)
-	local path = self.ROOT_PATH.."."..filename
+function GameObject:createComponent(filename, args, name, bDefinitely)
+	local path
+    if bDefinitely then
+        path = filename
+    else
+        path = self.ROOT_PATH.."."..filename
+    end
     local cls = require(path)
 	local ret = cls.new()
     name = name or ret.__cname
 	ret.mGameOject = self
+    if ret._ui_flag then ret.mRoot = self:getScene():getRoot() end
     self.mComponents[name] = ret
     ret.__path = path
 	ret:init(args)
@@ -104,6 +95,11 @@ function GameObject:removeComponent(args)
     if obj == nil then return end
     self.mComponents[name] = nil
     obj:removeFromObject(args)
+end
+
+-- 查找场景中的其他游戏对角
+function GameObject:findOtherObject(name)
+    return self:getScene():findGameObject(name)
 end
 
 return GameObject

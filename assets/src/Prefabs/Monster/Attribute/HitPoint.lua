@@ -31,9 +31,9 @@ end
 function HitPoint:bearDamage(damage)
     local value = damage:getDamage()
     self.mCurrent = self.mCurrent + value
-    self:getBrother("HPTips"):play(value)
-    self:getBrother("ActionSprite").mModel:onHit()
-    self:getBrother("LifeBar"):update(self:getPercent())
+    self:findComponent("HPTips"):play(value)
+    self:findComponent("ActionSprite").mModel:onHit()
+    self:findComponent("LifeBar"):update(self:getPercent())
 end
 
 function HitPoint:onKnockout()

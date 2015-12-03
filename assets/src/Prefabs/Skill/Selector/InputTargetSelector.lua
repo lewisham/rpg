@@ -23,12 +23,12 @@ end
 
 -- 1敌方所有存活目标
 function InputTargetSelector:solution1()
-    local tb = findObject("ActionList"):getActors()
+    local tb = g_ActionList:getActors()
     local caster = self.mSkill.mMonster
-    local group = EnemyGroup(caster:getComponent("GroupID"))
+    local group = EnemyGroup(caster:findComponent("GroupID"))
 	local list = {}
 	for _, val in pairs(tb) do
-		if val:getComponent("GroupID") == group and val:getComponent("HitPoint"):isAlive() then
+		if val:findComponent("GroupID") == group and val:findComponent("HitPoint"):isAlive() then
 			table.insert(list, val)
 		end
 	end

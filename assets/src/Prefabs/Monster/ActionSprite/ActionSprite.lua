@@ -5,10 +5,10 @@
 ----------------------------------------------------------------------
 
 local ActionSprite = class("ActionSprite", function() return cc.Layer:create() end)
+setClass(ActionSprite, Component)
 
 -- ππ‘Ï
 function ActionSprite:ctor()
-    setClass(self, Component)
     self.mNode = nil
     self.mModel = nil
     self.mOrginPosition = nil
@@ -95,7 +95,7 @@ function ActionSprite:onSword(bOn)
     if bOn then
         local sword = require("Prefabs.Monster.ActionSprite.FlySword").new()
         sword:init()
-        self.mNode:addChild(sword)
+        self.mNode:addChild(sword:getRoot())
         self.mNode:setPosition(0, 100)
         self.mSword = sword
     elseif self.mSword then

@@ -44,7 +44,7 @@ function HPTips:playEffectMode_2(damage)
 	local filename, str = self:getLabelParam(damage)
 	
 	-- 创建根结点
-	local root = self:getBrother("ActionSprite")
+	local root = self:findComponent("ActionSprite")
 	local layer = cc.Layer:create()
 	root:addChild(layer)
     layer:setPosition(0, 180)

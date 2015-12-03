@@ -11,7 +11,7 @@ local SJiangWei = class("SJiangWei", SKDisplay)
 -----------------------------
 function SJiangWei:playDisplay1(co, logic)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
@@ -24,7 +24,7 @@ end
 
 function SJiangWei:excuteLogic1(co)
     co:pause("step1")
-    self.mTarget:getComponent("HitPoint"):bearDamage(self:calcDamage(1))
+    self.mTarget:findComponent("HitPoint"):bearDamage(self:calcDamage(1))
 end
 
 -----------------------------
@@ -53,7 +53,7 @@ end
 -----------------------------
 function SJiangWei:playDisplay4(co)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
     co:waitForEvent(SK_EVENT.Move_Complete, monster)

@@ -15,7 +15,7 @@ end
 -----------------------------
 function SMaoQiuGuai:playDisplay1(co, logic)
     local monster = self.mMonster
-    local model = monster:getComponent("ActionSprite").mModel
+    local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "skill1_move", self:getPos(1), 0.2)
     co:waitForEvent(SK_EVENT.Move_Complete, monster)
