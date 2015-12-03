@@ -36,14 +36,11 @@ function UILoading:init(args)
             to = math.floor(idx / total * 100)
         end
 	end
-	self:scheduleUpdateWithPriorityLua(update, 0)
+	self:getRoot():scheduleUpdateWithPriorityLua(update, 0)
 end
 
 function UILoading:play(co)
-end
-
-function UILoading:isDone()
-    return self.loaded
+    co:waitForFuncResult(function() return self.loaded end)
 end
 
 return UILoading

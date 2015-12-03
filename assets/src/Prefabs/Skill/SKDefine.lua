@@ -1,8 +1,7 @@
-require "Root.Battle.Skill.Base.SKBase"
-require "Root.Battle.Skill.Base.SKLogic"
-require "Root.Battle.Skill.Base.SKDisplay"
-
-require "Root.Battle.Skill.SKEvent"
+require "Prefabs.Skill.Base.SKBase"
+require "Prefabs.Skill.Base.SKLogic"
+require "Prefabs.Skill.Base.SKDisplay"
+require "Prefabs.Skill.SKEvent"
 
 -- 技能位置定义
 PositionType = 

@@ -35,7 +35,7 @@ function ActionSprite:init(args)
 
 	local path = "monster/"..name.."/"..name..".ExportJson"
 	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(path)
-	local cls = require("Root.Battle.Monster.ActionSprite.Model.Model")
+	local cls = require("Prefabs.Monster.ActionSprite.Model")
 	local model = cls.create(name)
 	model:init()
 	model:initDirection(dir)
@@ -93,7 +93,7 @@ end
 -- Óù½£·ÉÐÐ
 function ActionSprite:onSword(bOn)
     if bOn then
-        local sword = require("Root.Battle.Monster.ActionSprite.FlySword").new()
+        local sword = require("Prefabs.Monster.ActionSprite.FlySword").new()
         sword:init()
         self.mNode:addChild(sword)
         self.mNode:setPosition(0, 100)

@@ -7,7 +7,7 @@
 g_FrontEffectRoot = nil
 g_BackEffectRoot = nil
 
-local EffectRootMgr = class("EffectRootMgr", Root)
+local EffectRootMgr = class("EffectRootMgr", GameObject)
 
 function EffectRootMgr:init()
     self.front = cc.Layer:create()

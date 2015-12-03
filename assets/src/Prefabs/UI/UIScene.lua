@@ -4,24 +4,21 @@
 -- 描述：场景
 ----------------------------------------------------------------------
 
-local UIScene = NodeDef("UIScene", "Scene/scene06/scene06_1.csb")
+local UIScene = class("UIScene", GameObject)
 
-function UIScene:init()
-    g_UIScene = self
-    self:onCreate()
-    g_BattleRoot:addChild(self)
-    g_MonsterRoot = self.ground
+function UIScene:init(args)
+    self:loadCsb("Scene/scene06/scene06_1.csb")
     self:initParallaxNode()
-    
     local node = cc.Node:create()
-    self:addChild(node)
-    node:scheduleUpdateWithPriorityLua(function() self:onReorder() end, 0)
+    self:getRoot():addChild(node)
+    g_MonsterRoot = self.ground
+    --node:scheduleUpdateWithPriorityLua(function() self:onReorder() end, 0)
 end
 
 -- 初始化不同层级移动速度不同结点
 function UIScene:initParallaxNode()
     local parallaxNode = cc.ParallaxNode:create()
-	self:addChild(parallaxNode)
+	self:getRoot():addChild(parallaxNode)
     self.mParallaxNode = parallaxNode
 
     local size = self.ground:getContentSize()

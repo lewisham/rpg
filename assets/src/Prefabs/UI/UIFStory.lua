@@ -4,11 +4,10 @@
 -- 描述：全屏剧情
 ----------------------------------------------------------------------
 
-local UIFStory = NodeDef("UIFStory", "Layout/CG/FStory.csb")
+local UIFStory = class("UIFStory", GameObject)
 
-function UIFStory:init()
-    self:onCreate()
-    g_BattleRoot:addChild(self)
+function UIFStory:init(args)
+    self:loadCsb("Layout/CG/FStory.csb")
 end
 
 function UIFStory:play(co)

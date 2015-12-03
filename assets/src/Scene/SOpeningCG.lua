@@ -18,14 +18,14 @@ end
 function SOpeningCG:play(co)
     self.mCoroutine = co
     -- 进场
-    self:createGameObject("Root.Battle.UI.UILoading", {10001, 10002, 10003, 10004}):play(co)
+    self:createGameObject("Prefabs.UI.UILoading", {10001, 10002, 10003, 10004}):play(co)
     self:removeGameObject("UILoading")
-    self:createGameObject("Root.Battle.UI.UIFStory"):play(co)
-    self:createGameObject("Root.Battle.Round.Camp")
-    self:createGameObject("Root.Battle.UI.UIScene")
-    self:createGameObject("Root.Battle.Skill.Effect.EffectRootMgr")
-    self:removeChild("UIFStory")
-    self:createGameObject("Root.Battle.UI.UIPlaceName", "云梦岭郊外")
+    self:createGameObject("Prefabs.UI.UIFStory"):play(co)
+    self:createGameObject("Prefabs.Round.Camp")
+    self:createGameObject("Prefabs.UI.UIScene")
+    self:createGameObject("Prefabs.Skill.Effect.EffectRootMgr")
+    self:removeGameObject("UIFStory")
+    self:createGameObject("Prefabs.UI.UIPlaceName", "云梦岭郊外")
     co:waitForSeconds(2.5)
 
     -- 创建主角与大反派
@@ -95,6 +95,17 @@ function SOpeningCG:play(co)
     co:waitForSeconds(0.6 + 0.1)
 
     self:playStory(1005, {m1, m5})
+end
+
+
+function SOpeningCG:createMonster(id, pos, group, fidx)
+    local config = monster_config[id]
+    local tb = clone(config)
+    tb.model = clone(monster_model[tb.model_id])
+    local ret = require("Prefabs.Monster.Monster").new()
+    ret:init({config = tb, position = pos, group = group, fidx = fidx})
+    self:findGameObject("Camp"):addActor(ret)
+    return ret
 end
 
 local SPEAKER_DURATION = 1.1

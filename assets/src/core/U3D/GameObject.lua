@@ -54,11 +54,13 @@ end
 
 -- º”‘ÿcsb
 function GameObject:loadCsb(filename)
+    filename = filename or self._uiFileName
     local node = UIBase.new()
     node.mDelegate = self
-    node:onCreate(filename)
     self:getScene():getRoot():addChild(node)
     self.mRoot = node
+    if filename == nil then return end
+    node:onCreate(filename)
 end
 
 function GameObject:getRoot()

@@ -43,9 +43,28 @@ function Component:getSelf()
     return self
 end
 
+
+-- 加载csb
+function Component:loadCsb(filename)
+    filename = filename or self._uiFileName
+    local node = UIBase.new()
+    node.mDelegate = self
+    self.mRoot = node
+    if filename == nil then return end
+    node:onCreate(filename)
+end
+
+function Component:getRoot()
+    return self.mRoot
+end
+
 --------------------------------------
 -- 组件操作
 --------------------------------------
+
+function Component:getGameObject()
+    return self.mGameOject
+end
 
 -- 查找组件
 function Component:findComponent(name)

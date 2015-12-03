@@ -27,7 +27,7 @@ function GameApp.applicationDidFinishLaunching()
 	require "Core.init"
     require "Global.Common"
 	
-    createGameScene("Scene.SYuMengLing")
+    createGameScene("Scene.SOpeningCG")
 end
 
 function GameApp.applicationWillEnterForeground()

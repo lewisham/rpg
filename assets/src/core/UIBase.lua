@@ -67,7 +67,7 @@ function UIBase:_autoRegisterButtonsAndVars()
 end
 
 function NodeDef(clsname, filename)
-    local ret = class(clsname, UIBase)
+    local ret = class(clsname, GameObject)
     ret._uiFileName = filename
     return ret
 end

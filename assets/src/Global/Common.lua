@@ -74,7 +74,7 @@ function createMonster(id, pos, group, fidx)
     local config = monster_config[id]
     local tb = clone(config)
     tb.model = clone(monster_model[tb.model_id])
-    local ret = require("Root.Battle.Monster.Monster").new()
+    local ret = require("Prefabs.Monster.Monster").new()
     ret:init({config = tb, position = pos, group = group, fidx = fidx})
     findObject("Camp"):addActor(ret)
     return ret
