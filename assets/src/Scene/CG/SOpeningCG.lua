@@ -11,18 +11,8 @@ function SOpeningCG:init(args)
     require "Prefabs.Skill.SKDefine"
     require "Data.monster_config"
     require "Data.monster_model"
-    self:initGlobal()
+    initBattleGlobal()
     startCoroutine(self, "play")
-end
-
--- 初始化全局变量
-function SOpeningCG:initGlobal()
-    g_FrontEffectRoot = nil
-    g_BackEffectRoot = nil
-    g_EffectRootMgr = nil
-    g_ActionList =  nil
-    g_MonsterRoot = nil
-    g_UIScene = nil
 end
 
 -- 开始执行逻辑
@@ -38,6 +28,8 @@ function SOpeningCG:play(co)
     self:removeGameObject("UIFStory")
     self:createGameObject("Prefabs.UI.UIPlaceName", "云梦岭郊外")
     co:waitForSeconds(2.5)
+
+    cc.SimpleAudioEngine:getInstance():playMusic("sound/bgm_cg1.mp3", true)
 
     -- 创建主角与大反派
     local m1 = self:createMonster(10001, cc.p(-200, 256), 2, 1)
@@ -80,10 +72,8 @@ function SOpeningCG:play(co)
 
     -- 创建狼
     local m3 = self:createMonster(10004, cc.p(-200, 356), 1, 4)
-    m3:addComponent("KnockOutType", 1)
     co:waitForMonsterMoveTo(m3, calcFormantionPos(5, 1), 1.8, "move")
     local m4 = self:createMonster(10004, cc.p(-200, 156), 1, 5)
-    m4:addComponent("KnockOutType", 1)
     co:waitForMonsterMoveTo(m4, calcFormantionPos(4, 1), 1.8, "move")
     self:cameraMoveTo(0, 0.8)
     self:playStory(1004, {m1, m3, m4})
@@ -106,8 +96,7 @@ function SOpeningCG:play(co)
     co:waitForSeconds(0.6 + 0.1)
 
     self:playStory(1005, {m1, m5})
-
-    SceneHelper:getInstance():runningScene("Scene.City.SYuMengLing")
+    Player:getInstance():goHome()
 end
 
 -- 创建怪物

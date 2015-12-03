@@ -20,29 +20,28 @@ function safeRemoveNode(node)
     node:removeFromParent(true)
 end
 
--- 创建怪物
-function createMonster(id, pos, group, fidx)
-    local config = monster_config[id]
-    local tb = clone(config)
-    tb.model = clone(monster_model[tb.model_id])
-    local ret = require("Prefabs.Monster.Monster").new()
-    ret:init({config = tb, position = pos, group = group, fidx = fidx})
-    findObject("Camp"):addActor(ret)
-    return ret
+-- 初始化全局变量
+function initBattleGlobal()
+    g_FrontEffectRoot = nil
+    g_BackEffectRoot = nil
+    g_EffectRootMgr = nil
+    g_ActionList =  nil
+    g_MonsterRoot = nil
+    g_UIScene = nil
 end
 
 -- 创建幻象
 function createPhantasm(monster)
     local group = monster:findComponent("GroupID")
-    local places = findObject("ActionList"):getEmptyPlace(group)
+    local places = g_ActionList:getEmptyPlace(group)
     local list = {}
     for _, idx in pairs(places) do
         local pos = calcFormantionPos(idx, group)
         local monster_id = monster._args.config.id
         --monster_id = 10003
-        local ret = createMonster(monster_id, pos, group, idx)
-        ret:addChild("Phantasm", true)
-        findObject("ActionList"):addActor(ret)
+        local ret = monster:getScene():createMonster(monster_id, pos, group, idx)
+        ret:addComponent("Phantasm", true)
+        g_ActionList:addActor(ret)
         --ret:findComponent("MStatusBar"):setVisible(true)
         ret:findComponent("ActionSprite"):changeState("idle")
         table.insert(list, ret)
@@ -60,12 +59,27 @@ end
 
 -- 阵形位置
 SCENE_MAP_WIDTH = 1024
+local mOffsetPos = nil
 function calcFormantionPos(id, group)
-    local offset = 120
-    local list2 = {cc.p(0, 0), cc.p(offset, 0), cc.p(-offset, 0), cc.p(0, -offset), cc.p(0, offset)}
+    local centerX = 216
+    if mOffsetPos == nil then
+        mOffsetPos = {}
+        table.insert(mOffsetPos, cc.p(0, 0))
+        local total = 5
+        local angle = 0
+        local add = 3.1415 * 2 / total
+        local xRadius = 140
+        local yRadius = 110
+        for i = 1, total do
+            local x = math.sin(angle) * xRadius
+            local y = math.cos(angle) * yRadius
+            table.insert(mOffsetPos, cc.p(x, y))
+            angle = angle + add
+        end
+    end
     local x = (SCENE_MAP_WIDTH - 1024) / 2 + 200
-    local list1 = {cc.p(x, 256), cc.p(SCENE_MAP_WIDTH - x, 256)}
-    local pos = cc.pAdd(list1[group], list2[id])
+    local list1 = {cc.p(x, centerX), cc.p(SCENE_MAP_WIDTH - x, centerX)}
+    local pos = cc.pAdd(list1[group], mOffsetPos[id])
     return pos
 end
 

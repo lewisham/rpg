@@ -83,12 +83,14 @@
     <Folder Include="assets\res\Scene\scene06\secene06_png\" />
     <Folder Include="assets\res\Scene\scene12\" />
     <Folder Include="assets\res\Scene\scene12\scene12_ani\" />
+    <Folder Include="assets\res\Shop\" />
     <Folder Include="assets\res\skill_icon\" />
     <Folder Include="assets\src\" />
     <Folder Include="assets\src\core\" />
     <Folder Include="assets\src\core\U3D\" />
     <Folder Include="assets\src\Data\" />
     <Folder Include="assets\src\Global\" />
+    <Folder Include="assets\src\Player\" />
     <Folder Include="assets\src\Prefabs\" />
     <Folder Include="assets\src\Prefabs\Monster\" />
     <Folder Include="assets\src\Prefabs\Monster\ActionSprite\" />
@@ -110,6 +112,9 @@
     <Folder Include="assets\src\Prefabs\Skill\Selector\" />
     <Folder Include="assets\src\Prefabs\UI\" />
     <Folder Include="assets\src\Scene\" />
+    <Folder Include="assets\src\Scene\Battle\" />
+    <Folder Include="assets\src\Scene\CG\" />
+    <Folder Include="assets\src\Scene\City\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\.buildpath" />
@@ -134,6 +139,8 @@
     <Content Include="assets\res\City\map\map2_02.png" />
     <Content Include="assets\res\City\map\map2_03.png" />
     <Content Include="assets\res\City\map\map2_04.png" />
+    <Content Include="assets\res\City\OpenCloud.csb" />
+    <Content Include="assets\res\City\open_cloud.png" />
     <Content Include="assets\res\City\YuMengLing.csb" />
     <Content Include="assets\res\common.vsh" />
     <Content Include="assets\res\Default\Button_Disable.png" />
@@ -374,6 +381,12 @@
     <Content Include="assets\res\Scene\scene12\scene_01_3_3.png" />
     <Content Include="assets\res\Scene\scene12\scene_01_4.png" />
     <Content Include="assets\res\Scene\scene12\scene_01_4_deco2.png" />
+    <Content Include="assets\res\Shop\Drugstore.csb" />
+    <Content Include="assets\res\Shop\GoodsItem.csb" />
+    <Content Include="assets\res\Shop\npc_009.png" />
+    <Content Include="assets\res\Shop\ui3_box.png" />
+    <Content Include="assets\res\Shop\ui_frame_type1.png" />
+    <Content Include="assets\res\Shop\ui_top_type1.png" />
     <Content Include="assets\res\skill_icon\0001_dark_1.png" />
     <Content Include="assets\res\skill_icon\0001_dark_2.png" />
     <Content Include="assets\res\skill_icon\0001_dark_3.png" />
@@ -942,6 +955,7 @@
     <Content Include="assets\res\ui3_frame.png" />
     <Content Include="assets\rpg.config" />
     <Content Include="assets\rpg.luaproj" />
+    <Content Include="assets\rpg.luaproj.user" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="assets\cocos\cocos2d\bitExtend.lua" />
@@ -1017,7 +1031,9 @@
     <Compile Include="assets\src\Data\story_config.lua" />
     <Compile Include="assets\src\GameApp.lua" />
     <Compile Include="assets\src\Global\Common.lua" />
+    <Compile Include="assets\src\Global\SceneHelper.lua" />
     <Compile Include="assets\src\main.lua" />
+    <Compile Include="assets\src\Player\Player.lua" />
     <Compile Include="assets\src\Prefabs\Monster\ActionSprite\ActionSprite.lua" />
     <Compile Include="assets\src\Prefabs\Monster\ActionSprite\FlySword.lua" />
     <Compile Include="assets\src\Prefabs\Monster\ActionSprite\Model.lua" />
@@ -1070,10 +1086,10 @@
     <Compile Include="assets\src\Prefabs\UI\UIPlaceName.lua" />
     <Compile Include="assets\src\Prefabs\UI\UIScene.lua" />
     <Compile Include="assets\src\Prefabs\UI\UISideMask.lua" />
-    <Compile Include="assets\src\Scene\SEscort.lua" />
+    <Compile Include="assets\src\Scene\Battle\SEscortAgency.lua" />
+    <Compile Include="assets\src\Scene\CG\SOpeningCG.lua" />
+    <Compile Include="assets\src\Scene\City\SYuMengLing.lua" />
     <Compile Include="assets\src\Scene\SMonsterEdit.lua" />
-    <Compile Include="assets\src\Scene\SOpeningCG.lua" />
-    <Compile Include="assets\src\Scene\SYuMengLing.lua" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />
 </Project>

@@ -15,10 +15,18 @@ function Player:getInstance()
 end
 
 function Player:ctor()
-    self.mSceneName = "Scene.CG.SOpeningCG"
+    self.mSceneName = "Scene.City.SYuMengLing"--"Scene.CG.SOpeningCG"
 end
 
 function Player:play()
     SceneHelper:getInstance():runningScene(self.mSceneName)
+end
+
+function Player:goHome()
+    SceneHelper:getInstance():replaceScene("Scene.City.SYuMengLing")
+end
+
+function Player:gotoEscort()
+    SceneHelper:getInstance():replaceScene("Scene.Battle.SEscortAgency")
 end
 

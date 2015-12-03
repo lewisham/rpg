@@ -8,12 +8,13 @@ local SYuMengLing = class("SYuMengLing", GameScene)
 
 -- 初始化
 function SYuMengLing:init()
+    cc.SimpleAudioEngine:getInstance():playMusic("sound/bgm_cg1.mp3", true)
     startCoroutine(self, "play")
 end
 
 function SYuMengLing:play(co)
-    self:createGameObject("Prefabs.UI.UICity", {filename = "City/YuMengLing.csb"})
-    self:createGameObject("Prefabs.UI.UICityMainPanel")
+    self:createGameObject("Prefabs.City.UICity", {filename = "City/YuMengLing.csb"})
+    self:createGameObject("Prefabs.City.UICityMainPanel")
 end
 
 return SYuMengLing

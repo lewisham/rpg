@@ -7,6 +7,7 @@
 local UIScene = ObjDef("UIScene", "Scene/scene06/scene06_1.csb")
 
 function UIScene:init(args)
+    g_UIScene = self
     self:onCreate()
     self:initParallaxNode()
     local node = cc.Node:create()

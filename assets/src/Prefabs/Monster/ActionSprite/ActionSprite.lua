@@ -5,10 +5,10 @@
 ----------------------------------------------------------------------
 
 local ActionSprite = class("ActionSprite", function() return cc.Layer:create() end)
-setClass(ActionSprite, Component)
 
 -- ππ‘Ï
 function ActionSprite:ctor()
+    setClass(self, Component)
     self.mNode = nil
     self.mModel = nil
     self.mOrginPosition = nil

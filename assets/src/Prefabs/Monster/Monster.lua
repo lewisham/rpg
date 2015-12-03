@@ -19,7 +19,7 @@ end
 function Monster:init(args)
     self._args = args
     self:addComponent("GroupID", args.group)
-    self:addComponent("KnockOutType", 0)
+    self:addComponent("KnockOutType", args.config.model.knockout_type or 0)
     self:addComponent("FIdx", args.fidx)
     self:addComponent("Phantasm", false)
 

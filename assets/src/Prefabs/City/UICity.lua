@@ -27,6 +27,10 @@ end
 
 function UICity:clickBuild(build)
     print(build:getName())
+    local name = build:getName()
+    if name == "EscortAgency" then 
+        Player:getInstance():gotoEscort()
+    end
 end
 
 
