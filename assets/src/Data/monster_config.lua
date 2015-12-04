@@ -40,6 +40,16 @@ monster_config =
         model_id = 201,
     },
 
+    [10006] = 
+    {
+        id = 10006,
+        name = "宠物狼",
+        hit_point = 110,
+        atk = 35,
+        speed = 85,
+        model_id = 202,
+    },
+
     [10005] = 
     {
         id = 10005,

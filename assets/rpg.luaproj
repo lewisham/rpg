@@ -31,6 +31,7 @@
     <Folder Include="src\Player\Bag\" />
     <Folder Include="src\Player\Monster\" />
     <Folder Include="src\Prefabs\" />
+    <Folder Include="src\Prefabs\City\" />
     <Folder Include="src\Prefabs\Monster\" />
     <Folder Include="src\Prefabs\Monster\ActionSprite\" />
     <Folder Include="src\Prefabs\Monster\Attribute\" />
@@ -66,7 +67,7 @@
     <Compile Include="src\Core\u3d\GameObject.lua" />
     <Compile Include="src\Core\RequireReload.lua" />
     <Compile Include="src\Core\UIBase.lua" />
-    <Compile Include="src\Data\escort_monster_config.lua" />
+    <Compile Include="src\Data\escort_config.lua" />
     <Compile Include="src\Data\monster_config.lua" />
     <Compile Include="src\Data\monster_model.lua" />
     <Compile Include="src\Data\skill_config.lua" />
@@ -74,6 +75,9 @@
     <Compile Include="src\GameApp.lua" />
     <Compile Include="src\main.lua" />
     <Compile Include="src\Player\Player.lua" />
+    <Compile Include="src\Prefabs\City\Cloud.lua" />
+    <Compile Include="src\Prefabs\City\UICity.lua" />
+    <Compile Include="src\Prefabs\City\UICityMainPanel.lua" />
     <Compile Include="src\Prefabs\Monster\ActionSprite\ActionSprite.lua" />
     <Compile Include="src\Prefabs\Monster\ActionSprite\FlySword.lua" />
     <Compile Include="src\Prefabs\Monster\ActionSprite\Model.lua" />
@@ -119,8 +123,6 @@
     <Compile Include="src\Prefabs\Skill\SKDefine.lua" />
     <Compile Include="src\Prefabs\Skill\SKEvent.lua" />
     <Compile Include="src\Prefabs\Skill\SkillCoroutine.lua" />
-    <Compile Include="src\Prefabs\UI\UICity.lua" />
-    <Compile Include="src\Prefabs\UI\UICityMainPanel.lua" />
     <Compile Include="src\Prefabs\UI\UIFStory.lua" />
     <Compile Include="src\Prefabs\UI\UILoading.lua" />
     <Compile Include="src\Prefabs\UI\UIPlaceName.lua" />

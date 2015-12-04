@@ -11,9 +11,11 @@ function SEscortAgency:init(args)
     require "Prefabs.Skill.SKDefine"
     require "Data.monster_config"
     require "Data.monster_model"
+    require "Data.escort_config"
     initBattleGlobal()
     self.mPlayerMonsters = {}
     self.mEnemyMonsters = {}
+    self.config = escort_config[1001]
     startCoroutine(self, "play")
 end
 
@@ -23,7 +25,7 @@ function SEscortAgency:play(co)
     self:removeGameObject("UILoading")
 
     self:createGameObject("Prefabs.Round.Camp")
-    self:createGameObject("Prefabs.UI.UIScene")
+    self:createGameObject("Prefabs.UI.UIScene", self.config.scene_name)
     self:createGameObject("Prefabs.Skill.Effect.EffectRootMgr")
     self:createGameObject("Prefabs.UI.UIPlaceName", "押镖途中")
     co:waitForSeconds(2.5)
@@ -43,7 +45,13 @@ end
 
 -- 初始化数据
 function SEscortAgency:initEnemyMonsters()
-    local list = {10004, 10004, 10004, 10004, 10004, 10004}
+    local config = self.config
+    local count = config.count[calcWeightIndex(config.count_weight)]
+    local list = {}
+    for i = 1, count do
+        local id = config.monster[calcWeightIndex(config.monster_weight)]
+        table.insert(list, id)
+    end
     for key, id in pairs(list) do
         local idx = key
         local pos = calcFormantionPos(idx, 2)

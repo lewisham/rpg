@@ -88,3 +88,19 @@ function cameraMoveTo(pos, duration)
     if g_UIScene == nil then return end
     g_UIScene:cameraMoveTo(pos, duration)
 end
+
+-- 计算权重的索引
+function calcWeightIndex(list)
+    local total = 0
+    for _, val in ipairs(list) do
+        total = total + val
+    end
+    local r = math.random(1, total)
+    for key, val in ipairs(list) do
+        if r <= val then
+            return key
+        end
+        r = r - val
+    end
+    return 1
+end

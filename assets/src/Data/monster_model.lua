@@ -68,6 +68,7 @@ monster_model =
         model = "hero_0017_fire",
         dir = -1,
         scale = 0.8,
-        actor_icon = "hero_0017_fire.png"
+        actor_icon = "hero_0017_fire.png",
+        knockout_type = 1,
     },
 }

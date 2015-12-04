@@ -28,6 +28,7 @@ function GameApp.applicationDidFinishLaunching()
     require "Global.Common"
     require "Global.SceneHelper"
     require "Player.Player"
+    math.randomseed(os.clock())
     Player:getInstance():play()
 end
 

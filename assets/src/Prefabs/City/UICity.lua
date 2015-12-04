@@ -12,6 +12,10 @@ function UICity:init(args)
     root:addChild(sky)
     self:onCreate(args.filename)
     self:createBuildings()
+    self:getScene():createGameObject("Prefabs.City.Cloud", {root = self.ScrollView_1, name = "City/images/main_cloud_1.png"})
+    self:getScene():createGameObject("Prefabs.City.Cloud", {root = self.ScrollView_1, name = "City/images/main_cloud_2.png"})
+    self:getScene():createGameObject("Prefabs.City.Cloud", {root = self.ScrollView_1, name = "City/images/main_cloud_3.png"})
+
 end
 
 function UICity:createBuildings()
