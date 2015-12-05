@@ -128,7 +128,7 @@ end
 -- 等待数秒
 function Coroutine:waitForSeconds(seconds)
     --print("wait for seconds", seconds)
-    self.mWaitForSeconds = seconds
+    self.mWaitForSeconds = seconds + 0.001
     self:pause("waitForSeconds")
 end
 

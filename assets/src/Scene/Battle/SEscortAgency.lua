@@ -34,6 +34,9 @@ function SEscortAgency:play(co)
     self:initEnemyMonsters()
     self:playFighting(co)
     co:waitForSeconds(1.5)
+    self:removeGameObject("UIScene")
+    self:removeGameObject("EffectRootMgr")
+    self:removeGameObject("Camp")
     Player:getInstance():goHome()
 end
 

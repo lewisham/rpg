@@ -63,7 +63,7 @@
     <Compile Include="src\core\U3D\GameObject.lua" />
     <Compile Include="src\core\U3D\GameScene.lua" />
     <Compile Include="src\core\UIBase.lua" />
-    <Compile Include="src\Data\escort_monster_config.lua" />
+    <Compile Include="src\Data\escort_config.lua" />
     <Compile Include="src\Data\monster_config.lua" />
     <Compile Include="src\Data\monster_model.lua" />
     <Compile Include="src\Data\skill_config.lua" />
@@ -73,6 +73,7 @@
     <Compile Include="src\Global\SceneHelper.lua" />
     <Compile Include="src\main.lua" />
     <Compile Include="src\Player\Player.lua" />
+    <Compile Include="src\Prefabs\City\Cloud.lua" />
     <Compile Include="src\Prefabs\Monster\ActionSprite\ActionSprite.lua" />
     <Compile Include="src\Prefabs\Monster\ActionSprite\FlySword.lua" />
     <Compile Include="src\Prefabs\Monster\ActionSprite\Model.lua" />

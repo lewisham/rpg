@@ -44,4 +44,17 @@ function UIActorsProgress:updateAll()
     end
 end
 
+function UIActorsProgress:updateWithTime(time)
+    local duration = time * 2
+    for _, val in pairs(self.mActors) do
+        if val.actor:findComponent("HitPoint"):isAlive() then
+            local percent = val.actor:findComponent("ActionBar"):getMovePercent()
+            local x = math.floor(self.mMaxLength  * percent / 100)
+            val.node:runAction(cc.MoveBy:create(duration, cc.p(x, 0)))
+            val.node:setVisible(true)
+        end
+    end
+    return duration
+end
+
 return UIActorsProgress

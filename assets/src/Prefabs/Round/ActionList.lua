@@ -80,36 +80,31 @@ end
 function ActionList:calcNextActor(co)
     self.mActionCnt = 0
     local actor = nil
-    while true do
-        actor = self:calcActor()
-        if actor then
-            break
-        end
-        co:waitForFrames(1)
-        self:updateActorActionBar()
-        self:findComponent("UIActorsProgress"):updateAll()
-    end
-    return actor
-end
-
--- 更新行动者
-function ActionList:calcActor()
-   local actor = nil
-   for _, val in pairs(self.mActors) do
-        if val:findComponent("HitPoint"):isAlive() and val:findComponent("ActionBar"):isFull() then
-            actor = val
-            break
-        end
-   end
-   return actor
-end
-
-function ActionList:updateActorActionBar()
-     for _, val in pairs(self.mActors) do
+    local min = 999999
+    local time = 0
+    -- 计算需要多少时间填充
+    for _, val in pairs(self.mActors) do
         if val:findComponent("HitPoint"):isAlive() then
-            val:findComponent("ActionBar"):updatePerFrame()
+            local t1 = val:findComponent("ActionBar"):calcNeedTime()
+            local t2 = math.floor(t1 * 1000) -- 转换成毫秒
+            if t2 < min then
+                min = t2
+                time = t1
+                actor = val
+            end
         end
-   end
+    end
+    -- 同步进度条
+    if min > 0 then
+        for _, val in pairs(self.mActors) do
+            if val:findComponent("HitPoint"):isAlive() then
+                val:findComponent("ActionBar"):syncTime(time)
+            end
+        end
+    end
+    local duration = self:findComponent("UIActorsProgress"):updateWithTime(time)
+    co:waitForSeconds(duration)
+    return actor
 end
 
 ----------------------------

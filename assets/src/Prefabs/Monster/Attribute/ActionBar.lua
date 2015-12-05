@@ -11,6 +11,7 @@ function ActionBar:ctor()
 	ActionBar.super.ctor(self)
     self.mDistance = 0
 	self.mSpeed = 0
+    self.mMovePercent = 0
 end
 
 -- 初始化
@@ -30,11 +31,24 @@ function ActionBar:getPercent()
     return self.mDistance
 end
 
-function ActionBar:updatePerFrame()
+-- 计算需要多少时间
+function ActionBar:calcNeedTime()
+    self.mMovePercent = 0
     if self:isFull() then
-        return
+        return 0
     end
-    self.mDistance = self.mDistance + self.mSpeed * 0.015
+    return (100 - self.mDistance) / self.mSpeed
+end
+
+-- 同步进度条
+function ActionBar:syncTime(time)
+    local add = self.mSpeed * time
+    self.mDistance = self.mDistance + add
+    self.mMovePercent = add
+end
+
+function ActionBar:getMovePercent()
+    return self.mMovePercent
 end
 
 return ActionBar
