@@ -27,7 +27,7 @@ function SWildWolf:playDisplay1(co, logic)
     logic:resume("step1")
     co:waitForEvent(SK_EVENT.Movement_Complete, model)
 
-    self:playBackOff("skill1_end", 0.2)
+    self:playBackOff("skill1_end", 0.4)
 	self:over()
 end
 
@@ -53,7 +53,7 @@ function SWildWolf:playDisplay2(co, logic)
     logic:resume("step1")
     co:waitForEvent(SK_EVENT.Movement_Complete, model)
 
-    self:playBackOff("skill2_end", 0.2)
+    self:playBackOff("skill2_end", 0.4)
 	self:over()
 end
 
@@ -76,7 +76,7 @@ function SWildWolf:playDisplay3(co, logic)
     logic:resume("step1")
     co:waitForEvent(SK_EVENT.Movement_Complete, model)
 
-    self:playBackOff("skill2_end", 0.2)
+    self:playBackOff("skill2_end", 0.4)
 	self:over()
 end
 
