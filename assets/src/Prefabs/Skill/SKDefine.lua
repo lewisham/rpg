@@ -1,7 +1,7 @@
 require "Prefabs.Skill.Base.SKBase"
 require "Prefabs.Skill.Base.SKLogic"
 require "Prefabs.Skill.Base.SKDisplay"
-require "Prefabs.Skill.SKEvent"
+require "Prefabs.Skill.SDisplayEvent"
 
 -- 技能位置定义
 PositionType = 

@@ -60,7 +60,7 @@ function Effect:listenMovementEvent()
 	local function onMovementEvent(armature, movementType, movementID)
         --print(movementType, movementID)
 		if movementType == ccs.MovementEventType.complete then
-            SKEvent.post(SK_EVENT.Movement_Complete, self)
+            SDisplayEvent.post(SDISPLAY_EVENT.Movement_Complete, self)
 			if self.mAnimateEndHandler then
 				local handler = self.mAnimateEndHandler
 				self.mAnimateEndHandler = nil
@@ -78,7 +78,7 @@ function Effect:listenFrameEvent()
 		if evt == nil then
 			return
 		end
-        SKEvent.post(SK_EVENT.Frame_Event, self)
+        SDisplayEvent.post(SDISPLAY_EVENT.Frame_Event, self)
 		if self.mFrameEventHandler then
 			self.mFrameEventHandler(evt)
 		end

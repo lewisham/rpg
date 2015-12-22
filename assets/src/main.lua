@@ -1,11 +1,10 @@
-cc.FileUtils:getInstance():addSearchPath("src");
-cc.FileUtils:getInstance():addSearchPath("res");
 
-
-local target = cc.Application:getInstance():getTargetPlatform();
-
+cc.FileUtils:getInstance():addSearchPath("src")
+cc.FileUtils:getInstance():addSearchPath("res")
+local target = cc.Application:getInstance():getTargetPlatform()
 
 TRACKBACK_HANDDLER = nil
+require "cocos.init"
 require ("GameApp")
 
 function __G__TRACKBACK__(msg)

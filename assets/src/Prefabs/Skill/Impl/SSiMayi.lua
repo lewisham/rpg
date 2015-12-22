@@ -14,13 +14,13 @@ function SSiMayi:playDisplay1(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "attack_1")
     self:playEffectOnce("simayi", "attack_1", self:getPos(3))
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     logic:resume("step1")
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
 
     -- 回退
     self:playBackOff()
@@ -40,14 +40,14 @@ function SSiMayi:playDisplay4(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
     self:playModelAnimate(model, "skill")
 
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     self:playMask()
     self:playEffectOnce("shoujitexiao", "duang", self:getPos(3))
 
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     self:startCoroutine("targetEffect4", logic)
 
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
 
     self:playBackOff()
 end

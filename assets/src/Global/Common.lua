@@ -31,11 +31,12 @@ function initBattleGlobal()
 end
 
 -- 创建幻象
-function createPhantasm(monster)
+function createPhantasm(monster, count)
     local group = monster:findComponent("GroupID")
     local places = g_ActionList:getEmptyPlace(group)
     local list = {}
-    for _, idx in pairs(places) do
+    for key, idx in pairs(places) do
+        if key > count then break end
         local pos = calcFormantionPos(idx, group)
         local monster_id = monster._args.config.id
         --monster_id = 10003
@@ -49,19 +50,12 @@ function createPhantasm(monster)
     return list
 end
 
--- 预加载怪物资源
-function preloadMonsterRes(id)
-    local config = monster_model[monster_config[id].model_id]
-    local name = config.model
-	local path = "monster/"..name.."/"..name..".ExportJson"
-	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(path)
-end
-
 -- 阵形位置
 SCENE_MAP_WIDTH = 1024
+SCENE_MAP_MIDDLE_Y = 216
 local mOffsetPos = nil
 function calcFormantionPos(id, group)
-    local centerX = 216
+    local centerX = SCENE_MAP_MIDDLE_Y
     if mOffsetPos == nil then
         mOffsetPos = {}
         table.insert(mOffsetPos, cc.p(0, 0))

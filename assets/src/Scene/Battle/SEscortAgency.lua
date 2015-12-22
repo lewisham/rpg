@@ -32,6 +32,8 @@ function SEscortAgency:play(co)
 
     self:initPlayerMonsters()
     self:initEnemyMonsters()
+    self:findGameObject("UIScene"):cameraMoveTo(0, 0.1)
+    co:waitForSeconds(0.2)
     self:playFighting(co)
     co:waitForSeconds(1.5)
     self:removeGameObject("UIScene")
@@ -76,8 +78,6 @@ end
 
 -- 战斗
 function SEscortAgency:playFighting(co)
-    self:findGameObject("UIScene"):cameraMoveTo(0, 0.1)
-    co:waitForSeconds(0.2)
     self:createGameObject("Prefabs.Round.ActionList")
     for _, val in pairs(self.mPlayerMonsters) do
         self:findGameObject("ActionList"):addActor(val)

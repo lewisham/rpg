@@ -173,6 +173,15 @@ function Coroutine:waitForMonsterMoveTo(monster, pos, duration, name)
     self:pause("waitForMonsterMoveTo")
 end
 
+-- 等待事件
+function Coroutine:waitForDisplayEvent(id, obj)
+    local function callback(args)
+        self:resume("waitForDisplayEvent")
+    end
+    SDisplayEvent.create(id, obj, callback)
+    self:pause("waitForDisplayEvent")
+end
+
 -- 恢复
 function Coroutine:resume(name)
     --assert(self.mWaitName == name, "resume error")

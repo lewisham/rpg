@@ -28,4 +28,8 @@ function AttributeBase:getCurrent()
     return self.mCurrent
 end
 
+function AttributeBase:getMax()
+    return self.mMax
+end
+
 return AttributeBase

@@ -72,9 +72,9 @@ function SOpeningCG:play(co)
 
     -- 创建狼
     local m3 = self:createMonster(10004, cc.p(-200, 356), 1, 4)
-    co:waitForMonsterMoveTo(m3, calcFormantionPos(5, 1), 1.8, "move")
+    co:waitForMonsterMoveTo(m3, calcFormantionPos(1, 1), 1.8, "move")
     local m4 = self:createMonster(10004, cc.p(-200, 156), 1, 5)
-    co:waitForMonsterMoveTo(m4, calcFormantionPos(4, 1), 1.8, "move")
+    co:waitForMonsterMoveTo(m4, calcFormantionPos(2, 1), 1.8, "move")
     self:cameraMoveTo(0, 0.8)
     self:playStory(1004, {m1, m3, m4})
 
@@ -87,8 +87,8 @@ function SOpeningCG:play(co)
     self:playAnimate(co, m5, "enter")
 
     self:playFighting(co, {m3, m4, m5})
-    local pos = calcFormantionPos(1, 2)
-    co:waitForMonsterMoveTo(m5, cc.p(pos.x - 200, pos.y), 0.3, "idle")
+    local pos = cc.p(m1:findComponent("ActionSprite"):getPosition())
+    co:waitForMonsterMoveTo(m5, cc.p(pos.x - 400, pos.y), 0.3, "idle")
     self:cameraMoveTo(1, 0.8)
     m5:findComponent("ActionSprite"):onDir(1)
 

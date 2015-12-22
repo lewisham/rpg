@@ -6,6 +6,8 @@
 
 SKDisplay = class("SKDisplay", SKLogic)
 
+SKDisplay.sound_file_list = {}
+
 -- 初始化表现
 function SKDisplay:initDisplay()
     self.PositionSelect = require("Prefabs.Skill.Selector.PositionSelect").create(self)
@@ -31,7 +33,7 @@ function SKDisplay:playBackOff(name, duration)
     duration = duration or 0.075
     if math.abs(pos1.x - pos2.x) > 2 or math.abs(pos1.y - pos2.y) > 2 then
         self:playMonsterMove(monster, name, self:getPos(2), duration)
-        self.mDisplayCO:waitForEvent(SK_EVENT.Move_Complete, monster)
+        self.mDisplayCO:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
     end
     self:changeZOrder(0)
     monster:findComponent("ActionSprite"):changeState("idle")
@@ -46,7 +48,7 @@ function SKDisplay:playMonsterMove(monster, name, pos, duration)
     duration = duration or 0.1
     local function callback()
         self:changeZOrder(10)
-        SKEvent.post(SK_EVENT.Move_Complete, monster)
+        SDisplayEvent.post(SDISPLAY_EVENT.Move_Complete, monster)
     end
      local tb = 
     {
@@ -63,15 +65,25 @@ end
 function SKDisplay:playModelAnimate(model, name)
     -- 动作完毕回调
     local function animateEndHandler()
-        SKEvent.post(SK_EVENT.Movement_Complete, model)
+        SDisplayEvent.post(SDISPLAY_EVENT.Movement_Complete, model)
     end
 
     -- 帧事件回调
     local function frameEventHandler(evt)
-        SKEvent.post(SK_EVENT.Frame_Event, model, evt)
-        --print(evt)
+        SDisplayEvent.post(SDISPLAY_EVENT.Frame_Event, model, evt)
+        if ENABLE_MODEL_EVT then
+            print("frame evt", evt)
+        end
     end
     model:playAnimate(name, 0, animateEndHandler, frameEventHandler)
+end
+
+function SKDisplay:playModelAnimateOnce(model, name)
+    -- 动作完毕回调
+    local function animateEndHandler()
+        model:playAnimate("idle", 1)
+    end
+    model:playAnimate(name, 0, animateEndHandler)
 end
 
 -- 播放特效
@@ -88,12 +100,12 @@ function SKDisplay:playEffectOnce(file, name, pos, bReverse, zOrder)
 
     -- 帧事件回调
     local function frameEventHandler(evt)
-        SKEvent.post(SK_EVENT.Frame_Event, effect, evt)
+        SDisplayEvent.post(SDISPLAY_EVENT.Frame_Event, effect, evt)
         --print(evt)
     end
 
     local function animateEndHandler()
-        SKEvent.post(SK_EVENT.Movement_Complete, effect)
+        SDisplayEvent.post(SDISPLAY_EVENT.Movement_Complete, effect)
         effect:removeFromParent(true)
     end
     effect:playAnimate(name, 0, animateEndHandler, frameEventHandler)
@@ -121,4 +133,11 @@ end
 
 function SKDisplay:cameraRecover()
     g_UIScene:cameraMoveTo(0, 0.1)
+end
+
+function SKDisplay:playSound(id)
+    if not ENABLE_SOUND then return end
+    local filename = self.sound_file_list[id]
+    if filename == nil then return end
+    cc.SimpleAudioEngine:getInstance():playEffect(filename)
 end

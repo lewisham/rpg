@@ -27,6 +27,7 @@ end
 -- 替换场景
 function SceneHelper:replaceScene(path, name)
     self.mRunningScene:destroy()
+    cc.SimpleAudioEngine:getInstance():stopMusic()
     local scene = self:createScene(path, name)
     self.mRunningScene = scene
 end

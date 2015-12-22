@@ -4,11 +4,11 @@
 -- 描述：技能表现事件中心
 ----------------------------------------------------------------------
 
-SKEvent = class("SKEvent")
+SDisplayEvent = class("SDisplayEvent")
 
-SKEvent.map = {}
+SDisplayEvent.map = {}
 
-SK_EVENT = 
+SDISPLAY_EVENT = 
 {
     Movement_Complete = 1,
     Frame_Event = 2,
@@ -16,10 +16,10 @@ SK_EVENT =
     Move_Complete = 4,
 }
 
-function SKEvent.post(id, obj, args)
-    for key, event in pairs(SKEvent.map) do
+function SDisplayEvent.post(id, obj, args)
+    for key, event in pairs(SDisplayEvent.map) do
         if event:judge(id, obj) then
-            SKEvent.map[key] = nil
+            SDisplayEvent.map[key] = nil
             event:excute(args)
             break
         end
@@ -27,31 +27,31 @@ function SKEvent.post(id, obj, args)
 end
 
 local mInstance = 1
-function SKEvent.create(id, obj, handler)
-    local ret = SKEvent.new()
+function SDisplayEvent.create(id, obj, handler)
+    local ret = SDisplayEvent.new()
     ret.mEventId = id
     ret.mObj = obj
     ret.mHandler = handler
-    SKEvent.map[mInstance] = ret
+    SDisplayEvent.map[mInstance] = ret
     mInstance = mInstance + 1
     return ret
 end
 
 -- 构造函数
-function SKEvent:ctor()
+function SDisplayEvent:ctor()
     self.mEventId = 0
     self.mObj = nil
     self.mHandler = nil
 end
 
-function SKEvent:judge(id, obj)
+function SDisplayEvent:judge(id, obj)
     if id == self.mEventId and self.mObj == obj then
         return true
     end
     return false
 end
 
-function SKEvent:excute(args)
+function SDisplayEvent:excute(args)
     if self.mHandler then
         self.mHandler(args)
         self.mHandler = nil

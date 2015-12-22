@@ -8,6 +8,7 @@ SKLogic = class("SKLogic", SKBase)
 
 function SKLogic:initLogic()
     self.InputTargetSelector = require("Prefabs.Skill.Selector.InputTargetSelector").create(self)
+    self.TargetSelect = require("Prefabs.Skill.Selector.TargetSelect").create(self)
 end
 
 function SKLogic:getInputTargets(idx)
@@ -15,21 +16,31 @@ function SKLogic:getInputTargets(idx)
 end
 
 -- 计算伤害
-function SKLogic:calcDamage(calcType)
-    local damage = require("Prefabs.Skill.Selector.Damage").create(self.mMonster, self.mTarget)
-    damage:play(calcType, {percent = 100})
+function SKLogic:calcDamage(calcType, target, args)
+    local damage = require("Prefabs.Skill.Selector.Damage").create(self.mMonster, target)
+    damage:play(calcType, args)
     return damage
+end
+
+-- 计算恢复
+function SKLogic:calcHealth(calcType, target, args)
+    local health = require("Prefabs.Skill.Selector.Health").create(self.mMonster, target)
+    health:play(calcType, args)
+    return health
 end
 
 -- 计算目标
 function SKLogic:calcTargets(id)
-    self.mTargetList = {self.mTarget}
+    id = id or 1
+    self.mTargetList = self.TargetSelect:play(id)
 end
 
 -- 造成伤害
 function SKLogic:makeDamage(calcType)
     for _, target in pairs(self.mTargetList) do
-        target:findComponent("HitPoint"):bearDamage(self:calcDamage(calcType))
+        local damage = self:calcDamage(calcType, target)
+        SModifyHitPoint:getInstance():post(damage)
+        target:findComponent("HitPoint"):modifyHitPoint(damage)
     end
 end
 

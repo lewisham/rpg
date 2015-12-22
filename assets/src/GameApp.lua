@@ -23,9 +23,9 @@ function GameApp.applicationDidFinishLaunching()
     --cc.FileUtils:getInstance():setPopupNotify(false)
     --cc.Director:getInstance():setDisplayStats(true)
     
-	require "cocos.init"
 	require "Core.init"
     require "Global.Common"
+    require "Global.PseudoRandom"
     require "Global.SceneHelper"
     require "Player.Player"
     math.randomseed(os.clock())

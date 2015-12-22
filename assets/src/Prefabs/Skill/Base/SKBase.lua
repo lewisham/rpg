@@ -10,9 +10,10 @@ _G["SKBase"] = SKBase
 -- 构造函数
 function SKBase:ctor()
     SKBase.super.ctor(self)
-    self.mSkillInfos = {}
-    self.mMonster = nil
+    self.mSkillInfos = {}   -- 技能信息表
+    self.mMonster = nil     
     self.mTarget = nil
+    self.mPlayingIdx = 0
 end
 
 -- 初始化
@@ -22,8 +23,8 @@ function SKBase:init(args)
     self:initLogic()
     self:initDisplay()
 
-    for i = 1, 5 do
-        local func = self["initSkill"..i]
+    for _, val in pairs(self.mSkillInfos) do
+        local func = self["initSkill"..val.id]
         if func then
             func(self)
         end
@@ -31,11 +32,12 @@ function SKBase:init(args)
 end
 
 -- 添加技能
-function SKBase:addSkillInfo(id, cd)
+function SKBase:addSkillInfo(id, cd, passive)
     local unit = {}
     unit.id = id
     unit.cur_cd = 0
-    unit.max_cd = cd or 0
+    unit.max_cd = cd
+    unit.passive = passive == nil and false or passive
     table.insert(self.mSkillInfos, unit)
 end
 
@@ -58,23 +60,41 @@ function SKBase:startCoroutine(name, args)
 end
 
 function SKBase:getSkillInfo()
-    return self.mSkillInfos
+    local list = {}
+    for _, val in pairs(self.mSkillInfos) do
+        if val.cur_cd == 0 and not val.passive then
+            table.insert(list, val)
+        end
+    end
+    return list
 end
 
-function SKBase:play(idx, target)
+function SKBase:play(co, idx, target)
+    self.mPlayingIdx = idx
     self.mTarget = target
     self:startCoolDown(idx)
+    SRoundStart:getInstance():post(self.mMonster, co)
+    -- 开始表现
     local logicCO = self:startCoroutine("excuteLogic"..idx)
     self.mDisplayCO = self:startCoroutine("playDisplay"..idx, logicCO)
 end
 
 function SKBase:over()
+    self.mPlayingIdx = 0
     g_ActionList:iActorDone()
 end
 
 -- 开启cd
 function SKBase:startCoolDown(idx)
-    local unit = self.mSkillInfos[idx]
+    local unit = nil
+    for _, val in pairs(self.mSkillInfos) do
+        if val.id == idx then
+            unit = val
+        elseif not val.passive and val.cur_cd > 0 then
+            val.cur_cd = val.cur_cd - 1
+        end
+    end
+    if unit == nil then return end
     unit.cur_cd = unit.max_cd
 end
 

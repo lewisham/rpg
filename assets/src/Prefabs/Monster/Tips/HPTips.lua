@@ -103,8 +103,12 @@ function HPTips:playEffectMode_2(damage)
 end
 
 -- 获得显示参数
-function HPTips:getLabelParam(damage)
-	return "fonts/battle_num_damage.png", tostring(damage)
+function HPTips:getLabelParam(value)
+    if value <= 0 then
+	    return "fonts/battle_num_damage.png", tostring(value)
+    else
+        return "fonts/battle_num_health.png", tostring(value)
+    end
 end
 
 return HPTips

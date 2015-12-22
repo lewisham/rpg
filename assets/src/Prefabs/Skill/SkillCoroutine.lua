@@ -32,15 +32,4 @@ function SkillCoroutine.startCoroutine(target, name, args)
     return co
 end
 
--- 等待事件
-function SkillCoroutine:waitForEvent(id, obj)
-    local function callback(args)
-        self:resume("waitForEvent")
-    end
-    SKEvent.create(id, obj, callback)
-    self:pause("waitForEvent")
-end
-
-
-
 return SkillCoroutine

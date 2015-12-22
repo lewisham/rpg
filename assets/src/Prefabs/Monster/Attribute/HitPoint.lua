@@ -28,8 +28,8 @@ function HitPoint:isKnockout()
 end
 
 -- 受到伤害
-function HitPoint:bearDamage(damage)
-    local value = damage:getDamage()
+function HitPoint:modifyHitPoint(damage)
+    local value = damage:getFinal()
     self.mCurrent = self.mCurrent + value
     self:findComponent("HPTips"):play(value)
     self:findComponent("ActionSprite").mModel:onHit()

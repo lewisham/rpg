@@ -18,15 +18,15 @@ function SLinYu:playDisplay1(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
 
     -- 判断攻击次数
     self:playModelAnimate(model, "attack1_1")
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     logic:resume("step1")
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
     self:playBackOff()
 	self:over()
 end

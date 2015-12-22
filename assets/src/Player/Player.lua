@@ -27,6 +27,7 @@ function Player:goHome()
 end
 
 function Player:gotoEscort()
-    SceneHelper:getInstance():replaceScene("Scene.Battle.SEscortAgency")
+    SceneHelper:getInstance():replaceScene("Scene.Battle.SMonsterEdit")
+    --SceneHelper:getInstance():replaceScene("Scene.Battle.SEscortAgency")
 end
 

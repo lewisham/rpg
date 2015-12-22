@@ -20,36 +20,36 @@ function SPangDe:playDisplay1(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
   
     -- 判断攻击次数
     if self.mAttackTimes == 1 then
         self:playModelAnimate(model, "attack_1")
         self:playEffectOnce("pangde", "attack_1", self:getPos(3), false)
-        co:waitForEvent(SK_EVENT.Frame_Event, model)
+        co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
         logic:resume("step1")
-        co:waitForEvent(SK_EVENT.Movement_Complete, model)
+        co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
     elseif self.mAttackTimes == 2 then
         self:playModelAnimate(model, "attack_2")
         self:playEffectOnce("pangde", "attack_1", self:getPos(3), false)
-        co:waitForEvent(SK_EVENT.Frame_Event, model)
+        co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
         logic:resume("step1")
         self:playEffectOnce("pangde", "attack_2", self:getPos(3), false)
-        co:waitForEvent(SK_EVENT.Frame_Event, model)
+        co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
         logic:resume("step2")
-        co:waitForEvent(SK_EVENT.Movement_Complete, model)
+        co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
     else
         self:playModelAnimate(model, "attack_3")
         self:playEffectOnce("pangde", "attack_3_1", self:getPos(3), false)
         self:playEffectOnce("pangde", "attack_3_2", self:getPos(3), false, -1)
-        co:waitForEvent(SK_EVENT.Frame_Event, model)
-        co:waitForEvent(SK_EVENT.Frame_Event, model)
+        co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
+        co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
         logic:resume("step1")
-        co:waitForEvent(SK_EVENT.Frame_Event, model)
+        co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
         logic:resume("step2")
-        co:waitForEvent(SK_EVENT.Frame_Event, model)
+        co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
         logic:resume("step3")
-        co:waitForEvent(SK_EVENT.Movement_Complete, model)
+        co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
     end
 
     -- 回退
@@ -75,15 +75,15 @@ function SPangDe:playDisplay2(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
 
     self:playMask()
     --self:playEffectOnce("shoujitexiao", "duang", self:getPos(3), false)
     self:playModelAnimate(model, "skill")
     self:playEffectOnce("pangde", "effect_2", self:getPos(3), false)
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     logic:resume("step1")
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
 
     -- 回退
     self:playBackOff()
@@ -111,12 +111,12 @@ function SPangDe:playDisplay3(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "skillchase_1")
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     logic:resume("step1")
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
 
     -- 回退
     self:playBackOff()

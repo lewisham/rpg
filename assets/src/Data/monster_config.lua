@@ -59,4 +59,24 @@ monster_config =
 		speed = 120,
         model_id = 103,
     },
+
+    [20001] = 
+    {
+        id = 20001,
+        name = "流风云",
+        hit_point = 1240,
+        atk = 45,
+		speed = 120,
+        model_id = 301,
+    },
+
+    [20002] = 
+    {
+        id = 20002,
+        name = "流风云",
+        hit_point = 1240,
+        atk = 45,
+		speed = 120,
+        model_id = 302,
+    },
 }

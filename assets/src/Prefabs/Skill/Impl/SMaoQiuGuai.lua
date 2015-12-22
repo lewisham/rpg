@@ -18,14 +18,14 @@ function SMaoQiuGuai:playDisplay1(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "skill1_move", self:getPos(1), 0.2)
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "skill1_attack")
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     logic:resume("step1")
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
     self:playModelAnimate(model, "skill1_end")
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
     self:playBackOff("skill1_end", 0)
 	self:over()
 end

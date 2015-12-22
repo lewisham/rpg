@@ -169,6 +169,10 @@ function Model:onHit()
     local function callback()
         self:playAnimate("idle", 1)
     end
+    local id = self:getAnimation():getCurrentMovementID()
+    if id ~= "idle" and id ~= "hit" then
+        return
+    end
     self:playAnimate("hit", 0, callback)
 end
 

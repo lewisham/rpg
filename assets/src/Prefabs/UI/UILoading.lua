@@ -31,7 +31,7 @@ function UILoading:init(args)
         count = count + 1
         if count > 10 then
             count = 0
-            preloadMonsterRes(args[idx])
+            self:preloadMonsterRes(args[idx])
             idx = idx + 1
             to = math.floor(idx / total * 100)
         end
@@ -41,6 +41,22 @@ end
 
 function UILoading:play(co)
     co:waitForFuncResult(function() return self.loaded end)
+end
+
+function UILoading:preloadMonsterRes(id)-- 预加载怪物资源
+    local config = monster_model[monster_config[id].model_id]
+    local name = config.model
+	local path = "monster/"..name.."/"..name..".ExportJson"
+
+    -- 加载模型
+	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(path)
+
+    -- 加载技能音效
+    local list = require("Prefabs.Skill.Impl."..config.skill).sound_file_list
+    for _, val in pairs(list) do
+        local id = cc.SimpleAudioEngine:getInstance():preloadEffect(val)
+        --print("sound id", id)
+    end
 end
 
 return UILoading

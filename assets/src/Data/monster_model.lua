@@ -71,4 +71,24 @@ monster_model =
         actor_icon = "hero_0017_fire.png",
         knockout_type = 1,
     },
+
+    [301] = 
+    {
+        id = 301,
+        name = "林惊宇",
+        skill = "SLinJingYu",
+        model = "zhentianxingcun_action",
+        dir = 1,
+        actor_icon = "hero_icon_026.png"
+    },
+
+    [302] = 
+    {
+        id = 301,
+        name = "魏延",
+        skill = "SWeiYan",
+        model = "weiyan_action",
+        dir = 1,
+        actor_icon = "hero_icon_026.png"
+    },
 }

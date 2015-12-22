@@ -20,12 +20,12 @@ function SWildWolf:playDisplay1(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "skill1_move", self:getPos(1), 0.3)
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "skill1_attack")
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     logic:resume("step1")
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
 
     self:playBackOff("skill1_end", 0.4)
 	self:over()
@@ -45,13 +45,13 @@ function SWildWolf:playDisplay2(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "skill2_move", self:getPos(1, 90), 0.3)
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
 
     self:playModelAnimate(model, "skill2_attack")
-    --co:waitForEvent(SK_EVENT.Frame_Event, model)
+    --co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     co:waitForSeconds(0.5)
     logic:resume("step1")
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
 
     self:playBackOff("skill2_end", 0.4)
 	self:over()
@@ -71,10 +71,10 @@ function SWildWolf:playDisplay3(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
 
     self:playModelAnimate(model, "skill3_attack")
-    --co:waitForEvent(SK_EVENT.Frame_Event, model)
+    --co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     co:waitForSeconds(0.5)
     logic:resume("step1")
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
 
     self:playBackOff("skill2_end", 0.4)
 	self:over()

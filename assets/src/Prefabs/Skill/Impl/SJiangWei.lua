@@ -14,7 +14,7 @@ function SJiangWei:playDisplay1(co, logic)
     local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
 
     logic:resume("step1")
 
@@ -24,7 +24,7 @@ end
 
 function SJiangWei:excuteLogic1(co)
     co:pause("step1")
-    self.mTarget:findComponent("HitPoint"):bearDamage(self:calcDamage(1))
+    self.mTarget:findComponent("HitPoint"):modifyHitPoint(self:calcDamage(1))
 end
 
 -----------------------------
@@ -56,16 +56,16 @@ function SJiangWei:playDisplay4(co)
     local model = monster:findComponent("ActionSprite").mModel
     -- 移动
     self:playMonsterMove(monster, "front", self:getPos(1))
-    co:waitForEvent(SK_EVENT.Move_Complete, monster)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Move_Complete, monster)
 
     self:playMask()
     self:playEffectOnce("shoujitexiao", "duang", self:getPos(3))
     self:playModelAnimate(model, "skill")
 
-    co:waitForEvent(SK_EVENT.Frame_Event, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Frame_Event, model)
     self:playEffectOnce("jiangwei", "attack_1", self:getPos(3))
 
-    co:waitForEvent(SK_EVENT.Movement_Complete, model)
+    co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)
 
     self:playBackOff()
 end
