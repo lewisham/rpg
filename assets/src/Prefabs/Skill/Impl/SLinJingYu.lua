@@ -63,9 +63,6 @@ function SLinJingYu:excuteLogic1(co)
         co:pause("step"..i)
         self:makeDamage(1)
     end
-    if self.mAttackTimes == 3 then
-        self:playState(Monster_State.JiTui)
-    end
 end
 
 -----------------------------

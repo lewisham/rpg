@@ -7,7 +7,7 @@
 local SXiaHouDun = class("SXiaHouDun", SKDisplay)
 
 SXiaHouDun.sound_file_list = {}
-SXiaHouDun.sound_file_list[1] = "sound/weiyan_atk1.mp3"
+SXiaHouDun.sound_file_list[1] = "sound/xiahoudun_atk1.mp3"
 SXiaHouDun.sound_file_list[2] = "sound/weiyan_atk2.mp3"
 SXiaHouDun.sound_file_list[3] = "sound/weiyan_atk3.mp3"
 SXiaHouDun.sound_file_list[4] = "sound/weiyan_cast.mp3"

@@ -63,7 +63,7 @@ monster_config =
     [20001] = 
     {
         id = 20001,
-        name = "流风云",
+        name = "大将神武罗",
         hit_point = 1240,
         atk = 45,
 		speed = 120,
@@ -73,7 +73,7 @@ monster_config =
     [20002] = 
     {
         id = 20002,
-        name = "流风云",
+        name = "大将风无痕",
         hit_point = 1240,
         atk = 45,
 		speed = 120,

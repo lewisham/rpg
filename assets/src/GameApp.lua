@@ -23,6 +23,7 @@ function GameApp.applicationDidFinishLaunching()
     --cc.FileUtils:getInstance():setPopupNotify(false)
     --cc.Director:getInstance():setDisplayStats(true)
     
+    require "GameConfig"
 	require "Core.init"
     require "Global.Common"
     require "Global.PseudoRandom"

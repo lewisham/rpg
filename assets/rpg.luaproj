@@ -53,6 +53,7 @@
     <Folder Include="src\Prefabs\Skill\Impl\" />
     <Folder Include="src\Prefabs\Skill\Event\" />
     <Folder Include="src\Prefabs\Skill\Aura\" />
+    <Folder Include="src\Prefabs\Skill\Impl\guard\" />
     <Folder Include="src\Prefabs\Skill\Selector\" />
     <Folder Include="src\Prefabs\UI\" />
     <Folder Include="src\Scene\" />
@@ -122,8 +123,9 @@
     <Compile Include="src\Prefabs\Skill\Impl\SLinYu.lua" />
     <Compile Include="src\Prefabs\Skill\Impl\SMaoQiuGuai.lua" />
     <Compile Include="src\Prefabs\Skill\Impl\SPangDe.lua" />
+    <Compile Include="src\Prefabs\Skill\Impl\guard\SShenWuLuo.lua" />
     <Compile Include="src\Prefabs\Skill\Impl\SSiMayi.lua" />
-    <Compile Include="src\Prefabs\Skill\Impl\SWeiYan.lua" />
+    <Compile Include="src\Prefabs\Skill\Impl\guard\SFengWuHen.lua" />
     <Compile Include="src\Prefabs\Skill\Impl\SWildWolf.lua" />
     <Compile Include="src\Prefabs\Skill\Impl\SXiaHouDun.lua" />
     <Compile Include="src\Prefabs\Skill\Selector\Damage.lua" />

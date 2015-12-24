@@ -75,20 +75,20 @@ monster_model =
     [301] = 
     {
         id = 301,
-        name = "林惊宇",
-        skill = "SLinJingYu",
-        model = "zhentianxingcun_action",
+        name = "大将神武罗",
+        skill = "guard.SShenWuLuo",
+        model = "weiyan_action",
         dir = 1,
-        actor_icon = "hero_icon_026.png"
+        actor_icon = "hero_icon_006.png"
     },
 
     [302] = 
     {
-        id = 301,
-        name = "魏延",
-        skill = "SWeiYan",
-        model = "weiyan_action",
+        id = 302,
+        name = "大将风无痕",
+        skill = "guard.SFengWuHen",
+        model = "guanfeng_action",
         dir = 1,
-        actor_icon = "hero_icon_026.png"
+        actor_icon = "hero_icon_006.png"
     },
 }

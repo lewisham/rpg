@@ -49,10 +49,6 @@ function createPhantasm(monster, count)
     end
     return list
 end
-
--- ’Û–ŒŒª÷√
-SCENE_MAP_WIDTH = 1024
-SCENE_MAP_MIDDLE_Y = 216
 local mOffsetPos = nil
 function calcFormantionPos(id, group)
     local centerX = SCENE_MAP_MIDDLE_Y

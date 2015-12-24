@@ -23,8 +23,16 @@ end
 
 -- 开始执行逻辑
 function SMonsterEdit:play(co)
+    local list1 = {10001, 10004}
+    local list2 = {20001, 20002}
+    local list = {}
+    local function addlist(tb)
+        for _, id in pairs(tb) do table.insert(list, id) end
+    end
+    addlist(list1)
+    addlist(list2)
     PseudoRandom.setRand(200)
-    self:createGameObject("Prefabs.UI.UILoading", {20002, 10002}):play(co)
+    self:createGameObject("Prefabs.UI.UILoading", list):play(co)
     self:removeGameObject("UILoading")
 
     cc.SimpleAudioEngine:getInstance():playMusic("sound/bgm_battle2.mp3", true)
@@ -35,10 +43,10 @@ function SMonsterEdit:play(co)
     self:createGameObject("Prefabs.Skill.Effect.EffectRootMgr")
 
     self:findGameObject("UIScene"):cameraMoveTo(0, 0)
-    --self:playLoopModel(10002)
+    --self:playLoopModel(20002)
     --self:playEffect("shoujitexiao", cc.p(512, 100))
 
-    self:initMonster({10002}, {20002})
+    self:initMonster(list1, list2)
     co:waitForFuncResult(function() return self:findGameObject("ActionList"):isBattleEnd() end)
     self:removeGameObject("ActionList")
     Player:getInstance():goHome()
