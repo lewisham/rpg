@@ -70,18 +70,23 @@ function SKBase:getSkillInfo()
 end
 
 function SKBase:play(co, idx, target)
+    self.mRunningCount = 1
     self.mPlayingIdx = idx
     self.mTarget = target
     self:startCoolDown(idx)
-    SRoundStart:getInstance():post(self.mMonster, co)
     -- 开始表现
     local logicCO = self:startCoroutine("excuteLogic"..idx)
     self.mDisplayCO = self:startCoroutine("playDisplay"..idx, logicCO)
+    co:waitForFuncResult(function() return self:isOver() end)
+    self.mPlayingIdx = 0
+end
+
+function SKBase:isOver()
+    return self.mRunningCount == 0
 end
 
 function SKBase:over()
-    self.mPlayingIdx = 0
-    g_ActionList:iActorDone()
+    self.mRunningCount = self.mRunningCount - 1
 end
 
 -- 开启cd

@@ -17,6 +17,7 @@ function Round:play(co)
     self:beforeCast(co)
     self:casting(co)
     self:chaseListener(co)
+    g_ActionList:iActorDone()
 end
 
 -- 输入
@@ -40,6 +41,7 @@ end
 
 -- 施法中
 function Round:casting(co)
+    SRoundStart:getInstance():post(self.mActors, co)
     self.mActors:findComponent("Skill1"):play(co, self.mIdx, self.mTarget)
 end
 

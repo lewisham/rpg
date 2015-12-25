@@ -185,6 +185,9 @@ function SShenWuLuo:onRoundStart4(co)
     local model = monster:findComponent("ActionSprite").mModel
     self:playEffectOnce("shoujitexiao", "blood_1", self:getPos(3), false)
     self:playModelAnimate(model, "cast")
+    self:playEffectOnce("fx_heal", "play", self:getPos(3), false)
+    self:playEffectOnce("fx_heal_back", "play", self:getPos(3))
+
     local dp = self:calcHealth(2, self.mMonster, 5)
     self.mMonster:findComponent("HitPoint"):modifyHitPoint(dp)
     co:waitForDisplayEvent(SDISPLAY_EVENT.Movement_Complete, model)

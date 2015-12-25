@@ -45,7 +45,7 @@ function UIActorsProgress:updateAll()
 end
 
 function UIActorsProgress:updateWithTime(time)
-    local duration = time * 2
+    local duration = time * 1.2
     for _, val in pairs(self.mActors) do
         if val.actor:findComponent("HitPoint"):isAlive() then
             local percent = val.actor:findComponent("ActionBar"):getMovePercent()

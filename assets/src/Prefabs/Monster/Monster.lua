@@ -18,6 +18,7 @@ end
 -- ≥ı ºªØ
 function Monster:init(args)
     self._args = args
+    self:addComponent("Name", args.config.model.name)
     self:addComponent("GroupID", args.group)
     self:addComponent("KnockOutType", args.config.model.knockout_type or 0)
     self:addComponent("FIdx", args.fidx)

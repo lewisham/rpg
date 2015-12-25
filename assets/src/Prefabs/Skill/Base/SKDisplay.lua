@@ -115,7 +115,12 @@ end
 -- 播放遮罩
 function SKDisplay:playMask()
     local cls = require("Prefabs.Skill.Effect.EMask")
-    local ret = cls.create({monsters = {self.mMonster, self.mTarget}})
+    local list = {}
+    table.insert(list, self.mMonster)
+    for _, val in pairs(self.mTargetList) do
+        table.insert(list, val)
+    end
+    local ret = cls.create({monsters = list})
     return ret
 end
 

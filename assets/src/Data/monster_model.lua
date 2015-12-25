@@ -89,6 +89,6 @@ monster_model =
         skill = "guard.SFengWuHen",
         model = "guanfeng_action",
         dir = 1,
-        actor_icon = "hero_icon_006.png"
+        actor_icon = "hero_icon_012.png"
     },
 }

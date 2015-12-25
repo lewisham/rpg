@@ -51,13 +51,12 @@ function createPhantasm(monster, count)
 end
 local mOffsetPos = nil
 function calcFormantionPos(id, group)
-    local centerX = SCENE_MAP_MIDDLE_Y
     if mOffsetPos == nil then
         mOffsetPos = {}
         table.insert(mOffsetPos, cc.p(0, 0))
         local total = 5
-        local angle = 0
-        local add = 3.1415 * 2 / total
+        local angle = 30 / 180 * 3.1415926
+        local add = 3.1415926 * 2 / total
         local xRadius = 140
         local yRadius = 110
         for i = 1, total do
@@ -68,8 +67,11 @@ function calcFormantionPos(id, group)
         end
     end
     local x = (SCENE_MAP_WIDTH - 1024) / 2 + 200
-    local list1 = {cc.p(x, centerX), cc.p(SCENE_MAP_WIDTH - x, centerX)}
-    local pos = cc.pAdd(list1[group], mOffsetPos[id])
+    local list1 = {cc.p(x, SCENE_MAP_MIDDLE_Y), cc.p(SCENE_MAP_WIDTH - x, SCENE_MAP_MIDDLE_Y)}
+    local pos = cc.pAdd(list1[1], mOffsetPos[id])
+    if group == 2 then
+        pos.x = SCENE_MAP_WIDTH / 2 + SCENE_MAP_WIDTH / 2 - pos.x
+    end
     return pos
 end
 

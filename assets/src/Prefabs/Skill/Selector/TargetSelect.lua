@@ -37,4 +37,18 @@ function TargetSelect:solution2()
     return list
 end
 
+-- 通过对方名字搜寻
+function TargetSelect:solution101(name)
+    local tb = g_ActionList:getActors()
+    local caster = self.mSkill.mMonster
+    local group = caster:findComponent("GroupID")
+	local list = {}
+	for _, val in pairs(tb) do
+		if val:findComponent("GroupID") == group and val:findComponent("Name") == name and val:findComponent("HitPoint"):isAlive() then
+			table.insert(list, val)
+		end
+	end
+    return list
+end
+
 return TargetSelect

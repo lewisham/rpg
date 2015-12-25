@@ -66,7 +66,7 @@ monster_config =
         name = "大将神武罗",
         hit_point = 1240,
         atk = 45,
-		speed = 120,
+		speed = 100,
         model_id = 301,
     },
 
@@ -76,7 +76,7 @@ monster_config =
         name = "大将风无痕",
         hit_point = 1240,
         atk = 45,
-		speed = 120,
+		speed = 150,
         model_id = 302,
     },
 }

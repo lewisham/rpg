@@ -23,7 +23,7 @@ end
 
 -- 开始执行逻辑
 function SMonsterEdit:play(co)
-    local list1 = {10001, 10004}
+    local list1 = {20001, 20002}--{20002, 10001, 10004, 10002}
     local list2 = {20001, 20002}
     local list = {}
     local function addlist(tb)
@@ -31,7 +31,7 @@ function SMonsterEdit:play(co)
     end
     addlist(list1)
     addlist(list2)
-    PseudoRandom.setRand(200)
+    PseudoRandom.setRand(math.random(1, 10000))
     self:createGameObject("Prefabs.UI.UILoading", list):play(co)
     self:removeGameObject("UILoading")
 
@@ -44,7 +44,9 @@ function SMonsterEdit:play(co)
 
     self:findGameObject("UIScene"):cameraMoveTo(0, 0)
     --self:playLoopModel(20002)
-    --self:playEffect("shoujitexiao", cc.p(512, 100))
+    --self:playEffect("guanfeng", cc.p(512, 100))
+    --self:playEffect("fx_heal", cc.p(512, 100))
+    --self:playEffect("fx_heal_back", cc.p(512, 100))
 
     self:initMonster(list1, list2)
     co:waitForFuncResult(function() return self:findGameObject("ActionList"):isBattleEnd() end)
