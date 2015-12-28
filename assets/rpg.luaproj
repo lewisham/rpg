@@ -62,6 +62,7 @@
     <Folder Include="src\Scene\City\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="src\Scene\SAutoUpdate.lua" />
     <Compile Include="src\Core\Coroutine.lua" />
     <Compile Include="src\Core\init.lua" />
     <Compile Include="src\Core\Log.lua" />

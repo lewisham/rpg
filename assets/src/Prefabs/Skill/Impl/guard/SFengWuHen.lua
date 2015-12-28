@@ -118,6 +118,7 @@ end
 function SFengWuHen:onBeforCast2(co, ally)
     self.mRunningCount = self.mRunningCount + 1
     co:waitForSeconds(0.5)
+    ally:findComponent("Skill1"):willPlay(1, self.mTarget)
     ally:findComponent("Skill1"):play(co, 1, self.mTarget)
     self:over()
 end
@@ -135,7 +136,7 @@ function SFengWuHen:onModifyHitPoint3(damage)
         return
     end
     local value = math.abs(damage:getDamage())
-    local amp = math.floor(value * 1.22)
+    local amp = math.floor(value * 0.22)
     damage:addAmplify(-amp)
 
     local list = self.TargetSelect:play(2)

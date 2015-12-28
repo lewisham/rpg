@@ -17,7 +17,7 @@ function GameApp.applicationDidFinishLaunching()
     end
     package.loadedSystem["GameApp"] = nil
 	
-	cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(1024, 576, 2)
+	cc.Director:getInstance():getOpenGLView():setDesignResolutionSize(1024, 576, 4)
 	g_RootScene = cc.Scene:create()
 	cc.Director:getInstance():runWithScene(g_RootScene)
     --cc.FileUtils:getInstance():setPopupNotify(false)

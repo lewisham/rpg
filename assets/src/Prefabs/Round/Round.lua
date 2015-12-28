@@ -41,8 +41,9 @@ end
 
 -- 施法中
 function Round:casting(co)
+    self.mActors:findComponent("Skill1"):willPlay(self.mIdx, self.mTarget)
     SRoundStart:getInstance():post(self.mActors, co)
-    self.mActors:findComponent("Skill1"):play(co, self.mIdx, self.mTarget)
+    self.mActors:findComponent("Skill1"):play(co)
 end
 
 -- 追打监听

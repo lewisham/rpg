@@ -69,11 +69,15 @@ function SKBase:getSkillInfo()
     return list
 end
 
-function SKBase:play(co, idx, target)
-    self.mRunningCount = 1
+function SKBase:willPlay(idx, target)
     self.mPlayingIdx = idx
     self.mTarget = target
     self:startCoolDown(idx)
+end
+
+function SKBase:play(co)
+    self.mRunningCount = 1
+    local idx = self.mPlayingIdx
     -- 开始表现
     local logicCO = self:startCoroutine("excuteLogic"..idx)
     self.mDisplayCO = self:startCoroutine("playDisplay"..idx, logicCO)
