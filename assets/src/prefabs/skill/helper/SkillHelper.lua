@@ -3,7 +3,6 @@
 -- 日期：2013-3-31
 -- 描述：技能
 ----------------------------------------------------------------------
-require "prefabs.skill.SKDefine"
 
 local SkillHelper = class("SkillHelper", GameObject)
 

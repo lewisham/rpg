@@ -11,7 +11,7 @@ SShenWuLuo.sound_file_list[1] = "sound/shenwuluo_atk1.mp3"
 SShenWuLuo.sound_file_list[2] = "sound/shenwuluo_atk2.mp3"
 SShenWuLuo.sound_file_list[3] = "sound/shenwuluo_atk3.mp3"
 SShenWuLuo.sound_file_list[4] = "sound/shenwuluo_cast.mp3"
-SShenWuLuo.sound_file_list[5] = "sound/shenwuluo_Skill.mp3"
+SShenWuLuo.sound_file_list[5] = "sound/shenwuluo_skill.mp3"
 SShenWuLuo.sound_file_list[6] = "sound/shenwuluo_def.mp3"
 
 function SShenWuLuo:initDisplayRes()

@@ -29,6 +29,7 @@ function GameApp.applicationDidFinishLaunching()
     require "global.PseudoRandom"
     require "global.SceneHelper"
     require "player.Player"
+    require "prefabs.skill.SKDefine"
     math.randomseed(os.clock())
     Player:getInstance():play()
 end

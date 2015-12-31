@@ -54,7 +54,7 @@ function UILoading:preloadMonsterRes(id)-- 预加载怪物资源
 	ccs.ArmatureDataManager:getInstance():addArmatureFileInfo(path)
 
     -- 加载技能音效
-    local list = require("Prefabs.Skill.Impl."..config.skill_script).sound_file_list
+    local list = require("prefabs.skill.impl."..config.skill_script).sound_file_list
     for _, val in pairs(list) do
         local id = cc.SimpleAudioEngine:getInstance():preloadEffect(val)
         --print("sound id", id)

@@ -48,7 +48,7 @@ end
 -- Ëµ»°
 function Monster:speak(str)
     if self:findComponent("UIChatPanel") == nil then
-       self:createComponent("Speaker.UIChatPanel")
+       self:createComponent("speaker.UIChatPanel")
     end
     local dir = self:findComponent("ActionSprite").mDir
     self:findComponent("UIChatPanel"):speak(dir, str)

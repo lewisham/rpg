@@ -10,7 +10,7 @@ SFengWuHen.sound_file_list = {}
 SFengWuHen.sound_file_list[1] = "sound/fengwuhen_atk1.mp3"
 SFengWuHen.sound_file_list[2] = "sound/fengwuhen_atk2.mp3"
 SFengWuHen.sound_file_list[3] = "sound/fengwuhen_atk3.mp3"
-SFengWuHen.sound_file_list[4] = "sound/fengwuhen_Skill.mp3"
+SFengWuHen.sound_file_list[4] = "sound/fengwuhen_skill.mp3"
 
 function SFengWuHen:initDisplayRes()
     self.mAttackTimes = -1

@@ -26,6 +26,10 @@ function Player:goHome()
     SceneHelper:getInstance():replaceScene("scene.city.SYuMengLing")
 end
 
+function Player:gotoOpeningCG()
+    SceneHelper:getInstance():replaceScene("scene.cg.SOpeningCG")
+end
+
 function Player:gotoEscort()
     SceneHelper:getInstance():replaceScene("scene.battle.SMonsterEdit")
     --SceneHelper:getInstance():replaceScene("Scene.Battle.SEscortAgency")

@@ -37,7 +37,6 @@ end
 
 -- 初始化全局变量
 function InitBattleGlobal()
-    require "Prefabs.Skill.SKDefine"
     g_FrontEffectRoot = nil
     g_BackEffectRoot = nil
     g_EffectRootMgr = nil

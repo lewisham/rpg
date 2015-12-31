@@ -38,7 +38,7 @@ function UICity:clickBuild(build)
     if name == "EscortAgency" then 
         Player:getInstance():gotoEscort()
     else
-        SceneHelper:getInstance():replaceScene("Scene.CG.SOpeningCG")
+        Player:getInstance():gotoOpeningCG()
     end
 end
 
