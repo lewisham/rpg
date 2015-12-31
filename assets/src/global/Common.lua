@@ -53,7 +53,7 @@ function createPhantasm(monster, count)
     local list = {}
     for key, idx in pairs(places) do
         if key > count then break end
-        local pos = calcFormantionPos(idx, group)
+        local pos = CalcFormantionPos(idx, group)
         local monster_id = monster._args.config.id
         --monster_id = 10003
         local ret = monster:getScene():createMonster(monster_id, pos, group, idx)
@@ -66,7 +66,7 @@ function createPhantasm(monster, count)
     return list
 end
 local mOffsetPos = nil
-function calcFormantionPos(id, group)
+function CalcFormantionPos(id, group)
     if mOffsetPos == nil then
         mOffsetPos = {}
         table.insert(mOffsetPos, cc.p(0, 0))

@@ -4,7 +4,9 @@
 -- 描述：地方名
 ----------------------------------------------------------------------
 
-local UIPlaceName = ObjDef("UIPlaceName", "Layout/CG/PlaceName.csb")
+local UIPlaceName = class("UIPlaceName", UIBase)
+
+UIPlaceName._uiFileName = "Layout/CG/PlaceName.csb"
 
 function UIPlaceName:init(name)
     self:onCreate()

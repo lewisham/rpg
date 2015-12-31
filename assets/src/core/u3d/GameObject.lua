@@ -57,7 +57,10 @@ end
 --------------------------------------
 
 -- 从场景中移除
-function GameObject:removeFromScene(args)
+function GameObject:removeFromScene(...)
+    if self._ui_flag then
+        self:destroy(...)
+    end
 end
 
 -- 创建组件

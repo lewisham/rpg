@@ -26,8 +26,11 @@ function StartCoroutine(target, name, args)
     end
     local co = nil
     local function excuteFunc()
-        --func(target, co, args)
-        xpcall(function() func(target, co, args) end, __G__TRACKBACK__)
+        if not device.isWindows() then
+            func(target, co, args)
+        else
+            xpcall(function() func(target, co, args) end, __G__TRACKBACK__)
+        end
     end
     co = Coroutine.createCoroutine(excuteFunc)
     co:run()

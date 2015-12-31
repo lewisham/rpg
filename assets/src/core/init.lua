@@ -1,3 +1,4 @@
+require("core.Device")
 require("core.Coroutine")
 require("core.YieldType")
 require("core.UIBase")

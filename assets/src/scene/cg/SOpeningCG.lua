@@ -35,14 +35,14 @@ function SOpeningCG:play(co)
     local m1 = self:createMonster(10001, cc.p(-200, 256), 2, 1)
     m1:findComponent("ActionSprite"):onSword(true)
     m1:findComponent("ActionSprite"):onDir(1)
-    WaitForMonsterMoveTo(co, m1, calcFormantionPos(1, 2), 1.8, "cast")
+    WaitForMonsterMoveTo(co, m1, CalcFormantionPos(1, 2), 1.8, "cast")
     WaitForSeconds(co, 0.4)
     m1:findComponent("ActionSprite"):onSword(false)
     m1:findComponent("ActionSprite"):onDir(-1)
 
     local m2 = self:createMonster(10002, cc.p(-200, 256), 1, 1)
     m2:findComponent("ActionSprite"):onSword(true)
-    WaitForMonsterMoveTo(co, m2, calcFormantionPos(1, 1), 0.8, "idle")
+    WaitForMonsterMoveTo(co, m2, CalcFormantionPos(1, 1), 0.8, "idle")
     WaitForSeconds(co, 0.4)
     m2:findComponent("ActionSprite"):onSword(false)
     m2:findComponent("ActionSprite"):changeState("cast")
@@ -71,19 +71,19 @@ function SOpeningCG:play(co)
     self:cameraMoveTo(-1, 0.8)
 
     -- 创建狼
-    local m3 = self:createMonster(10004, cc.p(-200, 356), 1, 4)
-    WaitForMonsterMoveTo(co, m3, calcFormantionPos(1, 1), 1.8, "move")
-    local m4 = self:createMonster(10004, cc.p(-200, 156), 1, 5)
-    WaitForMonsterMoveTo(co, m4, calcFormantionPos(2, 1), 1.8, "move")
+    local m3 = self:createMonster(10004, cc.p(-200, 356), 1, 1)
+    WaitForMonsterMoveTo(co, m3, CalcFormantionPos(1, 1), 1.8, "move")
+    local m4 = self:createMonster(10004, cc.p(-200, 156), 1, 2)
+    WaitForMonsterMoveTo(co, m4, CalcFormantionPos(2, 1), 1.8, "move")
     self:cameraMoveTo(0, 0.8)
     self:playStory(1004, {m1, m3, m4})
 
     m1:findComponent("ActionSprite"):onDir(1)
-    WaitForMonsterMoveTo(co, m1, calcFormantionPos(2, 2), 0.3, "idle")
+    WaitForMonsterMoveTo(co, m1, CalcFormantionPos(2, 2), 0.3, "idle")
     m1:findComponent("ActionSprite"):changeState("dead")
     m1:findComponent("ActionSprite"):onDir(-1)
 
-    local m5 = self:createMonster(10003, calcFormantionPos(1, 2), 2, 1)
+    local m5 = self:createMonster(10003, CalcFormantionPos(1, 2), 2, 1)
     self:playAnimate(co, m5, "enter")
 
     self:playFighting(co, {m3, m4, m5})
@@ -101,6 +101,7 @@ end
 
 -- 创建怪物
 function SOpeningCG:createMonster(id, pos, group, fidx)
+    pos.y = CalcFormantionPos(fidx, group).y
     local config = monster_config[id]
     local tb = clone(config)
     tb.model = clone(monster_model[tb.model_id])

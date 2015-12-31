@@ -4,20 +4,19 @@
 -- 描述：行动头像
 ----------------------------------------------------------------------
 
+local NodeActor = class("NodeActor", UIBase)
 
-local NodeActor = NodeDef("NodeActor", "Layout/Actors/ActorIconUp.csb")
+NodeActor._uiFileName = "Layout/Actors/ActorIconUp.csb"
 
-function NodeActor.changeFile(group)
+function NodeActor:init(filename, group)
+    local file
     if group == 1 then
-        NodeActor._uiFileName = "Layout/Actors/ActorIconUp.csb"
+        file = "Layout/Actors/ActorIconUp.csb"
     else
-        NodeActor._uiFileName = "Layout/Actors/ActorIconDown.csb"
+        file = "Layout/Actors/ActorIconDown.csb"
     end
-end
-
-function NodeActor:init(filename)
     self.mbAutoAddTo = false
-    self:onCreate()
+    self:onCreate(file)
     self.icon:loadTexture(filename)
     local width = self.icon:getContentSize().width
     local scale = self.icon:getScale()

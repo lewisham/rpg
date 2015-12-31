@@ -24,7 +24,7 @@ function GameApp.applicationDidFinishLaunching()
     cc.Director:getInstance():setDisplayStats(true)
     
     require "GameConfig"
-	require "Core.init"
+	require "core.init"
     require "global.Common"
     require "global.PseudoRandom"
     require "global.SceneHelper"

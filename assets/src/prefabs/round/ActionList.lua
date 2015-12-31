@@ -6,20 +6,29 @@
 
 local ActionList = class("ActionList", GameObject)
 
-ActionList.ROOT_PATH = "Prefabs.Round"
+ActionList.ROOT_PATH = "prefabs.round"
 
 function ActionList:init()
     g_ActionList = self
     self.mActors = {}
     self.mActionCnt = 0
     self.mBattleEndType = 0
-    self:createComponent("View.Actors.UIActorsProgress")
+    self:createComponent("view.actors.UIActorsProgress")
     --self:createComponent("View.Operator.UIOperatorMain")
     StartCoroutine(self, "update")
 end
 
 function ActionList:getActors()
     return self.mActors
+end
+
+-- 计算个数
+function ActionList:calcCnt(func)
+    local cnt = 0
+    for _, val in pairs(self.mActors) do
+        if func(val) then cnt = cnt + 1 end
+    end
+    return cnt
 end
 
 function ActionList:removeFromScene()
@@ -55,7 +64,10 @@ function ActionList:update(co)
         local actor = self:calcNextActor(co)
         self:move(actor)
         WaitForFuncResult(co, function() return self:isActionEnd() end)
+        self:roundEnd()
         actor:findComponent("ActionBar"):empty()
+        local duration = self:findComponent("UIActorsProgress"):updateWithTime(0.1)
+        WaitForSeconds(co, duration)
         self:knockOutJudge(co)
         self:findComponent("UIActorsProgress"):updateAll()
         self:implBattleEndJudge(co)
@@ -113,7 +125,7 @@ end
 
 function ActionList:move(actor)
     self:iActorStart(actor)
-    self:getScene():createGameObject("Prefabs.Round.Round", actor)
+    self:getScene():createGameObject("prefabs.round.Round", actor)
     --actor
 end
 
@@ -129,6 +141,14 @@ end
 
 function ActionList:isActionEnd()
     return self.mActionCnt <= 0
+end
+
+function ActionList:roundEnd()
+    for _, val in pairs(self.mActors) do
+        if val:findComponent("HitPoint"):isAlive() then
+            val:findComponent("ActionBar"):afterRound()
+        end
+    end
 end
 
 ----------------------------

@@ -34,7 +34,11 @@ end
 function UIBase:init()
 end
 
-function UIBase:removeFromScene()
+function UIBase:destroy(...)
+    self:onDestroy(...)
+end
+
+function UIBase:onDestroy(...)
     self:removeFromParent(true)
 end
 

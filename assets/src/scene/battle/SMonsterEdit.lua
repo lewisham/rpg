@@ -31,7 +31,7 @@ function SMonsterEdit:play(co)
     self:createGameObject("prefabs.ui.UILoading", list):play(co)
     self:removeGameObject("UILoading")
     cc.SimpleAudioEngine:getInstance():playMusic("sound/bgm_battle2.mp3", true)
-    self:createGameObject("prefabs.ui.UIScene", self.config.scene_name)
+    self:createGameObject("prefabs.ui.UIScene", "Scene/scene16/scene16_3.csb")--"Scene/scene07/scene07_1.csb"
     self:createGameObject("prefabs.skill.helper.SkillHelper")
     self:createGameObject("prefabs.round.Camp")
 
@@ -48,12 +48,12 @@ end
 function SMonsterEdit:initMonster(list1, list2)
     self:createGameObject("prefabs.round.ActionList")
     for key, id in ipairs(list1) do
-        local monster = self:createMonster(id, calcFormantionPos(key, 1), 1, key)
+        local monster = self:createMonster(id, CalcFormantionPos(key, 1), 1, key)
         self:findGameObject("ActionList"):addActor(monster)
     end
 
     for key, id in ipairs(list2) do
-        local monster = self:createMonster(id, calcFormantionPos(key, 2), 2, key)
+        local monster = self:createMonster(id, CalcFormantionPos(key, 2), 2, key)
         self:findGameObject("ActionList"):addActor(monster)
     end
 end

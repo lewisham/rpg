@@ -58,7 +58,7 @@ function SLiuFengYun:playDisplay1(co, logic)
 end
 
 function SLiuFengYun:excuteLogic1(co)
-    self:calcTargets()
+    self:calcTargets(1)
     self.mAttackTimes = math.random(1, 3)
     --self.mAttackTimes = 2
     for i = 1, self.mAttackTimes do
@@ -87,7 +87,7 @@ function SLiuFengYun:playDisplay2(co, logic)
 end
 
 function SLiuFengYun:excuteLogic2(co)
-    self:calcTargets()
+    self:calcTargets(1)
     co:pause("step1")
     self:makeDamage(1)
 end

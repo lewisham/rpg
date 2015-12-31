@@ -42,10 +42,10 @@
     <Folder Include="src\prefabs\monster\tips\" />
     <Folder Include="src\prefabs\buff\" />
     <Folder Include="src\prefabs\round\" />
-    <Folder Include="src\prefabs\round\View\" />
-    <Folder Include="src\prefabs\round\View\Actors\" />
-    <Folder Include="src\prefabs\round\View\Operator\" />
-    <Folder Include="src\prefabs\round\View\Operator\Skill\" />
+    <Folder Include="src\prefabs\round\view\" />
+    <Folder Include="src\prefabs\round\view\actors\" />
+    <Folder Include="src\prefabs\round\view\operator\" />
+    <Folder Include="src\prefabs\round\view\operator\skill\" />
     <Folder Include="src\prefabs\skill\" />
     <Folder Include="src\prefabs\skill\helper\aura\impl\" />
     <Folder Include="src\prefabs\skill\base\" />
@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="src\core\YieldType.lua" />
+    <Compile Include="src\core\Device.lua" />
     <Compile Include="src\scene\SAutoUpdate.lua" />
     <Compile Include="src\Core\Coroutine.lua" />
     <Compile Include="src\Core\init.lua" />
@@ -107,11 +108,11 @@
     <Compile Include="src\prefabs\round\ActionList.lua" />
     <Compile Include="src\prefabs\round\Camp.lua" />
     <Compile Include="src\prefabs\round\Round.lua" />
-    <Compile Include="src\prefabs\round\View\Actors\NodeActor.lua" />
-    <Compile Include="src\prefabs\round\View\Actors\UIActorsProgress.lua" />
-    <Compile Include="src\prefabs\round\View\Operator\Skill\NodeSkillIcon.lua" />
-    <Compile Include="src\prefabs\round\View\Operator\Skill\UISkillSelector.lua" />
-    <Compile Include="src\prefabs\round\View\Operator\UIOperatorMain.lua" />
+    <Compile Include="src\prefabs\round\view\actors\NodeActor.lua" />
+    <Compile Include="src\prefabs\round\view\actors\UIActorsProgress.lua" />
+    <Compile Include="src\prefabs\round\view\operator\skill\NodeSkillIcon.lua" />
+    <Compile Include="src\prefabs\round\view\operator\skill\UISkillSelector.lua" />
+    <Compile Include="src\prefabs\round\view\operator\UIOperatorMain.lua" />
     <Compile Include="src\prefabs\skill\helper\aura\impl\AKuangZhanShi.lua" />
     <Compile Include="src\prefabs\skill\helper\aura\SAura.lua" />
     <Compile Include="src\prefabs\skill\base\SKBase.lua" />

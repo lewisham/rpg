@@ -4,16 +4,23 @@
 -- 描述：场景
 ----------------------------------------------------------------------
 
-local UIScene = ObjDef("UIScene", "Scene/scene06/scene06_1.csb")
+local UIScene = class("UIScene", UIBase)
+
+UIScene._uiFileName = "Scene/scene06/scene06_1.csb"
 
 function UIScene:init(args)
     g_UIScene = self
+    print(args)
     self:onCreate(args)
     self:initParallaxNode()
     local node = cc.Node:create()
     self:addChild(node)
     g_MonsterRoot = self.ground
     node:scheduleUpdateWithPriorityLua(function() self:onReorder() end, 0)
+
+    -- 适配
+    local height = cc.Director:getInstance():getWinSize().height
+    Log(cc.Director:getInstance():getWinSize())
 end
 
 -- 初始化不同层级移动速度不同结点

@@ -4,8 +4,10 @@
 -- 描述：行动列表视图
 ----------------------------------------------------------------------
 
+local UIActorsProgress = class("UIActorsProgress", UIBase)
 
-local UIActorsProgress = NodeDef("UIActorsProgress", "Layout/Actors/ActorsProgress.csb")
+UIActorsProgress._uiFileName = "Layout/Actors/ActorsProgress.csb"
+
 
 function UIActorsProgress:init()
     self:onCreate()
@@ -14,9 +16,8 @@ function UIActorsProgress:init()
 end
 
 function UIActorsProgress:addActor(actor)
-    local cls = require("Prefabs.Round.View.Actors.NodeActor")
+    local cls = require("prefabs.round.view.actors.NodeActor")
     local group = actor:findComponent("GroupID")
-    cls.changeFile(group)
     local root
     if group == 1 then
         root = self.up_root
@@ -24,7 +25,7 @@ function UIActorsProgress:addActor(actor)
         root = self.down_root
     end
     local node = cls.new()
-    node:init("hero_icon/"..actor._args.config.model.actor_icon)
+    node:init("hero_icon/"..actor._args.config.model.actor_icon, group)
     root:addChild(node)
     node:setScale(0.8)
 

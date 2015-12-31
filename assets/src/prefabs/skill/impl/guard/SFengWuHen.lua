@@ -17,6 +17,7 @@ function SFengWuHen:initDisplayRes()
     self:addSkillInfo(1, 0, false)
     self:addSkillInfo(2, 1, false)
     self:addSkillInfo(3, 0, true)
+    self:addSkillInfo(4, 0, true)
 end
 
 -------------------------------------------------
@@ -66,7 +67,7 @@ end
 function SFengWuHen:excuteLogic1(co)
     self:calcTargets(1)
     self.mAttackTimes = PseudoRandom.random(1, 3)
-    self.mAttackTimes = 3
+    --self.mAttackTimes = 3
     for i = 1, self.mAttackTimes do
         co:pause("step"..i)
         self:makeDamage(1)
@@ -74,7 +75,7 @@ function SFengWuHen:excuteLogic1(co)
 end
 
 -------------------------------------------------
--- 技能2：攻击敌方单一单位，如果队友有神武罗时，自动触发神武罗1技能攻击目标
+-- 技能2：合击，攻击敌方单一单位，如果队友有神武罗时，自动触发神武罗1技能攻击目标
 -------------------------------------------------
 function SFengWuHen:playDisplay2(co, logic)
     local monster = self.mMonster
@@ -137,7 +138,7 @@ function SFengWuHen:onModifyHitPoint3(damage)
     end
     local value = math.abs(damage:getDamage())
     local amp = math.floor(value * 0.22)
-    damage:addAmplify(-amp)
+    damage:addAmplify(amp)
 
     local list = self.TargetSelect:play(2)
     for _, val in pairs(list) do
@@ -149,35 +150,51 @@ end
 
 
 -------------------------------------------------
--- 技能4：回合开始时,一定几率恢复5%的生命值,如普通攻击触发时,必定触发三连击
+-- 技能4：荒芜，敌方单位越少，造成的伤害越高，我方单位越多，受到的伤害越少
 -------------------------------------------------
+
 function SFengWuHen:initSkill4()
-    self:initAura4_1()
+    SModifyHitPoint:getInstance():register(self.mMonster, function(...) self:onModifyHitPoint4(...) end)
 end
 
-function SFengWuHen:initAura4_1()
-    local function condition(caster)
-        local r = PseudoRandom.random(0, 100)
-        local rate = 60
-        if r > rate then return false end
-        return caster == self.mMonster
+function SFengWuHen:onModifyHitPoint4(damage)
+    if damage:getTarget() == self.mMonster then
+        self:onBearDamage4(damage)
+    elseif damage:getCaster() == self.mMonster then
+        self:onMakeDamage4(damage)
     end
-    local function handler(caster, co)
-        self:onRoundStart4(co)
-    end
-    SRoundStart:getInstance():register(condition, handler, 1)
 end
 
-function SFengWuHen:onRoundStart4(co)
-    local monster = self.mMonster
-    local model = monster:findComponent("ActionSprite").mModel
-    self:playEffectOnce("shoujitexiao", "blood_1", self:getPos(3), false)
-    self:playModelAnimate(model, "cast")
-    local dp = self:calcHealth(2, self.mMonster, 5)
-    self.mMonster:findComponent("HitPoint"):modifyHitPoint(dp)
-    WaitForDisplayEvent(co, SDISPLAY_EVENT.Movement_Complete, model)
-    -- 三连击
-    if self.mPlayingIdx == 1 then self.mAttackTimes = 3 end
+-- 受到伤害时
+function SFengWuHen:onBearDamage4(damage)
+    local group = self.mMonster:findComponent("GroupID")
+    local cnt = g_ActionList:calcCnt(function(val) 
+        if val:findComponent("HitPoint"):isAlive() and val:findComponent("GroupID") == group then
+            return true
+        end
+        return false
+    end)
+    if cnt < 2 then return end
+    local value = math.abs(damage:getDamage())
+    local red = math.floor((cnt - 1) * 0.15 * value)
+    damage:addAmplify(red)
 end
+
+-- 造成伤害时
+function SFengWuHen:onMakeDamage4(damage)
+    local group = self.mMonster:findComponent("GroupID")
+    local cnt = g_ActionList:calcCnt(function(val) 
+        if val:findComponent("GroupID") ~= group then
+            return not val:findComponent("HitPoint"):isAlive()
+        end
+        return false
+    end)
+    if cnt < 1 then return end
+    local value = math.abs(damage:getDamage())
+    local red = math.floor(cnt * 0.15 * value)
+    damage:addAmplify(-red)
+end
+
+
 
 return SFengWuHen

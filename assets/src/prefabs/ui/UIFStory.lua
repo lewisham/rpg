@@ -4,7 +4,9 @@
 -- 描述：全屏剧情
 ----------------------------------------------------------------------
 
-local UIFStory = ObjDef("UIFStory", "Layout/CG/FStory.csb")
+local UIFStory = class("UIFStory", UIBase)
+
+UIFStory._uiFileName = "Layout/CG/FStory.csb"
 
 function UIFStory:init(args)
     self:onCreate()

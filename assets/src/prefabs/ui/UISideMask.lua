@@ -4,7 +4,7 @@
 -- 描述：上下边黑幕
 ----------------------------------------------------------------------
 
-local UISideMask = ObjDef("UISideMask")
+local UISideMask = class("UISideMask", UIBase)
 
 local height = 100
 
@@ -24,7 +24,7 @@ function UISideMask:init(duration)
     self.down = down
 end
 
-function UISideMask:removeFromScene(duration)
+function UISideMask:onDestroy(duration)
     self.up:runAction(cc.EaseIn:create(cc.MoveBy:create(duration, cc.p(0, height)), 2.5))
     self.down:runAction(cc.EaseIn:create(cc.MoveBy:create(duration, cc.p(0, -height)), 2.5))
     local tb =

@@ -38,6 +38,8 @@ function Damage:getFinal()
     for _, val in pairs(self.mAmplifyList) do
         total = total + val
     end
+    --print(self.mValue)
+    --Log(self.mAmplifyList)
     return total
 end
 

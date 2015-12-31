@@ -43,8 +43,8 @@ function SEscortAgency:play(co)
 end
 
 function SEscortAgency:initPlayerMonsters()
-    local m1 = self:createMonster(10003, calcFormantionPos(1, 1), 1, 1)
-    local m2 = self:createMonster(10005, calcFormantionPos(2, 1), 1, 2)
+    local m1 = self:createMonster(10003, CalcFormantionPos(1, 1), 1, 1)
+    local m2 = self:createMonster(10005, CalcFormantionPos(2, 1), 1, 2)
     self.mPlayerMonsters = {m1, m2}
 end
 
@@ -59,7 +59,7 @@ function SEscortAgency:initEnemyMonsters()
     end
     for key, id in pairs(list) do
         local idx = key
-        local pos = calcFormantionPos(idx, 2)
+        local pos = CalcFormantionPos(idx, 2)
         local m1 = self:createMonster(id, pos, 2, idx)
         table.insert(self.mEnemyMonsters, m1)
     end

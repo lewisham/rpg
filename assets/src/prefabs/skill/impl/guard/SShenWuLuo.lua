@@ -148,15 +148,17 @@ end
 -- 造成伤害时
 function SShenWuLuo:onMakeDamage3(damage)
     if self.mPlayingIdx ~= 1 then return end
+    local dp = self:calcDamage(2, self.mMonster, 2)
+    if math.abs(dp:getDamage()) >= self.mMonster:findComponent("HitPoint"):getCurrent() then
+        return
+    end 
     local r = PseudoRandom.random(0, 100)
     local rate = 60
     if r > rate then return end
     self:playEffectOnce("shoujitexiao", "fireground_3", self:getPos(3), false, 3)
     local value = damage:getDamage()
-    local amp = math.floor(value * 2.5)
+    local amp = math.floor(value * 1.5)
     damage:addAmplify(amp)
-
-    local dp = self:calcDamage(2, self.mMonster, 2)
     self.mMonster:findComponent("HitPoint"):modifyHitPoint(dp)
 end
 

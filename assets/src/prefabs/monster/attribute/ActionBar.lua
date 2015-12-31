@@ -28,7 +28,11 @@ function ActionBar:isFull()
 end
 
 function ActionBar:getPercent()
-    return self.mDistance
+    local percent = self.mDistance
+    if percent > 100 then
+        percent = 100
+    end
+    return percent
 end
 
 -- 计算需要多少时间
@@ -49,6 +53,12 @@ end
 
 function ActionBar:getMovePercent()
     return self.mMovePercent
+end
+
+function ActionBar:afterRound()
+    local add = self.mSpeed * 0.05
+    self.mDistance = self.mDistance + add
+    self.mMovePercent = add
 end
 
 return ActionBar

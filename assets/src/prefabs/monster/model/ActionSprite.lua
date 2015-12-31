@@ -27,6 +27,7 @@ function ActionSprite:init(args)
 
     
     local scale = config.scale or 1.0
+    scale = scale * BATTLE_MONSTER_SCALE
     local node = cc.Node:create()
     self:addChild(node)
     node:setAnchorPoint(0, 0)

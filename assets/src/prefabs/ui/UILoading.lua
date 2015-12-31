@@ -4,7 +4,9 @@
 -- 描述：加载资源中
 ----------------------------------------------------------------------
 
-local UILoading = ObjDef("UILoading", "Layout/Loading/Loading.csb")
+local UILoading = class("UILoading", UIBase)
+
+UILoading._uiFileName = "Layout/Loading/Loading.csb"
 
 function UILoading:init(args)
     self:onCreate()
